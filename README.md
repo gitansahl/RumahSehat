@@ -9,11 +9,31 @@
 ---
 **Kontrak Tahap 1 Tugas Akhir**
 
-| NPM | Nama Lengkap | Fitur yang akan diselesaikan  |
-| ----------| --- | ---------- | 
-| 2006596522 | Gitan Sahl Tazakha Wijaya | TBA |
-| 2006485680 | Muhammad Raihan Adliputra | TBA |
-| 2006521326 | Amelia Putri Fadillah | TBA |
-| 1906298941 | Josias Marchellino Pakpahan | TBA |
-| 1906399114 | Muhammad Ivan Radman | TBA |
+| NPM | Nama Lengkap | Fitur yang akan diselesaikan |
+| ----------| --- |------------------------------| 
+| 2006596522 | Gitan Sahl Tazakha Wijaya | -                            |
+| 2006485680 | Muhammad Raihan Adliputra | -                            |
+| 2006521326 | Amelia Putri Fadillah | -                            |
+| 1906298941 | Josias Marchellino Pakpahan | -                            |
+| 1906399114 | Muhammad Ivan Radman | -                            |
+---
+**Kontrak Tahap 2 Tugas Akhir**
+
+| NPM | Nama Lengkap | Fitur yang akan diselesaikan |
+| ----------| --- |------------------------------| 
+| 2006596522 | Gitan Sahl Tazakha Wijaya | 2, 3, 4, 5                   |
+| 2006485680 | Muhammad Raihan Adliputra | 9, 10                        |
+| 2006521326 | Amelia Putri Fadillah | 14, 15, 16, 17               |
+| 1906298941 | Josias Marchellino Pakpahan | 1, 13                        |
+| 1906399114 | Muhammad Ivan Radman | 6, 7, 8                      |
+---
+**Kontrak Tahap 3 Tugas Akhir**
+
+| NPM | Nama Lengkap | Fitur yang akan diselesaikan |
+| ----------| --- |------------------------------| 
+| 2006596522 | Gitan Sahl Tazakha Wijaya | -                            |
+| 2006485680 | Muhammad Raihan Adliputra | 11                           |
+| 2006521326 | Amelia Putri Fadillah | -                            |
+| 1906298941 | Josias Marchellino Pakpahan | 12                           |
+| 1906399114 | Muhammad Ivan Radman | -                            |
 ---

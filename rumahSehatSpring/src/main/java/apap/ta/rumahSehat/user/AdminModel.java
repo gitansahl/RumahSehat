@@ -12,7 +12,6 @@ import javax.persistence.Table;
 @Setter
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
 @Table(name = "admin")
 public class AdminModel extends UserModel{
 
