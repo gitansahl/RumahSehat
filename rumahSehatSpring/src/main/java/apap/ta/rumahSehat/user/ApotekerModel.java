@@ -18,4 +18,6 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "apoteker")
 public class ApotekerModel extends UserModel {
+    @OneToMany
+    List<ResepModel> listResep;
 }
