@@ -1,5 +1,6 @@
-package apap.ta.rumahSehat.user;
+package apap.ta.rumahSehat.user.repository;
 
+import apap.ta.rumahSehat.user.model.UserModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

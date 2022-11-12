@@ -1,4 +1,4 @@
-package apap.ta.rumahSehat.authentication;
+package apap.ta.rumahSehat.authentication.setting;
 
 import java.util.List;
 

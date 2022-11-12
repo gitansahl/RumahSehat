@@ -1,4 +1,4 @@
-package apap.ta.rumahSehat.user;
+package apap.ta.rumahSehat.user.model;
 
 import apap.ta.rumahSehat.resep.ResepModel;
 import lombok.AllArgsConstructor;

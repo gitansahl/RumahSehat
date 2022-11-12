@@ -1,11 +1,12 @@
-package apap.ta.rumahSehat.authentication;
+package apap.ta.rumahSehat.authentication.controller;
 
+import apap.ta.rumahSehat.authentication.setting.Setting;
 import apap.ta.rumahSehat.authentication.xml.Attributes;
 import apap.ta.rumahSehat.authentication.xml.ServiceResponses;
-import apap.ta.rumahSehat.user.AdminModel;
-import apap.ta.rumahSehat.user.RoleEnum;
-import apap.ta.rumahSehat.user.UserModel;
-import apap.ta.rumahSehat.user.UserService;
+import apap.ta.rumahSehat.user.model.AdminModel;
+import apap.ta.rumahSehat.user.model.RoleEnum;
+import apap.ta.rumahSehat.user.model.UserModel;
+import apap.ta.rumahSehat.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
