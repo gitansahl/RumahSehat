@@ -1,5 +1,6 @@
-package apap.ta.rumahSehat.user;
+package apap.ta.rumahSehat.user.model;
 
+import apap.ta.rumahSehat.user.model.RoleEnum;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
