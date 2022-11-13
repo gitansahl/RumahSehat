@@ -23,22 +23,20 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Configuration
-    @Order(1)
+    @Order(2)
     public static class UILoginWebSecurityConfig extends WebSecurityConfigurerAdapter{
         @Autowired
         JwtRequestFilter jwtRequestFilter;
         @Override
         protected void configure(HttpSecurity http) throws Exception {
 
-            http.csrf().disable()
+            http
                     .authorizeRequests()
                     .antMatchers("/css/**").permitAll()
                     .antMatchers("/js/**").permitAll()
                     .antMatchers("/login-sso", "/validate-ticket").permitAll()
                     .antMatchers("/").hasAnyAuthority("Admin", "Apoteker", "Dokter")
                     .antMatchers("/user/**").hasAuthority("Admin")
-                    .antMatchers("/api/**").hasAuthority("Pasien")
-                    .antMatchers("/jwt/authenticate").permitAll()
                     .anyRequest().authenticated()
                     .and()
                     .formLogin()
@@ -48,7 +46,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                     .logoutSuccessUrl("/login").permitAll()
                     .and()
                     .sessionManagement().sessionFixation().newSession().maximumSessions(1);
-            http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         }
 
         private BCryptPasswordEncoder encoder= new BCryptPasswordEncoder();
@@ -63,7 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     }
 
     @Configuration
-    @Order(2)
+    @Order(1)
     public static class RestApiWebSecurityConfig extends WebSecurityConfigurerAdapter{
         @Autowired
         private JwtAuthEntryPoint jwtAuthEntryPoint;
@@ -92,10 +89,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
         @Override
         protected void configure(HttpSecurity httpSecurity) throws Exception {
-            // We don't need CSRF for this example
-            httpSecurity.csrf().disable()
+            httpSecurity
+                    .antMatcher("/api/**").cors()
+                    .and()
+                    .csrf().disable()
                     // dont authenticate this particular request
                     .authorizeRequests()
+                    .antMatchers("/api/authenticate").permitAll()
+                    .antMatchers("/api/**").hasAuthority("Pasien")
 
                     // all other requests need to be authenticated
                     .anyRequest().authenticated().and()
