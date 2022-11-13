@@ -2,6 +2,7 @@ package apap.ta.rumahSehat.authentication.config;
 
 import apap.ta.rumahSehat.authentication.service.JwtUserDetailsService;
 import apap.ta.rumahSehat.authentication.service.UserDetailServiceImpl;
+import org.apache.catalina.filters.CorsFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,21 +25,30 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     @Configuration
     @Order(1)
     public static class UILoginWebSecurityConfig extends WebSecurityConfigurerAdapter{
+        @Autowired
+        JwtRequestFilter jwtRequestFilter;
         @Override
         protected void configure(HttpSecurity http) throws Exception {
-            http
+
+            http.csrf().disable()
                     .authorizeRequests()
                     .antMatchers("/css/**").permitAll()
                     .antMatchers("/js/**").permitAll()
                     .antMatchers("/login-sso", "/validate-ticket").permitAll()
                     .antMatchers("/").hasAnyAuthority("Admin", "Apoteker", "Dokter")
                     .antMatchers("/user/**").hasAuthority("Admin")
+                    .antMatchers("/api/**").hasAuthority("Pasien")
+                    .antMatchers("/jwt/authenticate").permitAll()
+                    .anyRequest().authenticated()
                     .and()
                     .formLogin()
                     .loginPage("/login").permitAll()
                     .and()
                     .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/login").permitAll();
+                    .logoutSuccessUrl("/login").permitAll()
+                    .and()
+                    .sessionManagement().sessionFixation().newSession().maximumSessions(1);
+            http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         }
 
         private BCryptPasswordEncoder encoder= new BCryptPasswordEncoder();
@@ -77,17 +87,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         @Autowired
         private JwtUserDetailsService jwtUserDetailsService;
 
-        @Autowired JwtRequestFilter jwtRequestFilter;
+        @Autowired
+        JwtRequestFilter jwtRequestFilter;
 
         @Override
         protected void configure(HttpSecurity httpSecurity) throws Exception {
             // We don't need CSRF for this example
             httpSecurity.csrf().disable()
-
                     // dont authenticate this particular request
                     .authorizeRequests()
-                    .antMatchers("/jwt/authenticate").permitAll()
-                    .antMatchers("/rest/**").hasAuthority("Pasien")
 
                     // all other requests need to be authenticated
                     .anyRequest().authenticated().and()
