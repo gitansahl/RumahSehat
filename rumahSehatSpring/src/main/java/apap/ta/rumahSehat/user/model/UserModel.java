@@ -33,7 +33,7 @@ public class UserModel {
     private RoleEnum role;
 
     @NotNull
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     private String username;
 
     @NotNull
