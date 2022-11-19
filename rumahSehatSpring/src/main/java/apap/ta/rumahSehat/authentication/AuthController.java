@@ -93,4 +93,6 @@ public class AuthController {
         }
         return new ModelAndView("redirect:" + Setting.SERVER_LOGOUT + Setting.CLIENT_LOGOUT);
     }
+
+
 }
