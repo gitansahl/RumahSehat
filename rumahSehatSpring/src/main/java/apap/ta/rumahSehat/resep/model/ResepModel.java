@@ -39,7 +39,6 @@ import apap.ta.rumahSehat.user.model.ApotekerModel;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "resep")
-@Data
 public class ResepModel implements Serializable {
     @Id
     @Column(name = "id_resep")
@@ -55,10 +54,10 @@ public class ResepModel implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime createdAt;
 
-    // @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    // @JoinColumn(name = "confirmer_uuid", referencedColumnName = "uuid", nullable = false)
-    // @OnDelete(action = OnDeleteAction.CASCADE)
-    // private String confirmerUUID;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "confirmer_uuid", referencedColumnName = "id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private ApotekerModel confirmer;
 
     @OneToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "jumlah", referencedColumnName = "id_jumlah")

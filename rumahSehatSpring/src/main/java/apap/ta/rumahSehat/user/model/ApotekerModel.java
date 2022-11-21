@@ -6,24 +6,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@PrimaryKeyJoinColumn(name = "id")
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "apoteker")
 public class ApotekerModel extends UserModel {
-    @OneToMany
+
+    @OneToMany(mappedBy = "confirmer", fetch = FetchType.LAZY)
     List<ResepModel> listResep;
-
-    // public ApotekerModel() {
-    // }
-
-    // public ApotekerModel(String nama, RoleEnum role, String username, String password, String email) {
-    //     super(nama, role, username, password, email);
-    // }
-
 }
