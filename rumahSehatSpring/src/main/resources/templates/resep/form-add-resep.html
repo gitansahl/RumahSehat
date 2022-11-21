@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tambah Resep</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+<body>
+<nav th:replace="fragments/fragment :: navbar (${'/resep'})"></nav>
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2>Tambah Resep</h2>
+                <br>
+                <form th:action="@{/resep/tambah}" th:object="${resep}" method="POST">
+                  <table class="table">
+                    <tbody>
+                    <tr th:each="obat, iterationStatus1 : *{listObat}">
+                        <td>
+                            <select th:field="*{listObat[__${iterationStatus1.index}__].obat.idObat}" class="form-control" name="idObat">
+                                <div th:each="obat, iterationStatus2 : ${listObatExisting}">
+                                    <option th:value="${obat.idObat}" th:text="${obat.nama}"></option>
+                                </div>
+                            </select>
+                        </td>
+                        <!-- <td>
+                            <input required class="form-control" type="number" th:field="*{listObat[__${iterationStatus2.index}__].kuantitas}"/>
+                        </td> -->
+                        <td>
+                            <button th:value="${iterationStatus2.index}" class="btn btn-danger" type="submit"
+                                    name="deleteRowObat">Hapus</button>
+                        </td>
+                    </tr>
+                    <button class="btn btn-primary" type="submit" name="addRowObat">+ Tambah Obat</button>
+                    </tbody>
+                    </table>
+                    <br><br>
+
+                    <button class="btn btn-primary" type="submit" name="save">Simpan</button>
+                    <a class="btn btn-primary" href="/resep">Batal</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
