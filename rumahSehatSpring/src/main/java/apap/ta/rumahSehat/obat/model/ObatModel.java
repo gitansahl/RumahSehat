@@ -1,5 +1,6 @@
-package apap.ta.rumahSehat.obat;
+package apap.ta.rumahSehat.obat.model;
 
+import apap.ta.rumahSehat.resep.model.JumlahModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,7 +34,7 @@ public class ObatModel {
     @Column(name = "harga", nullable = false)
     private int harga;
 
-    //relasi
+
 //    @OneToOne(fetch = FetchType.EAGER, optional = false)
 //    @JoinColumn(name = "jumlah", referencedColumnName = "id_jumlah")
 //    @OnDelete(action = OnDeleteAction.CASCADE)

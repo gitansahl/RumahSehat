@@ -1,6 +1,5 @@
 package apap.ta.rumahSehat.resep.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import apap.ta.rumahSehat.obat.ObatModel;
 import apap.ta.rumahSehat.resep.model.ResepModel;
 import apap.ta.rumahSehat.resep.service.ResepService;
 import org.springframework.web.bind.annotation.*;
