@@ -1,6 +1,6 @@
 package apap.ta.rumahSehat.user.model;
 
-import apap.ta.rumahSehat.appointment.AppointmentModel;
+import apap.ta.rumahSehat.appointment.model.AppointmentModel;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
