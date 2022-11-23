@@ -1,14 +1,12 @@
 package apap.ta.rumahSehat.user.model;
 
-import apap.ta.rumahSehat.resep.ResepModel;
+import apap.ta.rumahSehat.resep.model.ResepModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -18,6 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "apoteker")
 public class ApotekerModel extends UserModel {
-    @OneToMany
+
+    @OneToMany(mappedBy = "confirmer", fetch = FetchType.LAZY)
     List<ResepModel> listResep;
 }
