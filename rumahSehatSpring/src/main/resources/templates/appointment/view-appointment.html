@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Rumah Sehat</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"></head>
+<object th:include="fragments/fragment :: css" th:remove="tag"/>
+<object th:include="fragments/fragment :: js" th:remove="tag"/>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+    *{
+        font-family: 'Poppins', sans-serif;
+    }
+</style>
+<body>
+<nav th:replace="fragments/fragment :: navbar"/>
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2>Detail Appointment</h2>
+                <br>
+                <p th:text="'Nama Dokter: ' + ${appointment.dokter.nama}"></p>
+                <p th:text="'Nama Pasien: ' + ${appointment.pasien.nama}"></p>
+                <p th:text="'Tanggal Appointment: ' + ${appointment.tanggal}"></p>
+                <p th:text="'Waktu Awal: ' + ${appointment.waktuAwal}"></p>
+                <p th:if="${presensi.status == 0}">Status: Belum Selesai</p>
+                <p th:if="${presensi.status == 1}">Status: Selesai</p>
+                <br>
+
+                <a class="btn btn-warning" th:href="@{/presensi/update/} + ${presensi.idPresensi}">Update</a>
+                <a class="btn btn-primary" href="/presensi/viewall">Kembali</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
