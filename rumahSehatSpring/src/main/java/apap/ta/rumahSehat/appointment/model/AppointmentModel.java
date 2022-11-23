@@ -15,6 +15,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -49,11 +50,11 @@ public class AppointmentModel {
     private PasienModel pasien;
 
     //Relation with TagihanModel
-    @OneToOne(mappedBy = "kode_appointment", fetch = FetchType.LAZY)
-    private TagihanModel tagihan;
+//    @OneToOne(mappedBy = "kode_appointment", fetch = FetchType.LAZY)
+//    private TagihanModel tagihan;
 
     //Relation with ResepModel
-    @OneToOne(mappedBy = "kode_appointment", fetch = FetchType.LAZY)
-    private ResepModel resep;
+    @OneToMany(mappedBy = "appointment", fetch = FetchType.LAZY)
+    private List<ResepModel> resep;
 
 }
