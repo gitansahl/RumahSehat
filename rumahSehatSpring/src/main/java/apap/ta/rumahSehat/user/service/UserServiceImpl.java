@@ -1,6 +1,8 @@
-package apap.ta.rumahSehat.user;
+package apap.ta.rumahSehat.user.service;
 
-import apap.ta.rumahSehat.authentication.Setting;
+import apap.ta.rumahSehat.authentication.setting.Setting;
+import apap.ta.rumahSehat.user.repository.UserDb;
+import apap.ta.rumahSehat.user.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

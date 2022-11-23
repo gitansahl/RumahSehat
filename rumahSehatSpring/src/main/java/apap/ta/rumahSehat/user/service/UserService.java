@@ -1,4 +1,6 @@
-package apap.ta.rumahSehat.user;
+package apap.ta.rumahSehat.user.service;
+
+import apap.ta.rumahSehat.user.model.UserModel;
 
 public interface UserService {
     UserModel getUserByUsername(String username);
