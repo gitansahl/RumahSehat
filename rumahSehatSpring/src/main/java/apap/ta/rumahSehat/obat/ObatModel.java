@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import apap.ta.rumahSehat.resep.model.ResepModel;
+import apap.ta.rumahSehat.resep.model.JumlahModel;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -33,15 +35,13 @@ public class ObatModel {
     @Column(name = "harga", nullable = false)
     private int harga;
 
-    //relasi
-//    @OneToOne(fetch = FetchType.EAGER, optional = false)
-//    @JoinColumn(name = "jumlah", referencedColumnName = "id_jumlah")
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-//    private JumlahModel jumlah;
+    @OneToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "jumlah", referencedColumnName = "id_jumlah", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private JumlahModel jumlah;
 
-
-
-
-
-
+    @ManyToOne(fetch = FetchType.EAGER, optional = true)
+    @JoinColumn(name = "id_resep", referencedColumnName = "id_resep", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private ResepModel resep;
 }
