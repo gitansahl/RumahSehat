@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>403</title>
+  <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+  <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar(page = 'obat')"></nav>
+<div class="container-fluid">
+  <h2 class="text-center">Access Forbidden (403) </h2>
+  <h4 class="text-center">Halaman hanya boleh diakses oleh Admin</h4>
+  <a th:href="@{/}">Kembali</a>
+</div>
+
+</body>
+</html>
