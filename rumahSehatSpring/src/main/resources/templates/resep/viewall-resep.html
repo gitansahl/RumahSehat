@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>View All Resep</title>
-  <object th:include="fragments/fragment :: css" th:remove="tag"></object>
-  <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <meta charset="UTF-8">
+    <title>View All Resep</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <style>
   h2 {
@@ -83,7 +83,8 @@
                     <tr th:each="resep, iterationStatus : ${listResep}">
                         <td th:text="${resep.idResep}"></td>
                         <td th:text="${resep.createdAt}"></td>
-                        <td th:text="${resep.isDone}"></td>
+                        <td th:if="${resep.isDone}"  style="color: red;">BELUM SELESAI</td> 
+                        <td th:unless="${resep.isDone}" style="color: green;">SELESAI</td>  
                         <td style="text-align:center">
                             <!-- <a class="btn btn-success text-wrap" style="width: 7rem;" th:href="@{'/resep/'+${karyawan.idKaryawan}}">Detail</a> -->
                             <a class="btn btn-success text-wrap" style="width: 7rem;" th:href="@{'/'}">Detail</a>
