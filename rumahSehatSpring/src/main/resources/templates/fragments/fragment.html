@@ -35,19 +35,23 @@
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
           <li  class="nav-item" th:classappend="${page  == 'user'} ? active">
-            <a class="nav-link" th:href="@{/}">User</a>
+            <a class="nav-link text-white" th:href="@{/}">User</a>
           </li>
           <li class="nav-item" th:classappend="${page  == 'appointment'} ? active">
-            <a class="nav-link" th:href="@{/}">Appointment</a>
+            <a class="nav-link text-white" th:href="@{/}">Appointment</a>
           </li>
           <li class="nav-item" th:classappend="${page  == 'obat'} ? active">
-            <a class="nav-link" th:href="@{/}">Obat</a>
+            <a class="nav-link text-white" th:href="@{/}">Obat</a>
           </li>
           <li class="nav-item" th:classappend="${page  == 'obat'} ? active">
-            <a class="nav-link" th:href="@{/}">Resep</a>
+            <a class="nav-link text-white" th:href="@{/}">Resep</a>
           </li>
+        </ul>
+        <ul class="navbar-nav pull-right">
+          <a class="nav-item nav-link text-danger" th:href="@{/logout-sso}">Logout</a>
         </ul>
       </div>
     </nav>
   </body>
+
 </html>
