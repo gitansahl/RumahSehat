@@ -1,4 +1,4 @@
-package apap.ta.rumahSehat.obat;
+package apap.ta.rumahSehat.obat.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

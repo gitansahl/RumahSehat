@@ -26,6 +26,9 @@ import java.util.List;
 public class AppointmentModel {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idAppointment;
+
     @Column(name = "kode_appointment")
     private String kodeAppointment;
 
@@ -50,11 +53,11 @@ public class AppointmentModel {
     private PasienModel pasien;
 
     //Relation with TagihanModel
-//    @OneToOne(mappedBy = "kode_appointment", fetch = FetchType.LAZY)
-//    private TagihanModel tagihan;
+   @OneToOne(cascade = CascadeType.ALL)
+   private TagihanModel tagihan;
 
     //Relation with ResepModel
-    @OneToMany(mappedBy = "appointment", fetch = FetchType.LAZY)
-    private List<ResepModel> resep;
+    @OneToOne(cascade = CascadeType.ALL)
+    private ResepModel resep;
 
 }

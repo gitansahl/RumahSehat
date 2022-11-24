@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import apap.ta.rumahSehat.resep.model.ResepModel;
 import apap.ta.rumahSehat.resep.repository.ResepDb;
+import apap.ta.rumahSehat.appointment.repository.AppointmentDb;
+import apap.ta.rumahSehat.obat.model.ObatModel;
+import apap.ta.rumahSehat.obat.repository.ObatDb;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,8 +18,11 @@ public class ResepServiceImpl implements ResepService{
   @Autowired
   ResepDb resepDb;
 
-  // @Autowired
-  // AppointmentDb appointmentDb;
+  @Autowired
+  AppointmentDb appointmentDb;
+
+  @Autowired
+  ObatDb obatDb;
 
   @Override //, Long idAppointment
   public void addResep(ResepModel resep) {  //nnt harus diganti, ambil parameter id appointment buat ngecek appointmentnya udah kelar apa belom, kalo belom isDone nya false
@@ -38,5 +44,10 @@ public class ResepServiceImpl implements ResepService{
   @Override
   public ResepModel getResepByIdResep(Long idKaryawan) {
     return resepDb.findByIdResep(idKaryawan);
+  }
+
+  @Override
+  public List<ObatModel> getListObat() {
+    return obatDb.findAll();
   }
 }
