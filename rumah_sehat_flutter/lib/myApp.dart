@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:rumah_sehat_flutter/page/tagihan/daftarTagihan.dart';
+import 'package:rumah_sehat_flutter/page/profile/home.dart';
+import 'package:rumah_sehat_flutter/page/profile/profile.dart';
 
-import 'page/home.dart';
-import 'page/daftarTagihan.dart';
-import 'page/profile.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
