@@ -41,10 +41,10 @@
             <a class="nav-link text-white" th:href="@{/}">Appointment</a>
           </li>
           <li class="nav-item" th:classappend="${page  == 'obat'} ? active">
-            <a class="nav-link text-white" th:href="@{/}">Obat</a>
+            <a class="nav-link" th:href="@{/obat}">Obat</a>
           </li>
-          <li class="nav-item" th:classappend="${page  == 'obat'} ? active">
-            <a class="nav-link text-white" th:href="@{/}">Resep</a>
+          <li class="nav-item" th:classappend="${page  == 'resep'} ? active">
+            <a class="nav-link" th:href="@{/}">Resep</a>
           </li>
         </ul>
         <ul class="navbar-nav pull-right">
