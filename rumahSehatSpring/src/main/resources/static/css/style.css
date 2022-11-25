@@ -1,0 +1,22 @@
+
+header {
+    background-image: url('hospitalok.jpg');
+    max-width: 100%;
+    opacity: 0.8;
+    background-repeat: no-repeat;
+    height: auto;
+    background-position: center;
+    padding: 60px;
+}
+#text {
+    text-align: center;
+    font-family: Trebuchet MS, sans-serif;
+    font-weight: bolder;
+    font-size: 30px;
+}
+.nav-link{
+    font-family: 'Poppins';
+    font-size: medium;
+    font-weight: bolder;
+
+}
