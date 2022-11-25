@@ -1,5 +1,6 @@
 package apap.ta.rumahSehat.obat.model;
 
+import apap.ta.rumahSehat.resep.model.JumlahModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import apap.ta.rumahSehat.resep.model.JumlahModel;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Setter
@@ -35,13 +37,6 @@ public class ObatModel {
     @Column(name = "harga", nullable = false)
     private int harga;
 
-    @OneToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "jumlah", referencedColumnName = "id_jumlah", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private JumlahModel jumlah;
-
-    @ManyToOne(fetch = FetchType.EAGER, optional = true)
-    @JoinColumn(name = "id_resep", referencedColumnName = "id_resep", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private ResepModel resep;
+    @OneToMany(mappedBy = "obat", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<JumlahModel> listjumlah;
 }

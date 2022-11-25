@@ -1,31 +1,31 @@
 package apap.ta.rumahSehat.obat.service;
 
-import java.util.List;
+import apap.ta.rumahSehat.obat.model.ObatModel;
+import apap.ta.rumahSehat.obat.repository.ObatDb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import apap.ta.rumahSehat.obat.model.ObatModel;
-import apap.ta.rumahSehat.obat.repository.ObatDb;
-import org.springframework.transaction.annotation.Transactional;
+import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
-public class ObatServiceImpl implements ObatService {
-  @Autowired
-  ObatDb obatDb;
+public class ObatServiceImpl implements ObatService{
 
-  @Override
-  public List<ObatModel> getListObat() { 
+    @Override
+    public List<ObatModel> getListObat() {
     return obatDb.findAll();
   }
 
-  @Override
-  public ObatModel getObatByIdObat(String idObat) {
+    @Override
+    public ObatModel getObatByIdObat(String idObat) {
     return obatDb.findByIdObat(idObat);
   }
 
-  @Override
-  public ObatModel updateStok(ObatModel obatNew) {
+    @Override
+    public ObatModel updateStok(ObatModel obatNew) {
     return obatDb.save(obatNew);
   }
+    @Autowired
+    ObatDb obatDb;
 }

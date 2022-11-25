@@ -54,11 +54,12 @@ public class AppointmentModel {
     private PasienModel pasien;
 
     //Relation with TagihanModel
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private TagihanModel tagihan;
 
     //Relation with ResepModel
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_resep", referencedColumnName = "id_resep")
     private ResepModel resep;
 
 }

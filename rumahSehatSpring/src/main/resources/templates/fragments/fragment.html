@@ -34,20 +34,24 @@
       </button>
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
-          <li  class="nav-item" th:classappend="${page  == '/user'} ? active:''">
-            <a class="nav-link" th:href="@{/}">User</a>
+          <li  class="nav-item" th:classappend="${page  == 'user'} ? active">
+            <a class="nav-link text-white" th:href="@{/}">User</a>
           </li>
-          <li class="nav-item" th:classappend="${page  == '/appointment'} ? active:''">
-            <a class="nav-link" th:href="@{/}">Appointment</a>
+          <li class="nav-item" th:classappend="${page  == 'appointment'} ? active">
+            <a class="nav-link text-white" th:href="@{/}">Appointment</a>
           </li>
-          <li class="nav-item" th:classappend="${page  == '/obat'} ? active:''">
-            <a class="nav-link" th:href="@{/}">Obat</a>
+          <li class="nav-item" th:classappend="${page  == 'obat'} ? active">
+            <a class="nav-link" th:href="@{/obat}">Obat</a>
           </li>
-          <li class="nav-item" th:classappend="${page  == '/resep'} ? active:''">
+          <li class="nav-item" th:classappend="${page  == 'resep'} ? active">
             <a class="nav-link" th:href="@{/resep}">Resep</a>
           </li>
+        </ul>
+        <ul class="navbar-nav pull-right">
+          <a class="nav-item nav-link text-danger" th:href="@{/logout-sso}">Logout</a>
         </ul>
       </div>
     </nav>
   </body>
+
 </html>
