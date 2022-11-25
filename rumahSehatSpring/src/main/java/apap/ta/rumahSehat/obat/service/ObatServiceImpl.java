@@ -18,4 +18,14 @@ public class ObatServiceImpl implements ObatService {
   public List<ObatModel> getListObat() { 
     return obatDb.findAll();
   }
+
+  @Override
+  public ObatModel getObatByIdObat(String idObat) {
+    return obatDb.findByIdObat(idObat);
+  }
+
+  @Override
+  public ObatModel updateStok(ObatModel obatNew) {
+    return obatDb.save(obatNew);
+  }
 }

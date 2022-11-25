@@ -37,6 +37,7 @@ public class AppointmentModel {
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime waktuAwal;
 
+    @NotNull
     @Column(name = "isDone", nullable = false)
     private Boolean isDone;
 
@@ -53,8 +54,8 @@ public class AppointmentModel {
     private PasienModel pasien;
 
     //Relation with TagihanModel
-   @OneToOne(cascade = CascadeType.ALL)
-   private TagihanModel tagihan;
+    @OneToOne(cascade = CascadeType.ALL)
+    private TagihanModel tagihan;
 
     //Relation with ResepModel
     @OneToOne(cascade = CascadeType.ALL)

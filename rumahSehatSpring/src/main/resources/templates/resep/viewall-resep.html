@@ -5,6 +5,9 @@
     <title>View All Resep</title>
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" type="text/css" />
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <style>
   h2 {
@@ -67,31 +70,35 @@
         <div class="container-table border">
             <div class="header-container-table">
                 <h5 class="table-title text-white ml-4 mt-2">Data Resep</h5>
-                <!-- <a th:href="@{/karyawan/tambah}" class="mx-2 btn btn-info">+ Tambah Karyawan</a> -->
             </div>
-            <div class="content-container-table">
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>ID Resep</th>
-                        <th>Tanggal, Waktu</th>
-                        <th>Status</th>
-                        <th style="text-align:center">Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="resep, iterationStatus : ${listResep}">
-                        <td th:text="${resep.idResep}"></td>
-                        <td th:text="${resep.createdAt}"></td>
-                        <td th:if="${resep.isDone}"  style="color: red;">BELUM SELESAI</td> 
-                        <td th:unless="${resep.isDone}" style="color: green;">SELESAI</td>  
-                        <td style="text-align:center">
-                            <!-- <a class="btn btn-success text-wrap" style="width: 7rem;" th:href="@{'/resep/'+${karyawan.idKaryawan}}">Detail</a> -->
-                            <a class="btn btn-success text-wrap" style="width: 7rem;" th:href="@{'/'}">Detail</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div th:if="*{listResep.size() != 0}">
+                <div class="content-container-table">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>ID Resep</th>
+                            <th>Tanggal, Waktu</th>
+                            <th>Status</th>
+                            <th style="text-align:center">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="resep, iterationStatus : ${listResep}"
+                        th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+                            <td th:text="${iterationStatus.count}"></td>
+                            <td th:text="${resep.idResep}"></td>
+                            <td class="col-md-3" th:text="${#temporals.format(resep.createdAt, 'dd MMMM yyyy HH:mm')}"></td>
+                            <td th:if="${resep.isDone}"  style="color: red;">BELUM SELESAI</td> 
+                            <td th:unless="${resep.isDone}" style="color: green;">SELESAI</td>  
+                            <td style="text-align:center">
+                                <a class="btn btn-success text-wrap" style="width: 7rem;" th:href="@{#}">Detail</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <a class="btn btn-primary" style="width: 10rem;" th:href="@{/}">Home</a>
             </div>
         </div>
     </div>

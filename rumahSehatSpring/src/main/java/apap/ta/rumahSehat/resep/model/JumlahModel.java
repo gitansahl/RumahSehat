@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -34,12 +35,12 @@ public class JumlahModel {
   @Column(name = "id_jumlah", nullable = false)
   private Long idJumlah;
   
-  @OneToOne(fetch = FetchType.EAGER, optional = false)
+  @ManyToOne(fetch = FetchType.EAGER, optional = false)
   @JoinColumn(name = "id_obat", referencedColumnName = "id_obat", nullable = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
   private ObatModel obat;
 
-  @OneToOne(fetch = FetchType.EAGER, optional = false)
+  @ManyToOne(fetch = FetchType.EAGER, optional = false)
   @JoinColumn(name = "id_resep", referencedColumnName = "id_resep", nullable = false)
   @OnDelete(action = OnDeleteAction.CASCADE)
   private ResepModel resep;

@@ -6,5 +6,5 @@ import apap.ta.rumahSehat.obat.model.ObatModel;
 
 @Repository
 public interface ObatDb extends JpaRepository<ObatModel, Long>{
-  ObatModel findByIdObat(Long idObat);
+  ObatModel findByIdObat(String idObat);
 }

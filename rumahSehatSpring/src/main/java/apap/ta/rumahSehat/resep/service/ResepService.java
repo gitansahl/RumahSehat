@@ -10,6 +10,4 @@ public interface ResepService {
   List<ResepModel> getListResep();
 
   ResepModel getResepByIdResep(Long idResep);
-
-  List<ObatModel> getListObat(); //kayanya ini gaperlu dah
 }

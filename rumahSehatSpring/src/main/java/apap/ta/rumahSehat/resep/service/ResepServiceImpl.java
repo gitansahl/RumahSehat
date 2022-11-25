@@ -42,12 +42,7 @@ public class ResepServiceImpl implements ResepService{
   }
 
   @Override
-  public ResepModel getResepByIdResep(Long idKaryawan) {
-    return resepDb.findByIdResep(idKaryawan);
-  }
-
-  @Override
-  public List<ObatModel> getListObat() {
-    return obatDb.findAll();
+  public ResepModel getResepByIdResep(Long idResep) {
+    return resepDb.findByIdResep(idResep);
   }
 }
