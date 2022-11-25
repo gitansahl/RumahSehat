@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rumah_sehat_flutter/main.dart';
+import 'package:rumah_sehat_flutter/page/login.dart';
 import 'topUpSaldo.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -80,6 +82,18 @@ class _ProfilePageState extends State<ProfilePage> {
                     ],
                   )
                 ]),
+            ),
+          ),
+          Center(
+            child: ElevatedButton(
+              onPressed: () async {
+                jwt = "";
+                Navigator.pushAndRemoveUntil(context,
+                    MaterialPageRoute(builder: (context) => LoginPage()),
+                    ModalRoute.withName('/')
+                );
+              },
+              child: Text("Log Out"),
             ),
           )
 
