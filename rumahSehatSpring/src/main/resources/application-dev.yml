@@ -33,3 +33,9 @@ spring:
   web:
     resources:
       static-locations: file:src/main/resources/static/
+
+  main:
+    allow-circular-references: true
+    allow-bean-definition-overriding: true
+jwt:
+  secret: javainuse

@@ -24,3 +24,9 @@ spring:
     hibernate.ddl-auto: create-drop
 
     show-sql: true
+
+  main:
+    allow-circular-references: true
+    allow-bean-definition-overriding: true
+jwt:
+  secret: javainuse
