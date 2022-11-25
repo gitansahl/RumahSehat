@@ -7,9 +7,14 @@
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <style>
-    p {
-        font-weight: bold;
-    }
+  p {
+    font-weight: bold;
+  }
+  table {
+    position: relative;
+    text-align: center; 
+    margin: 0 auto;
+  }
 </style>
 <body>
 <nav th:replace="fragments/fragment :: navbar (${'/resep'})"></nav>
@@ -18,44 +23,40 @@
         <div class="container-table">
             <div class="content-container-table">
                 <form th:action="@{/resep/tambah}" th:object="${resep}" method="POST">
-                    <table class="table table-borderless">
+                    <table class="table table-borderless center">
                         <thead>
                             <h1 style="font-weight: bold; font-size: xx-large"> Tambah Resep </h1>
                         </thead>
                     </table>
 
-                    <!-- <table class="table table-borderless">  INI YANG DIPAKE!!!!
+                    <table class="table table-borderless center">
                         <tbody>
                           <tr>
                             <th>Daftar Obat</th>
                           </tr>
-                          <tr th:each="tugas, iterationStatus : *{listTugas}">
+                          <tr th:each="obat, iterationStatus1 : *{listObat}">
                             <td>
-                              <select name="idTugas" th:field="*{listTugas[__${iterationStatus.index}__].idTugas}"
+                              <select name="idObat" th:field="*{listObat[__${iterationStatus1.index}__].idObat}"
                                       class="form-control">
-                                <div th:each="tugasEx, iterationStatus2 : ${listTugasExisting}">
-                                  <option th:value="${tugasEx.idTugas}" th:text="${tugasEx.nama}"></option>
+                                <div th:each="obatEx, iterationStatus2 : ${listObatExisting}">
+                                  <option th:value="${obatEx.idObat}" th:text="${obatEx.namaObat}"></option>
                                 </div>
                               </select>
                             </td>
                             <td>
-                              <select class="form-control" th:field="*{listTugas[__${iterationStatus.index}__].status}">
-                                <option th:value="0">Dimulai</option>
-                                <option th:value="1">Dikerjakan</option>
-                                <option th:value="2">Selesai</option>
-                              </select>
+                              <input required class="form-control" type="number" th:field="*{listObat[__${iterationStatus2.index}__].kuantitas}"/>
                             </td>
                             <td>
-                              <button th:value="${iterationStatus.index}" class="btn btn-danger" type="submit" name="deleteRowTugas">Hapus</button>
+                            <button th:value="${iterationStatus1.index}" class="btn btn-danger" type="submit" name="deleteRowObat">Hapus</button>
                             </td>
                           </tr>
                           <tr>
                             <td>
-                              <button class="btn btn-success btn-block" type="submit" name="addRowTugas">+ Tambah Tugas</button>
+                              <button class="btn btn-success btn-block" type="submit" name="addRowObat">+ Tambah Obat</button>
                             </td>
                           </tr>
                         </tbody>
-                      </table> INI YANG DIPAKE!!!! --> 
+                      </table>
                     <!-- <table class="table">
                     <thead>
                         <th>Daftar Obat Resep</th>

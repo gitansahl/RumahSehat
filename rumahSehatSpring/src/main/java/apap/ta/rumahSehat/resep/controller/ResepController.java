@@ -9,7 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import apap.ta.rumahSehat.obat.model.ObatModel;
+import apap.ta.rumahSehat.obat.service.ObatService;
 import apap.ta.rumahSehat.resep.model.ResepModel;
 import apap.ta.rumahSehat.resep.service.ResepService;
 import org.springframework.web.bind.annotation.*;
@@ -20,9 +21,9 @@ public class ResepController {
   @Autowired
   private ResepService resepService;
 
-  // @Qualifier("obatServiceImpl")
-  // @Autowired
-  // private ResepService obatService;
+  @Qualifier("obatServiceImpl")
+  @Autowired
+  private ObatService obatService;
 
   @GetMapping("/resep")
   public String listKaryawan(Model model) {
@@ -42,29 +43,26 @@ public class ResepController {
   @GetMapping("/resep/tambah")
   public String addResepFormPage(Model model) {
     ResepModel resep = new ResepModel();
-    // List<ObatModel> listObat = obatService.getListObat();
+    List<ObatModel> listObat = obatService.getListObat();
 
     model.addAttribute("resep", resep);
-    // model.addAttribute("listObatExisting", listObat);
+    model.addAttribute("listObatExisting", listObat);
     
     return "resep/form-add-resep";
   }
 
-  @PostMapping("/resep/tambah")
-  public String addResepSubmitPage(@ModelAttribute ResepModel resep, Model model) {
-    resepService.addResep(resep);
+  // @PostMapping("/resep/tambah")
+  // public String addResepSubmitPage(@ModelAttribute ResepModel resep, Model model) {
+  //   resepService.addResep(resep);
 
-    model.addAttribute("resep", resep);
-    return "resep/add-resep";
-  }
+  //   model.addAttribute("resep", resep);
+  //   return "resep/add-resep";
+  // }
 
-  // @PostMapping(value = "/resep/tambah", params = {"addRow"})
-  // private String addRowObatMultiple(
-  //         @ModelAttribute ResepModel resep,
-  //         Model model
-  // ){
+  // @PostMapping(value = "/resep/tambah", params = {"addRowObat"})
+  // private String addRowObatMultiple(@ModelAttribute ResepModel resep, Model model) {
   //     if (resep.getListObat() == null || resep.getListObat().size() == 0) {
-  //         resep.setListObat(new ArrayList<>());
+  //       resep.setListObat(new ArrayList<>());
   //     }
   //     resep.getListObat().add(new ObatModel());
   //     List<ObatModel> listObat = obatService.getListObat();
@@ -75,12 +73,8 @@ public class ResepController {
   //     return "resep/form-add-resep";
   // }
 
-  // @PostMapping(value = "/resep/tambah", params = {"deleteRow"})
-  // private String deleteRowResepMultiple(
-  //         @ModelAttribute ResepModel resep,
-  //         @RequestParam("deleteRow") Integer row,
-  //         Model model
-  // ){
+  // @PostMapping(value = "/resep/tambah", params = {"deleteRowObat"})
+  // private String deleteRowResepMultiple(@ModelAttribute ResepModel resep, @RequestParam("deleteRow") Integer row, Model model) {
   //     final Integer rowId = Integer.valueOf(row);
   //     resep.getListObat().remove(rowId.intValue());
 
@@ -93,15 +87,12 @@ public class ResepController {
   // }
 
   // @PostMapping(value = "/resep/tambah", params = {"save"})
-  // private String addResepSubmit(
-  //         @ModelAttribute ResepModel resep,
-  //         Model model
-  // ){
+  // private String addResepSubmit(@ModelAttribute ResepModel resep, Model model) {
   //     if (resep.getListObat() == null) {
   //       resep.setListObat(new ArrayList<>());
   //     }
   //     for (ObatModel obat : resep.getListObat()) {
-  //         obat.setIdResep(resep.getIdResep());
+  //         obat.setResep(resep);
   //     }
   //     resepService.addResep(resep);
   //     System.out.println(resep.getIdResep());
