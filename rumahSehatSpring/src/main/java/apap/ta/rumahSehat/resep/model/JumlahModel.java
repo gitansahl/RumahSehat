@@ -1,7 +1,6 @@
 package apap.ta.rumahSehat.resep.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,7 +18,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import apap.ta.rumahSehat.obat.ObatModel;
+import apap.ta.rumahSehat.obat.model.ObatModel;
 
 @Setter
 @Getter
