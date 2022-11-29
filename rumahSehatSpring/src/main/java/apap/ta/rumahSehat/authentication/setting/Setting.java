@@ -3,7 +3,7 @@ package apap.ta.rumahSehat.authentication.setting;
 import java.util.List;
 
 public class Setting {
-    final public static String CLIENT_BASE_URL = "https://apap-056.cs.ui.ac.id";
+    final public static String CLIENT_BASE_URL = "http://localhost:8080";
 
     final public static String CLIENT_LOGIN = CLIENT_BASE_URL + "/validate-ticket";
 

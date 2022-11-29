@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View All Apoteker</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" type="text/css" />
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<style>
+    h2 {
+        margin-top: 50px;
+    }
+
+    .table {
+        margin-top: 20px;
+        width: 650px;
+        height: auto;
+    }
+
+    th {
+        text-align: center;
+        color: #36c4ef;
+    }
+
+    td {
+        text-align: center;
+    }
+    .container-content {
+        width: 850px;
+        display: flex;
+        justify-content: center;
+        padding-bottom: 80px;
+    }
+
+    .container-table {
+        width: 700px;
+        height: auto;
+        border-radius: 10px;
+        border-style: solid;
+        border-width: thick;
+        border-color: #36c4ef;
+    }
+
+    .header-container-table {
+        height: 60px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        background-color: #36c4ef;
+        align-items: center;
+    }
+
+    .content-container-table {
+        display: flex;
+        justify-content: center;
+    }
+</style>
+<body>
+<nav th:replace="fragments/fragment :: navbar ('user')"></nav>
+<div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
+<div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+<div class="d-flex justify-content-center">
+    <h2>Daftar Apoteker</h2>
+</div>
+<div class="d-flex justify-content-center">
+
+    <div class="container-content mt-5">
+        <div class="container-table border">
+            <div class="header-container-table">
+                <h5 class="table-title text-white ml-4 mt-2">Data Apoteker</h5>
+                <a class="btn btn-success mr-3 text-white" style="float: right;background-color: #006f93" th:href="@{/user/apoteker/add}">+ Apoteker</a>
+            </div>
+            <div th:if="*{listApoteker.size() != 0}">
+                <div class="content-container-table">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="apoteker, iterationStatus : ${listApoteker}">
+                            <td th:text="${iterationStatus.count}"></td>
+                            <td th:text="${apoteker.nama}"></td>
+                            <td th:text="${apoteker.username}"></td>
+                            <td th:text="${apoteker.email}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
