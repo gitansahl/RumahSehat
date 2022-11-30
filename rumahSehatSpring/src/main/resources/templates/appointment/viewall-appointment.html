@@ -15,41 +15,69 @@
   }
 </style>
 <body>
-<nav th:replace="fragments/fragment :: navbar"/>
+<nav th:replace="fragments/fragment :: navbar (${'/appointment'})"/>
 <div class="container">
   <h2>Daftar Appointment</h2>
   <br>
-  <div th:if="*{listAppointment.size() != 0}">
-    <table class="table">
-      <thead>
-      <tr>
-        <th>Kode Appointment</th>
-        <th>Nama Dokter</th>
-        <th>Nama Pasien</th>
-        <th>Tanggal Appointment</th>
-        <th>Waktu Awal</th>
-        <th>Aksi</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="presensi, iterationStatus : ${listPresensi}">
-        <td th:text="'APT-' + ${iterationStatus.count}"></td>
-        <td th:text="'Nama Dokter: ' + ${appointment.dokter.nama}"></td>
-        <td th:text="'Nama Pasien: ' + ${appointment.pasien.nama}"></td>
-        <td th:text="'Tanggal Appointment: ' + ${appointment.tanggal}"></td>
-        <td th:text="'Waktu Awal: ' + ${appointment.waktuAwal}"></td>
-        <td th:if="${presensi.status == 0}">Status: Belum Selesai</td>
-        <td th:if="${presensi.status == 1}">Status: Selesai</td>
-        <td>
-          <a class="btn btn-primary" th:href="@{/appointment/view/} + ${appointment.kodeAppointment}">Detail</a>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-    <div th:unless="*{listAppointment.size() != 0}">
-      <h2 th:text="'Tidak ada Appointment'"></h2>
-    </div>
-    <a class="btn btn-primary" th:href="@{/appointment/add}">Tambah Appointment</a>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Kode Appointment</th>
+<!--      <th>Nama Dokter</th>-->
+<!--      <th>Nama Pasien</th>-->
+      <th>Tanggal Appointment</th>
+      <th>Waktu Awal</th>
+      <th>Aksi</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="presensi, iterationStatus : ${listPresensi}">
+      <td th:text="'APT-' + ${iterationStatus.count}"></td>
+<!--      <td th:text="'Nama Dokter: ' + ${appointment.dokter.nama}"></td>-->
+<!--      <td th:text="'Nama Pasien: ' + ${appointment.pasien.nama}"></td>-->
+      <td th:text="'Tanggal Appointment: ' + ${appointment.tanggal}"></td>
+      <td th:text="'Waktu Awal: ' + ${appointment.waktuAwal}"></td>
+      <td th:if="${presensi.status == 0}">Status: Belum Selesai</td>
+      <td th:if="${presensi.status == 1}">Status: Selesai</td>
+      <td>
+        <!--          <a class="btn btn-primary" th:href="@{/appointment/view/} + ${appointment.kodeAppointment}">Detail</a>-->
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+<!--  <div th:if="*{listAppointment.size() != 0}">-->
+<!--    <table class="table">-->
+<!--      <thead>-->
+<!--      <tr>-->
+<!--        <th>Kode Appointment</th>-->
+<!--        <th>Nama Dokter</th>-->
+<!--        <th>Nama Pasien</th>-->
+<!--        <th>Tanggal Appointment</th>-->
+<!--        <th>Waktu Awal</th>-->
+<!--        <th>Aksi</th>-->
+<!--      </tr>-->
+<!--      </thead>-->
+<!--      <tbody>-->
+<!--      <tr th:each="presensi, iterationStatus : ${listPresensi}">-->
+<!--        <td th:text="'APT-' + ${iterationStatus.count}"></td>-->
+<!--        <td th:text="'Nama Dokter: ' + ${appointment.dokter.nama}"></td>-->
+<!--        <td th:text="'Nama Pasien: ' + ${appointment.pasien.nama}"></td>-->
+<!--        <td th:text="'Tanggal Appointment: ' + ${appointment.tanggal}"></td>-->
+<!--        <td th:text="'Waktu Awal: ' + ${appointment.waktuAwal}"></td>-->
+<!--        <td th:if="${presensi.status == 0}">Status: Belum Selesai</td>-->
+<!--        <td th:if="${presensi.status == 1}">Status: Selesai</td>-->
+<!--        <td>-->
+<!--&lt;!&ndash;          <a class="btn btn-primary" th:href="@{/appointment/view/} + ${appointment.kodeAppointment}">Detail</a>&ndash;&gt;-->
+<!--        </td>-->
+<!--      </tr>-->
+<!--      </tbody>-->
+<!--    </table>-->
+<!--    <div th:unless="*{listAppointment.size() != 0}">-->
+<!--      <h2 th:text="'Tidak ada Appointment'"></h2>-->
+<!--    </div>-->
+<!--    <a class="btn btn-primary" th:href="@{/appointment/add}">Tambah Appointment</a>-->
     <a class="btn btn-primary" href="/">Home</a>
   </div>
 </div>

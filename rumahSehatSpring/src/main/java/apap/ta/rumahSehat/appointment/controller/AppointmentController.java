@@ -19,50 +19,50 @@ public class AppointmentController {
     @Autowired
     private AppointmentService appointmentService;
 
-    @GetMapping("appointment/viewall")
+    @GetMapping("/appointment")
     public String listAppointment(Model model) {
         List<AppointmentModel> listAppointment = appointmentService.getListAppointment();
         model.addAttribute("listAppointment", listAppointment);
-        return "viewall-appointment";
+        return "appointment/viewall-appointment";
     }
 
-    @GetMapping("appointment/view/{kodeAppointment}" )
+    @GetMapping("/appointment/view/{kodeAppointment}" )
     public String viewDetailAppointmentPage(@PathVariable String kodeAppointment, Model model) {
         AppointmentModel appointment = appointmentService.getAppointmentByKodeAppointment(kodeAppointment);
         model.addAttribute("appointment", appointment);
-        return "view-appointment";
+        return "appointment/view-appointment";
     }
 
-    @GetMapping("appointment/add")
-    public String addAppointmentFormPage(Model model) {
-        AppointmentModel appointment = new AppointmentModel();
-
-        model.addAttribute("appointment", appointment);
-//        model.addAttribute("listKaryawan", karyawanService.getListKaryawan());
-//        model.addAttribute("listTugasExisting", tugasService.getListTugas());
-        return "form-add-appointment";
-    }
-
-    @PostMapping(value="/appointment/add", params = {"save"})
-    public String addAppointmentSubmitPage(@ModelAttribute AppointmentModel appointment, Model model) {
-//        if (presensi.getListTugas() != null){
-//            for (TugasModel tugas : presensi.getListTugas()){
-//                TugasModel tm = tugasService.getTugasById(tugas.getIdTugas());
-//                tugas.setPresensi(presensi);
-////                tugas.setNama();
-//            }
-//        }
-//        if (presensiService.onTime(presensi.getWaktuMasuk())) {
-//            presensi.setStatus(1);
-//        }
-//        else {
-//            presensi.setStatus(0);
-//        }
-
-        appointmentService.addAppointment(appointment);
-        model.addAttribute("appointment", appointment);
-//        model.addAttribute("listKaryawan", karyawanService.getListKaryawan());
-//        model.addAttribute("listTugasExisting", tugasService.getListTugas());
-        return "add-appointment";
-    }
+//    @GetMapping("appointment/add")
+//    public String addAppointmentFormPage(Model model) {
+//        AppointmentModel appointment = new AppointmentModel();
+//
+//        model.addAttribute("appointment", appointment);
+//        model.addAttribute("listDokter", appointment.getDokter());
+////        model.addAttribute("listTugasExisting", tugasService.getListTugas());
+//        return "form-add-appointment";
+//    }
+//
+//    @PostMapping(value="/appointment/add", params = {"save"})
+//    public String addAppointmentSubmitPage(@ModelAttribute AppointmentModel appointment, Model model) {
+////        if (presensi.getListTugas() != null){
+////            for (TugasModel tugas : presensi.getListTugas()){
+////                TugasModel tm = tugasService.getTugasById(tugas.getIdTugas());
+////                tugas.setPresensi(presensi);
+//////                tugas.setNama();
+////            }
+////        }
+////        if (presensiService.onTime(presensi.getWaktuMasuk())) {
+////            presensi.setStatus(1);
+////        }
+////        else {
+////            presensi.setStatus(0);
+////        }
+//
+//        appointmentService.addAppointment(appointment);
+//        model.addAttribute("appointment", appointment);
+////        model.addAttribute("listKaryawan", karyawanService.getListKaryawan());
+////        model.addAttribute("listTugasExisting", tugasService.getListTugas());
+//        return "add-appointment";
+//    }
 }
