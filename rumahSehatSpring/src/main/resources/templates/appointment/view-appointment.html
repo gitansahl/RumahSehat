@@ -19,16 +19,16 @@
             <div class="justify-content-center">
                 <h2>Detail Appointment</h2>
                 <br>
+                <p th:text="'APT-' + ${iterationStatus.count}"></p>
                 <p th:text="'Nama Dokter: ' + ${appointment.dokter.nama}"></p>
                 <p th:text="'Nama Pasien: ' + ${appointment.pasien.nama}"></p>
                 <p th:text="'Tanggal Appointment: ' + ${appointment.tanggal}"></p>
                 <p th:text="'Waktu Awal: ' + ${appointment.waktuAwal}"></p>
-                <p th:if="${presensi.status == 0}">Status: Belum Selesai</p>
-                <p th:if="${presensi.status == 1}">Status: Selesai</p>
+                <p th:if="${appointment.status == 0}" style="color: red;">BELUM SELESAI</p>
+                <p th:if="${appointment.status == 1}" style="color: green;">SELESAI</p>
                 <br>
 
-                <a class="btn btn-warning" th:href="@{/presensi/update/} + ${presensi.idPresensi}">Update</a>
-                <a class="btn btn-primary" href="/presensi/viewall">Kembali</a>
+                <a class="btn btn-success" href="/appointment">Kembali</a>
             </div>
         </div>
     </div>
