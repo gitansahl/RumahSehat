@@ -26,6 +26,9 @@ import java.util.List;
 public class AppointmentModel {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idAppointment;
+
     @Column(name = "kode_appointment")
     private String kodeAppointment;
 
@@ -34,6 +37,7 @@ public class AppointmentModel {
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime waktuAwal;
 
+    @NotNull
     @Column(name = "isDone", nullable = false)
     private Boolean isDone;
 
@@ -50,11 +54,12 @@ public class AppointmentModel {
     private PasienModel pasien;
 
     //Relation with TagihanModel
-//    @OneToOne(mappedBy = "kode_appointment", fetch = FetchType.LAZY)
-//    private TagihanModel tagihan;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private TagihanModel tagihan;
 
     //Relation with ResepModel
-    @OneToMany(mappedBy = "appointment", fetch = FetchType.LAZY)
-    private List<ResepModel> resep;
+    @OneToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_resep", referencedColumnName = "id_resep")
+    private ResepModel resep;
 
 }

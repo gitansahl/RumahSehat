@@ -19,6 +19,14 @@ public class AppointmentServiceImpl implements AppointmentService{
     public void addAppointment(AppointmentModel appointment) { appointmentDb.save(appointment); }
 
     @Override
+    public AppointmentModel getAppointmentByIdAppointment(Long idAppointment) {
+        Optional<AppointmentModel> appointment = appointmentDb.findByIdAppointment(idAppointment);
+        if (appointment.isPresent()) {
+            return appointment.get();
+        } else return null;
+    }
+
+    @Override
     public AppointmentModel getAppointmentByKodeAppointment(String kodeAppointment) {
         Optional<AppointmentModel> appointment = appointmentDb.findByKodeAppointment(kodeAppointment);
         if (appointment.isPresent()) {

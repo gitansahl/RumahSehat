@@ -1,14 +1,18 @@
-package apap.ta.rumahSehat.obat;
+package apap.ta.rumahSehat.obat.model;
 
+import apap.ta.rumahSehat.resep.model.JumlahModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import apap.ta.rumahSehat.resep.model.ResepModel;
+import apap.ta.rumahSehat.resep.model.JumlahModel;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Setter
@@ -33,15 +37,6 @@ public class ObatModel {
     @Column(name = "harga", nullable = false)
     private int harga;
 
-    //relasi
-//    @OneToOne(fetch = FetchType.EAGER, optional = false)
-//    @JoinColumn(name = "jumlah", referencedColumnName = "id_jumlah")
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-//    private JumlahModel jumlah;
-
-
-
-
-
-
+    @OneToMany(mappedBy = "obat", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<JumlahModel> listjumlah;
 }

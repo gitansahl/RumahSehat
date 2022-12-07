@@ -1,28 +1,15 @@
 package apap.ta.rumahSehat.resep.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.OnDelete;
@@ -30,7 +17,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import apap.ta.rumahSehat.appointment.model.AppointmentModel;
-import apap.ta.rumahSehat.obat.ObatModel;
+import apap.ta.rumahSehat.obat.model.ObatModel;
 import apap.ta.rumahSehat.user.model.ApotekerModel;
 
 @Entity
@@ -54,21 +41,17 @@ public class ResepModel implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime createdAt;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, optional =  false)
     @JoinColumn(name = "confirmer_uuid", referencedColumnName = "id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private ApotekerModel confirmer;
 
-    @OneToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "jumlah", referencedColumnName = "id_jumlah")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private JumlahModel jumlah;
+    @OneToMany(mappedBy = "resep", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<JumlahModel> listJumlah;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "kode_appointment", referencedColumnName = "kode_appointment", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToOne(mappedBy = "resep", fetch = FetchType.LAZY)
     private AppointmentModel appointment;
 
-    // @OneToMany(mappedBy = "resep", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    // @OneToMany(mappedBy = "resep", fetch = FetchType.LAZY, cascade = CascadeType.ALL) //kayanya ini gaperlu dah
     // private List<ObatModel> listObat;
 }
