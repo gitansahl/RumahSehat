@@ -25,7 +25,7 @@
 | 2006485680 | Muhammad Raihan Adliputra | 9, 10                     |
 | 2006521326 | Amelia Putri Fadillah | 14, 15            |
 | 1906298941 | Josias Marchellino Pakpahan | 1, 13                     |
-| 1906399114 | Muhammad Ivan Radman | 6, 7(Web)                      |
+| 1906399114 | Muhammad Ivan Radman | 7(Web)                      |
 ---
 **Kontrak Tahap 3 Tugas Akhir**
 
