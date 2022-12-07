@@ -1,6 +1,7 @@
 package apap.ta.rumahSehat.user.model;
 
 import apap.ta.rumahSehat.appointment.model.AppointmentModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,5 +27,6 @@ public class PasienModel extends UserModel {
     private Integer umur;
 
     @OneToMany(mappedBy = "pasien", fetch = FetchType.LAZY)
+    @JsonIgnore
     List<AppointmentModel> listAppointment;
 }

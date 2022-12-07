@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:rumah_sehat_flutter/main.dart';
+import 'package:rumah_sehat_flutter/page/appointment/daftar_appoitnment.dart';
 import 'package:rumah_sehat_flutter/page/tagihan/daftarTagihan.dart';
 import 'package:rumah_sehat_flutter/page/profile/home.dart';
 import 'package:rumah_sehat_flutter/page/profile/profile.dart';
@@ -17,7 +18,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget>_widgetOptions=[HomePage(), HomePage(), DaftarTagihanPage(), ProfilePage()];
+  static const List<Widget>_widgetOptions=[HomePage(), AppointmentPage(), DaftarTagihanPage(), ProfilePage()];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -39,8 +40,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
+            icon: Icon(Icons.schedule),
+            label: 'Appointment',
             backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(

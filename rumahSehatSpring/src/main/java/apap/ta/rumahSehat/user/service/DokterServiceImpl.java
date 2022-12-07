@@ -29,4 +29,9 @@ public class DokterServiceImpl implements DokterService{
         dokterModel.setPassword(encrypt(dokterModel.getPassword()));
         return dokterDb.save(dokterModel);
     }
+
+    @Override
+    public DokterModel findDokterByUsername(String username) {
+        return dokterDb.findByUsername(username);
+    }
 }

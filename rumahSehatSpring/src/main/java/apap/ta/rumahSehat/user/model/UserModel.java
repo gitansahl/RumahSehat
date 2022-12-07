@@ -1,6 +1,7 @@
 package apap.ta.rumahSehat.user.model;
 
 import apap.ta.rumahSehat.user.model.RoleEnum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +22,7 @@ public class UserModel {
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    @JsonIgnore
     private String id;
 
     @NotNull
@@ -30,6 +32,7 @@ public class UserModel {
 
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
+    @JsonIgnore
     private RoleEnum role;
 
     @NotNull
@@ -39,6 +42,7 @@ public class UserModel {
     @NotNull
     @Lob
     @Column(name = "password")
+    @JsonIgnore
     private String password;
 
     @NotNull

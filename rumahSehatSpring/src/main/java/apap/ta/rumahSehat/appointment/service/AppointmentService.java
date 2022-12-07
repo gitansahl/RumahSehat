@@ -12,4 +12,8 @@ public interface AppointmentService {
     AppointmentModel getAppointmentByKodeAppointment(String kodeAppointment);
 
     List<AppointmentModel> getListAppointment();
+
+    boolean isValid(AppointmentModel appointmentModel);
+
+    List<AppointmentModel> getPasienListAppointment(String id);
 }
