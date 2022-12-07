@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rumah_sehat_flutter/main.dart';
 import 'package:rumah_sehat_flutter/page/app.dart';
-import 'package:rumah_sehat_flutter/page/login.dart';
+import 'package:rumah_sehat_flutter/page/auth/login.dart';
 import 'package:rumah_sehat_flutter/page/tagihan/daftarTagihan.dart';
 import 'package:rumah_sehat_flutter/page/profile/home.dart';
 import 'package:rumah_sehat_flutter/page/profile/profile.dart';
