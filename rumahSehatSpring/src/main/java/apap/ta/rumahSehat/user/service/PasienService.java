@@ -11,5 +11,7 @@ public interface PasienService {
 
     PasienModel addPasien(PasienModel pasienModel) throws Exception;
 
+    PasienModel findPasienByUsername(String username);
+
     String encrypt(String password);
 }

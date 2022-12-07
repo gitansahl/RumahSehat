@@ -31,6 +31,11 @@ public class PasienServiceImpl implements PasienService{
     }
 
     @Override
+    public PasienModel findPasienByUsername(String username) {
+        return pasienDb.findByUsername(username);
+    }
+
+    @Override
     public String encrypt(String password) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         return passwordEncoder.encode(password);
