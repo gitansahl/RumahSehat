@@ -34,7 +34,7 @@ public class AppointmentModel {
 
     @NotNull
     @Column(name = "waktuAwal", nullable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @DateTimeFormat(pattern = "dd-MM-yyy HH:mm")
     private LocalDateTime waktuAwal;
 
     @NotNull

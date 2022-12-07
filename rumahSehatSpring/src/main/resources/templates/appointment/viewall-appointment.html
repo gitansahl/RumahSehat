@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
   <meta charset="UTF-8">
@@ -76,9 +77,10 @@
         <table class="table table-striped">
           <thead>
           <tr>
-            <th>Nama Dokter</th>
+            <div sec:authorize="hasAnyAuthority('Admin', 'Pasien')">
+              <th>Nama Dokter</th>
+            </div>
             <th>Nama Pasien</th>
-            <th>Tanggal Appointment</th>
             <th>Waktu Awal</th>
             <th>Status</th>
             <th style="text-align:center">Aksi</th>
@@ -86,12 +88,13 @@
           </thead>
           <tbody>
           <tr th:each="appointment, iterationStatus : ${listAppointment}">
-            <td th:text="'Nama Dokter: ' + ${appointment.dokter.nama}"></td>
-            <td th:text="'Nama Pasien: ' + ${appointment.pasien.nama}"></td>
-            <td th:text="'Tanggal Appointment: ' + ${appointment.tanggal}"></td>
-            <td th:text="'Waktu Awal: ' + ${appointment.waktuAwal}"></td>
-            <td th:if="${appointment.status == 0}" style="color: red;">BELUM SELESAI</td>
-            <td th:if="${appointment.status == 1}" style="color: green;">SELESAI</td>
+            <div sec:authorize="hasAnyAuthority('Admin', 'Pasien')">
+              <td th:text="${appointment.dokter.nama}"></td>
+            </div>
+            <td th:text="${appointment.pasien.nama}"></td>
+            <td th:text="${appointment.waktuAwal}"></td>
+            <td th:if="${appointment.isDone == false}" style="color: red;">BELUM SELESAI</td>
+            <td th:if="${appointment.isDone == true}" style="color: green;">SELESAI</td>
             <td>
               <a class="btn btn-success" th:href="@{/appointment/view/} + ${appointment.kodeAppointment}">Detail</a>
             </td>

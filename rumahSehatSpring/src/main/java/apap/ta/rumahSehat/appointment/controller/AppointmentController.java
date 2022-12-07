@@ -2,6 +2,7 @@ package apap.ta.rumahSehat.appointment.controller;
 
 import apap.ta.rumahSehat.appointment.model.AppointmentModel;
 import apap.ta.rumahSehat.appointment.service.AppointmentService;
+import apap.ta.rumahSehat.tagihan.TagihanModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -30,8 +32,29 @@ public class AppointmentController {
     public String viewDetailAppointmentPage(@PathVariable String kodeAppointment, Model model) {
         AppointmentModel appointment = appointmentService.getAppointmentByKodeAppointment(kodeAppointment);
         model.addAttribute("appointment", appointment);
+        if (appointment.getResep() != null) {
+            model.addAttribute("idResep", appointment.getResep().getIdResep());
+        }
         return "appointment/view-appointment";
     }
+
+    @PostMapping(value = "/appointment/view/{kodeAppointment}", params = {"ubahStatus"})
+    private String updateIsDone(
+            @PathVariable String kodeAppointment, Model model
+    ) {
+        AppointmentModel appointment = appointmentService.getAppointmentByKodeAppointment(kodeAppointment);
+        if (appointment.getIsDone() == false && appointment.getResep().getIsDone() == true && appointment.getResep().getConfirmer() != null) {
+            appointment.setIsDone(true);
+//            TagihanModel tagihan = new TagihanModel();
+            appointmentService.addAppointment(appointment);
+        }
+        model.addAttribute("appointment", appointment);
+        if (appointment.getResep() != null) {
+            model.addAttribute("idResep", appointment.getResep().getIdResep());
+        }
+        return "appointment/view-appointment";
+    }
+
 
 //    @GetMapping("appointment/add")
 //    public String addAppointmentFormPage(Model model) {
