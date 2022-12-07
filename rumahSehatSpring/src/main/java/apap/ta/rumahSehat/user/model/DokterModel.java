@@ -1,16 +1,13 @@
 package apap.ta.rumahSehat.user.model;
 
-import apap.ta.rumahSehat.appointment.AppointmentModel;
+import apap.ta.rumahSehat.appointment.model.AppointmentModel;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -24,6 +21,6 @@ public class DokterModel extends UserModel {
     @Column(name = "tarif")
     private Integer tarif;
 
-    @OneToMany
+    @OneToMany(mappedBy = "dokter", fetch = FetchType.LAZY)
     List<AppointmentModel> listAppointment;
 }

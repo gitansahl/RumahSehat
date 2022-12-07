@@ -1,9 +1,11 @@
 package apap.ta.rumahSehat.authentication.setting;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Setting {
-    final public static String CLIENT_BASE_URL = "http://localhost:8080";
+    final public static String CLIENT_BASE_URL = "https://apap-056.cs.ui.ac.id";
 
     final public static String CLIENT_LOGIN = CLIENT_BASE_URL + "/validate-ticket";
 
@@ -19,4 +21,13 @@ public class Setting {
             = SERVER_BASE_URL + "/serviceValidate?ticket=%s&service=%s";
 
     final public static List<String> whitelist = List.of("gitan.sahl", "amelia.putri02", "josias.marchellino", "muhammad.raihan05", "muhammad.ivan91");
+
+    public static <T> Map<String, T> response(T status, T data) {
+        Map <String, T> res = new HashMap<>();
+
+        res.put("status", status);
+        res.put("data", data);
+
+        return res;
+    }
 }

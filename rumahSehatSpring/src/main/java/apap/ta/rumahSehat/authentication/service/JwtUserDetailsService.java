@@ -24,7 +24,7 @@ public class JwtUserDetailsService implements UserDetailsService {
         PasienModel pasienModel = pasienDb.findByUsername(username);
 
         if (pasienModel == null) {
-            throw new UsernameNotFoundException("Tidak ditemukan akun dengan username: " + username);
+            throw new UsernameNotFoundException("Username not found.");
         }
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<GrantedAuthority>();
