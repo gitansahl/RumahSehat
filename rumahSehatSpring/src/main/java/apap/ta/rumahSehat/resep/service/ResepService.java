@@ -10,4 +10,6 @@ public interface ResepService {
   List<ResepModel> getListResep();
 
   ResepModel getResepByIdResep(Long idResep);
+
+  // ResepModel confirmResep(Long idResep);
 }

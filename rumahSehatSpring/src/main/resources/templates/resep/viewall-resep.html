@@ -59,6 +59,16 @@
       display: flex;
       justify-content: center;
   }
+
+  #done {
+    color: green;
+    font-weight: bold;
+  }
+
+  #nodone {
+    color: red;
+    font-weight: bold;
+  }
 </style>
 <body>
 <nav th:replace="fragments/fragment :: navbar (${'/resep'})"></nav>
@@ -89,8 +99,8 @@
                             <td th:text="${iterationStatus.count}"></td>
                             <td th:text="${resep.idResep}"></td>
                             <td class="col-md-3" th:text="${#temporals.format(resep.createdAt, 'dd MMMM yyyy HH:mm')}"></td>
-                            <td th:if="${resep.isDone}"  style="color: red;">BELUM SELESAI</td> 
-                            <td th:unless="${resep.isDone}" style="color: green;">SELESAI</td>  
+                            <td th:if="${resep.isDone}"  id="done">SELESAI</td> 
+                            <td th:unless="${resep.isDone}" id="nodone">BELUM SELESAI</td>  
                             <td style="text-align:center">
                                 <a class="btn btn-success text-wrap" style="width: 7rem;" th:href="@{#}">Detail</a>
                             </td>

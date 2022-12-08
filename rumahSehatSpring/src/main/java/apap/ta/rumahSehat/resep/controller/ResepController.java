@@ -130,10 +130,29 @@ public class ResepController {
   }
 
   @GetMapping("/resep/{idResep}")
-  public String viewDetailKaryawanPage(@PathVariable Long idResep, Model model) {
+  public String viewDetailResepPage(@PathVariable Long idResep, Model model) {
     ResepModel resep = resepService.getResepByIdResep(idResep);
     model.addAttribute("resep", resep);
 
     return "resep/view-resep";
+  }
+
+  @PostMapping(value = "/resep/konfirmasi", params = {"konfirmasi"})
+  public String konfirmasiResep(@RequestParam("konfirmasi") Long idResep, Model model) {
+      ResepModel resep = resepService.getResepByIdResep(idResep);
+      List<JumlahModel> listJumlah = resep.getListJumlah();
+      for (JumlahModel jumlah : listJumlah) {
+        ObatModel obat = jumlah.getObat();
+        if (obat.getStok() != 0) {
+          resep.setIsDone(true);
+        }
+        else {
+          // model.addAttribute("karyawan", karyawan);
+          return "cant-confirm-resep";
+        }
+      }
+      // resepService.deleteKaryawan(karyawan);
+      // model.addAttribute("karyawan", karyawan);
+      return "confirm-resep";
   }
 }
