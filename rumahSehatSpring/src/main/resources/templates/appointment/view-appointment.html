@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <title>Rumah Sehat</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"></head>
@@ -12,23 +13,32 @@
     }
 </style>
 <body>
-<nav th:replace="fragments/fragment :: navbar"/>
+<nav th:replace="fragments/fragment :: navbar (${'/appointment'})"/>
 <div class="container">
     <div class="card m-4 p-4">
         <div class="card-body">
             <div class="justify-content-center">
                 <h2>Detail Appointment</h2>
                 <br>
+                <p th:text="'APT-' + ${appointment.kodeAppointment}"></p>
                 <p th:text="'Nama Dokter: ' + ${appointment.dokter.nama}"></p>
                 <p th:text="'Nama Pasien: ' + ${appointment.pasien.nama}"></p>
-                <p th:text="'Tanggal Appointment: ' + ${appointment.tanggal}"></p>
                 <p th:text="'Waktu Awal: ' + ${appointment.waktuAwal}"></p>
-                <p th:if="${presensi.status == 0}">Status: Belum Selesai</p>
-                <p th:if="${presensi.status == 1}">Status: Selesai</p>
+                <p th:if="${appointment.isDone == false}" style="color: red;">BELUM SELESAI</p>
+                <p th:if="${appointment.isDone == true}" style="color: green;">SELESAI</p>
                 <br>
-
-                <a class="btn btn-warning" th:href="@{/presensi/update/} + ${presensi.idPresensi}">Update</a>
-                <a class="btn btn-primary" href="/presensi/viewall">Kembali</a>
+                <div sec:authorize="hasAuthority('Dokter')">
+                    <a th:if="${appointment.isDone == false}" class="btn btn-success" th:href="@{/resep/tambah/} + ${appointment.idAppointment}">Tambah Resep</a>
+                </div>
+                <a th:if="${appointment.resep != null}" class="btn btn-success" th:href="@{/resep/} + ${idResep}">Detail Resep</a>
+                <div sec:authorize="hasAuthority('Dokter')">
+                    <form th:action="@{/appointment/view/} + ${appointment.kodeAppointment}" method="POST">
+                        <a>
+                            <button th:if="${appointment.isDone == false}" class="btn btn-danger" type="submit" name="ubahStatus">Selesai</button>
+                        </a>
+                    </form>
+                </div>
+                <a class="btn btn-success" href="/appointment">Kembali</a>
             </div>
         </div>
     </div>
