@@ -37,7 +37,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Log In"),),
+      appBar: AppBar(title: const Text("Log In"),),
 
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -45,14 +45,14 @@ class LoginPage extends StatelessWidget {
           children: <Widget> [
             TextField(
               controller: _usernameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Username'
               ),
             ),
             TextField(
               controller: _passwordController,
               obscureText: true,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Password'
               ),
             ),
@@ -68,12 +68,12 @@ class LoginPage extends StatelessWidget {
               } catch (e) {
                 displayDialog(context, "Error", res['data']);
               }
-            }, child: Text("Log In")
+            }, child: const Text("Log In")
             ),
             RichText(
               text: TextSpan(
                 children: [
-                  TextSpan(
+                  const TextSpan(
                     text: "Didn't have an account? ",
                     style: TextStyle(
                       color: Colors.black
@@ -81,7 +81,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   TextSpan(
                     text: "Register",
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.blue
                       ),
                       recognizer: TapGestureRecognizer()..onTap = () {

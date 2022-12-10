@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:rumah_sehat_flutter/main.dart';
 import 'package:rumah_sehat_flutter/page/appointment/daftar_appoitnment.dart';
 import 'package:rumah_sehat_flutter/page/tagihan/daftarTagihan.dart';
 import 'package:rumah_sehat_flutter/page/profile/home.dart';

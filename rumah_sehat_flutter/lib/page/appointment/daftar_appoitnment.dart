@@ -6,51 +6,10 @@ import 'package:intl/intl.dart';
 import 'package:rumah_sehat_flutter/main.dart';
 import 'package:http/http.dart' as http;
 import 'package:rumah_sehat_flutter/page/appointment/create_appointment.dart';
+import 'package:rumah_sehat_flutter/page/appointment/detail_appointment.dart';
 
 class AppointmentPage extends StatelessWidget {
   const AppointmentPage({Key? key}) : super(key: key);
-  Card generateListTile(String namaDokter, String waktuAwal, bool isDone) {
-    DateTime dateTime = DateTime.parse(waktuAwal);
-    String tanggal = DateFormat.yMMMMd().format(dateTime);
-    String jam = DateFormat.jm().format(dateTime);
-
-    var status = Icons.check_circle_outline;
-    if(!isDone) {
-      status = Icons.schedule;
-    }
-    return Card(
-      child: ListTile(
-        title: Text(
-          namaDokter
-        ),
-        leading: Icon(
-            status),
-        subtitle: RichText(
-          text: TextSpan(
-              children: [
-                TextSpan(
-                    text: "$tanggal $jam ",
-                    style: const TextStyle(
-                        color: Colors.black
-                    )
-                )
-              ]
-          ),
-        )
-      ),
-    );
-  }
-
-  ListView assembleListView(Map<String, dynamic> data) {
-    List<dynamic> data0 = data['data'];
-    return ListView(
-      children: <Card> [
-        for (var i in data0) generateListTile(i['dokter']['nama'], i['waktuAwal'], i['isDone'])
-      ],
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-    );
-  }
   
   Future<Map<String, dynamic>> getListAppointment() async {
     var header = {
@@ -66,6 +25,57 @@ class AppointmentPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    Card generateListTile(Map<String, dynamic> data) {
+      DateTime dateTime = DateTime.parse(data['waktuAwal']);
+      String tanggal = DateFormat.yMMMMd().format(dateTime);
+      String jam = DateFormat.jm().format(dateTime);
+
+      var status = Icons.check_circle_outline;
+      if(!data['isDone']) {
+        status = Icons.schedule;
+      }
+      return Card(
+        child: ListTile(
+          title: Text(
+              data['dokter']['nama']
+          ),
+          leading: Icon(
+              status),
+          subtitle: RichText(
+            text: TextSpan(
+                children: [
+                  TextSpan(
+                      text: "$tanggal $jam ",
+                      style: const TextStyle(
+                          color: Colors.black
+                      )
+                  )
+                ]
+            ),
+          ),
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(
+                  builder: (context) => DetailAppointmentPage(data),
+                )
+            );
+          },
+        ),
+      );
+    }
+
+    ListView assembleListView(Map<String, dynamic> data) {
+      List<dynamic> data0 = data['data'];
+      return ListView(
+        children: <Card> [
+          for (var i in data0) generateListTile(i)
+        ],
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+      );
+    }
+
     return FutureBuilder(
         future: getListAppointment(),
         builder: (context, snapshot) {
