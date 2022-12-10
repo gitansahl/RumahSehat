@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 
 <head>
-    <title>Add Apoteker</title>
+    <title>Bar Chart</title>
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
@@ -10,51 +10,57 @@
 </head>
 
 <body>
-<nav th:replace="fragments/fragment :: navbar('user')"></nav>
+<nav th:replace="fragments/fragment :: navbar('chart')"></nav>
+<div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
+<div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
 <div class="container">
     <div class="card m-4 p-4">
         <div class="card-body">
             <div class="justify-content">
-                <form th:action="@{/user/apoteker/add}" th:object="${apoteker}" method="POST">
-                    <input type="hidden" th:field="*{role}">
+                <form th:action="@{/chart/bar}" th:object="${barChartRequest}" method="POST">
                     <table class="table table-borderless">
                         <thead>
                         <th class="pb-5">
-                            <h2>Tambah Apoteker</h2>
+                            <h2>Spesifikasi Bar Chart</h2>
                         </th>
                         </thead>
                         <br>
                         <tbody>
                         <tr>
                             <td>
-                                <h3>Nama</h3>
+                                <h3>Tipe</h3>
                             </td>
-                            <td>
-                                <h3>Username</h3>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <select class="form-control" th:field="*{tipe}">
+                                    <option value="Pendapatan">Berdasarkan Pendapatan</option>
+                                    <option value="Kuantitas">Berdasarkan Kuantitas Appointment</option>
+                                </select>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <input required class="form-control" placeholder="Nama" type="text" th:field="*{nama}"/>
+                                <h2>Daftar Dokter</h2>
+                            </td>
+                        </tr>
+                        <tr th:each="dokter, iterationStatus : *{dokterModelList}">
+                            <td>
+                                <select th:field="*{dokterModelList[__${iterationStatus.index}__].username}"
+                                        class="form-control">
+                                    <div th:each="dokterEx, iterationStatus2 : ${listDokter}">
+                                        <option th:value="${dokterEx.username}" th:text="${dokterEx.nama}"></option>
+                                    </div>
+                                </select>
                             </td>
                             <td>
-                                <input required class="form-control" placeholder="Username" type="text" th:field="*{username}" />
+                                <button th:value="${iterationStatus.index}" class="btn btn-danger" type="submit"
+                                        name="deleteRowDokter">Hapus</button>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <h3>Email</h3>
-                            </td>
-                            <td>
-                                <h3>Password</h3>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input required class="form-control" placeholder="Email" type="text" th:field="*{email}"/>
-                            </td>
-                            <td>
-                                <input required class="form-control" placeholder="Password" type="text" th:field="*{password}" />
+                                <button class="btn btn-primary" type="submit" name="addRowDokter">+ Tambah Dokter</button>
                             </td>
                         </tr>
                         <tr>
@@ -62,6 +68,9 @@
                                 <div class="row">
                                     <div class="col">
                                         <button class="btn btn-primary" type="submit" name="save">Submit</button>
+                                    </div>
+                                    <div class="col">
+                                        <a class="btn btn-primary" th:href="@{/chart}">Back</a>
                                     </div>
                                 </div>
                             </td>

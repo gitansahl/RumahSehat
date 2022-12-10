@@ -2,6 +2,7 @@ package apap.ta.rumahSehat.appointment.service;
 
 import apap.ta.rumahSehat.appointment.model.AppointmentModel;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface AppointmentService {
@@ -16,4 +17,6 @@ public interface AppointmentService {
     boolean isValid(AppointmentModel appointmentModel);
 
     List<AppointmentModel> getPasienListAppointment(String id);
+
+    List<AppointmentModel> getAppointmentInRange(LocalDateTime awal, LocalDateTime akhir);
 }

@@ -19,4 +19,10 @@ public interface AppointmentDb extends JpaRepository<AppointmentModel, Long> {
     Optional<AppointmentModel> findAppointmentModelByPasien_IdAndWaktuAwalBetween(String idPasien, LocalDateTime awal, LocalDateTime akhir);
 
     List<AppointmentModel> findAllByPasien_Id(String idPasien);
+
+    List<AppointmentModel> findAllByWaktuAwalBetween(LocalDateTime awal, LocalDateTime akhir);
+
+    List<AppointmentModel> findAllByDokter_Username(String username);
+
+    List<AppointmentModel> findAllByDokter_UsernameAndWaktuAwalBetween(String username, LocalDateTime awal, LocalDateTime akhir);
 }

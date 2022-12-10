@@ -89,4 +89,9 @@ public class AppointmentServiceImpl implements AppointmentService{
     public List<AppointmentModel> getPasienListAppointment(String id) {
         return appointmentDb.findAllByPasien_Id(id);
     }
+
+    @Override
+    public List<AppointmentModel> getAppointmentInRange(LocalDateTime awal, LocalDateTime akhir) {
+        return appointmentDb.findAllByWaktuAwalBetween(awal, akhir);
+    }
 }

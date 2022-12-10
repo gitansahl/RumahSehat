@@ -7,6 +7,7 @@ import apap.ta.rumahSehat.user.model.AdminModel;
 import apap.ta.rumahSehat.user.model.RoleEnum;
 import apap.ta.rumahSehat.user.model.UserModel;
 import apap.ta.rumahSehat.user.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,6 +27,7 @@ import javax.servlet.http.HttpSession;
 import java.security.Principal;
 
 @Controller
+@Slf4j
 public class AuthController {
     @Autowired
     ServerProperties serverProperties;
@@ -55,6 +57,8 @@ public class AuthController {
         String username = serviceResponses.getAuthenticationSuccess().getUser();
 
         if (!userService.isWhitelist(username)) {
+            log.info(String.format("%s non whitelist trying to log in.", username));
+
             return new ModelAndView("redirect:" + Setting.SERVER_LOGOUT + Setting.CLIENT_LOGOUT);
         }
 
@@ -78,6 +82,8 @@ public class AuthController {
         HttpSession httpSession = request.getSession(true);
         httpSession.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, securityContext);
 
+        log.info(String.format("%s logged in with SSO.", authentication.getName()));
+
         return new ModelAndView("redirect:/");
     }
 
@@ -88,6 +94,8 @@ public class AuthController {
 
     @GetMapping("/logout-sso")
     public ModelAndView logoutSSO(Principal principal) {
+        log.info(String.format("%s logged out.", principal.getName()));
+
         UserModel user = userService.getUserByUsername(principal.getName());
         if (!user.getRole().equals(RoleEnum.Admin)) {
             return new ModelAndView("redirect:/logout");
