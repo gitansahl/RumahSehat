@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>Add Apoteker</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar('user')"></nav>
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content">
+                <form th:action="@{/user/apoteker/add}" th:object="${apoteker}" method="POST">
+                    <input type="hidden" th:field="*{role}">
+                    <table class="table table-borderless">
+                        <thead>
+                        <th class="pb-5">
+                            <h2>Tambah Apoteker</h2>
+                        </th>
+                        </thead>
+                        <br>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <h3>Nama</h3>
+                            </td>
+                            <td>
+                                <h3>Username</h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input required class="form-control" placeholder="Nama" type="text" th:field="*{nama}"/>
+                            </td>
+                            <td>
+                                <input required class="form-control" placeholder="Username" type="text" th:field="*{username}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h3>Email</h3>
+                            </td>
+                            <td>
+                                <h3>Password</h3>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input required class="form-control" placeholder="Email" type="text" th:field="*{email}"/>
+                            </td>
+                            <td>
+                                <input required class="form-control" placeholder="Password" type="text" th:field="*{password}" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <div class="col">
+                                        <button class="btn btn-primary" type="submit" name="save">Submit</button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

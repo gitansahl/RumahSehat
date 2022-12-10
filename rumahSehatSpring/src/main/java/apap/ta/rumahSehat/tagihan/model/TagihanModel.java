@@ -1,4 +1,4 @@
-package apap.ta.rumahSehat.tagihan;
+package apap.ta.rumahSehat.tagihan.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,4 +22,6 @@ public class TagihanModel {
     @Id
     @Column(name = "kode_tagihan")
     private String kodeTagihan;
+
+//    TODO onetoone dengan appointment
 }

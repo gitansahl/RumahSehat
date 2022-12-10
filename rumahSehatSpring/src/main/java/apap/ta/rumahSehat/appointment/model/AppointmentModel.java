@@ -1,9 +1,10 @@
 package apap.ta.rumahSehat.appointment.model;
 
 import apap.ta.rumahSehat.resep.model.ResepModel;
-import apap.ta.rumahSehat.tagihan.TagihanModel;
+import apap.ta.rumahSehat.tagihan.model.TagihanModel;
 import apap.ta.rumahSehat.user.model.DokterModel;
 import apap.ta.rumahSehat.user.model.PasienModel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -27,6 +27,7 @@ public class AppointmentModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long idAppointment;
 
     @Column(name = "kode_appointment")
@@ -51,15 +52,18 @@ public class AppointmentModel {
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "pasien", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private PasienModel pasien;
 
     //Relation with TagihanModel
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private TagihanModel tagihan;
 
     //Relation with ResepModel
-    @OneToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_resep", referencedColumnName = "id_resep")
+    @JsonIgnore
     private ResepModel resep;
 
 }

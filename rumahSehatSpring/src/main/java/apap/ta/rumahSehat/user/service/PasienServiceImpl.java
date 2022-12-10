@@ -31,8 +31,19 @@ public class PasienServiceImpl implements PasienService{
     }
 
     @Override
+    public PasienModel findPasienByUsername(String username) {
+        return pasienDb.findByUsername(username);
+    }
+
+    @Override
     public String encrypt(String password) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         return passwordEncoder.encode(password);
+    }
+
+    @Override
+    public PasienModel topUpSaldo(PasienModel pasien, Integer saldoTambahan) {
+        pasien.setSaldo(pasien.getSaldo() + saldoTambahan);
+        return pasienDb.save(pasien);
     }
 }

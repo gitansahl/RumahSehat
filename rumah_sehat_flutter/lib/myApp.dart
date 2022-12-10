@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:rumah_sehat_flutter/main.dart';
+import 'package:rumah_sehat_flutter/page/app.dart';
+import 'package:rumah_sehat_flutter/page/auth/login.dart';
 import 'package:rumah_sehat_flutter/page/tagihan/daftarTagihan.dart';
 import 'package:rumah_sehat_flutter/page/profile/home.dart';
 import 'package:rumah_sehat_flutter/page/profile/profile.dart';
@@ -9,69 +12,35 @@ class MyApp extends StatelessWidget {
 
   static const String _title = 'Flutter Code Sample';
 
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: _title,
-      home: MyStatefulWidget(),
-
-    );
-  }
-}
-
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({Key? key}) : super(key: key);
-  @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
-}
-
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget>_widgetOptions=[HomePage(), HomePage(), DaftarTagihanPage(), ProfilePage()];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+  Future<String> get jwtOrEmpty async {
+    var token = await jwt;
+    if (token == null) return "";
+    return token;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+    return MaterialApp(
+      title: 'Rumah Sehat',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-            backgroundColor: Colors.blue,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
-            backgroundColor: Colors.blue,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.request_page),
-            label: 'Daftar Tagihan',
-            backgroundColor: Colors.blue,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-            backgroundColor: Colors.blue,
+      home: FutureBuilder(
+          future: jwtOrEmpty,
+          builder: (context, snapshot) {
+            if(!snapshot.hasData) return CircularProgressIndicator();
+            if(snapshot.data != "") {
+              var jwt = snapshot.data;
 
-
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.white,
-        onTap: _onItemTapped,
-
+              if(jwt == "") {
+                return LoginPage();
+              } else {
+                return MyStatefulWidget();
+              }
+            } else {
+              return LoginPage();
+            }
+          }
       ),
     );
   }

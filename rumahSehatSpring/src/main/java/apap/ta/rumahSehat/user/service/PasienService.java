@@ -11,5 +11,8 @@ public interface PasienService {
 
     PasienModel addPasien(PasienModel pasienModel) throws Exception;
 
+    PasienModel findPasienByUsername(String username);
+
+    PasienModel topUpSaldo(PasienModel pasien, Integer saldoTambahan);
     String encrypt(String password);
 }
