@@ -5,6 +5,7 @@ import apap.ta.rumahSehat.tagihan.TagihanModel;
 import apap.ta.rumahSehat.user.model.DokterModel;
 import apap.ta.rumahSehat.user.model.PasienModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -46,6 +47,7 @@ public class AppointmentModel {
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "dokter", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnoreProperties(value = {"username", "email", "tarif"})
     private DokterModel dokter;
 
     //Relation with PasienModel
@@ -61,9 +63,9 @@ public class AppointmentModel {
     private TagihanModel tagihan;
 
     //Relation with ResepModel
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "id_resep", referencedColumnName = "id_resep")
-    @JsonIgnore
+    @JsonIgnoreProperties(value = {"confirmer", "listJumlah", "appointment", "isDone", "createdAt"})
     private ResepModel resep;
 
 }

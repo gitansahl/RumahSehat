@@ -51,7 +51,7 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Register"),),
+      appBar: AppBar(title: const Text("Register"),),
 
       body: SingleChildScrollView(
         child: Padding(
