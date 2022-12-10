@@ -1,7 +1,7 @@
 package apap.ta.rumahSehat.appointment.model;
 
 import apap.ta.rumahSehat.resep.model.ResepModel;
-import apap.ta.rumahSehat.tagihan.TagihanModel;
+import apap.ta.rumahSehat.tagihan.model.TagihanModel;
 import apap.ta.rumahSehat.user.model.DokterModel;
 import apap.ta.rumahSehat.user.model.PasienModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;

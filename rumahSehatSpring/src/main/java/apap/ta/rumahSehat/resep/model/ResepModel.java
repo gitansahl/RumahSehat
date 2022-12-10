@@ -49,7 +49,7 @@ public class ResepModel implements Serializable {
     @OneToMany(mappedBy = "resep", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<JumlahModel> listJumlah;
 
-    @OneToOne(mappedBy = "resep", fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, optional = false)
     private AppointmentModel appointment;
 
     // @OneToMany(mappedBy = "resep", fetch = FetchType.LAZY, cascade = CascadeType.ALL) //kayanya ini gaperlu dah

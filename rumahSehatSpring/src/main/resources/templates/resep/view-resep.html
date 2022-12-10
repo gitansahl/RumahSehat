@@ -15,7 +15,7 @@
 
   th {
     text-align: center;
-    color: #36c4ef;
+    color: #34ce57;
   }
 
   td {
@@ -34,7 +34,7 @@
     border-radius: 10px;
     border-style: solid;
     border-width: thick;
-    border-color: #36c4ef;
+    border-color: #34ce57;
   }
 
   .header-container-table {
@@ -44,7 +44,7 @@
     justify-content: space-between;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
-    background-color: #36c4ef;
+    background-color: #34ce57;
     align-items: center;
   }
 
@@ -54,7 +54,7 @@
   }
 
   .detail-text {
-    color: #36c4ef;
+    color: #34ce57;
     font-weight: bold;
   }
 
@@ -95,24 +95,49 @@
             <p class="detail-text">Nama Dokter</p>
             <p class="detail-text">Nama Pasien</p>
             <p class="detail-text">Status</p>
-            <!-- KALO ADA -->
             <p class="detail-text">Nama Apoteker</p>
             <p class="detail-text">Daftar Obat</p>
           </td>
-          <td>
+          <td style="width:250px">
             <p th:text="${resep.idResep}"></p>
-            <p th:text="${resep.namaDokter}"></p>
-            <p th:text="${resep.namaPasien}"></p>
-            <p th:if="${resep.status} == 0" id="done">BELUM SELESAI</p>
-            <p th:unless="${resep.status} == 1" id="nodone">TERLAMBAT</p>
-            <p th:text="${resep.namaApoteker}"></p>
-            <p th:text="${resep.namaObat} + ' ' + ${resep.kuantitasObat}"></p>
+            <p th:text="${#temporals.format(resep.createdAt, 'dd MMMM yyyy HH:mm')}"></p>
+            <p th:text="${dokter}"></p>
+            <p th:text="${pasien}"></p>
+            <p th:text="${status}"></p>
+            <p th:text="${apoteker}"></p>
+            <div th:if="*{listJumlah.size() != 0}">
+              <table class="table">
+                  <thead>
+                  <tr class="border-bottom">
+                      <th>No</th>
+                      <th>Nama Obat</th>
+                      <th>Kuantitas</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr th:each="jumlah, iterationStatus1 : ${listJumlah}"
+                      th:style="${iterationStatus1.even} ? 'font-weight:bold;'">
+                      <td th:text="${iterationStatus1.count}"></td>
+                      <td th:text="${jumlah.obat.namaObat}"></td>
+                      <td th:text="${jumlah.kuantitas}"></td>
+                  </tr>
+                  </tbody>
+              </table>
+          </div>
           </td>
         </table>
+        <div th:if="${#strings.equals(role, 'Apoteker')}">
+          <div th:if="${#strings.equals(status, 'Belum Selesai')}">
+              <form th:action="@{/resep/confirmation}" th:object="${resep}" method="POST">
+                  <input type="hidden" th:field="*{id}">
+                  <input type="submit" value="Konfirmasi Resep" class="btn btn-outline-success">
+              </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+  <a class="btn btn-primary" style="width: 10rem;" th:href="@{/}">Home</a>
 </div>
-
 </body>
 </html>

@@ -2,7 +2,8 @@ package apap.ta.rumahSehat.appointment.controller;
 
 import apap.ta.rumahSehat.appointment.model.AppointmentModel;
 import apap.ta.rumahSehat.appointment.service.AppointmentService;
-import apap.ta.rumahSehat.tagihan.TagihanModel;
+import apap.ta.rumahSehat.tagihan.model.TagihanModel;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;

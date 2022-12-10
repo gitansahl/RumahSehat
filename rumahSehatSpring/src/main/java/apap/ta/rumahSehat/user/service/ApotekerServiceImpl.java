@@ -29,4 +29,9 @@ public class ApotekerServiceImpl implements ApotekerService{
         apotekerModel.setPassword(encrypt(apotekerModel.getPassword()));
         return apotekerDb.save(apotekerModel);
     }
+
+    @Override
+    public ApotekerModel getApotekerByUsername(String username){
+        return apotekerDb.findByUsername(username);
+    }
 }

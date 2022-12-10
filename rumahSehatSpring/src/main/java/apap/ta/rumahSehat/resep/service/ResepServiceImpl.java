@@ -18,22 +18,9 @@ public class ResepServiceImpl implements ResepService{
   @Autowired
   ResepDb resepDb;
 
-  @Autowired
-  AppointmentDb appointmentDb;
-
-  @Autowired
-  ObatDb obatDb;
-
-  @Override //, Long idAppointment
-  public void addResep(ResepModel resep) {  //nnt harus diganti, ambil parameter id appointment buat ngecek appointmentnya udah kelar apa belom, kalo belom isDone nya false
-    // Optional<AppointmentModel> appointment = appointmentDb.findByIdAppointment(idAppointment);
-
-    // if (appointment.getIsDone == true) {
-    //   return true;
-    // }
+  @Override
+  public void addResep(ResepModel resep) {
     resepDb.save(resep);
-    
-    // return false;
   }
 
   @Override
