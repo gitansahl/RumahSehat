@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Home</title>
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
@@ -25,7 +26,7 @@
                                 </div>
                                 <h3 class="card-title font-weight-bold " align="center">Welcome to Rumah Sehat</h3>
                                 <p class="card-text" align="center">List of Features:</p>
-                                <a th:href="@{/}" class="btn text-white border-light text-center">User</a>
+                                <a th:href="@{/}" class="btn text-white border-light text-center" sec:authorize="hasAuthority('Admin')">User</a>
                                 <a th:href="@{/}" class="btn text-white border-light text-center">Appointment</a>
                                 <a th:href="@{/}" class="btn text-white border-light text-center">Obat</a>
                                 <a th:href="@{/}" class="btn text-white border-light text-center">Resep</a>

@@ -31,7 +31,7 @@
 
 | NPM | Nama Lengkap | Fitur yang akan diselesaikan |
 | ----------| --- |------------------------------| 
-| 2006596522 | Gitan Sahl Tazakha Wijaya | 4, 5, 6, 7(Mobile), 8(Mobile)                        |
+| 2006596522 | Gitan Sahl Tazakha Wijaya | 4, 5, 6, 7(Mobile), 8(Mobile), 20                        |
 | 2006485680 | Muhammad Raihan Adliputra | 11                           |
 | 2006521326 | Amelia Putri Fadillah | 16, 17                       |
 | 1906298941 | Josias Marchellino Pakpahan | 12                           |
