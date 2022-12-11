@@ -6,12 +6,28 @@
   <object th:include="fragments/fragment :: css" th:remove="tag"></object>
   <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
+<style>
+  .center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+</style>
 <body>
 <nav th:replace="fragments/fragment :: navbar(page = 'obat')"></nav>
+<br>
+<br>
 <div class="container-fluid">
   <h2 class="text-center">Access Forbidden (403) </h2>
-  <h4 class="text-center">Halaman hanya boleh diakses oleh Admin</h4>
-  <a th:href="@{/}">Kembali</a>
+  <h4 class="text-center">Halaman memiliki akses terbatas</h4>
+  <div class="container">
+    <div class="center">
+      <a class="btn btn-primary" th:href="@{/obat}">Kembali</a>
+    </div>
+  </div>
 </div>
 
 </body>
