@@ -195,7 +195,9 @@ public class ResepController {
   }
 
   @GetMapping("/resep/{idResep}")
-  public String viewDetailResepPage(@PathVariable Long idResep, Model model) {
+  public String viewDetailResepPage(
+    @PathVariable Long idResep, 
+    Model model) {
     ResepModel resep = resepService.getResepByIdResep(idResep);
     List<JumlahModel> listJumlah = resep.getListJumlah();
     
@@ -232,7 +234,9 @@ public class ResepController {
   }
 
   @PostMapping("/resep/konfirmasi")
-  public String konfirmasiResep(@ModelAttribute ResepModel resep, Model model) {
+  public String konfirmasiResep(
+    @ModelAttribute ResepModel resep, 
+    Model model) {
       ResepModel temp = resepService.getResepByIdResep(resep.getIdResep());
       List<JumlahModel> listJumlah = temp.getListJumlah();
       Integer tagihan = 0;
