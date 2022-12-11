@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+  <title>Line Chart Monthly</title>
+  <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+  <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+  <link rel="stylesheet" th:href="@{/css/style.css}"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=neon|outline|emboss|shadow-multiple">
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar('chart')"></nav>
+<div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
+<div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+<div class="container">
+  <div class="card m-4 p-4">
+    <div class="card-body">
+      <div class="justify-content">
+        <form th:action="@{/chart/line-daily}" th:object="${lineChartRequest}" method="POST">
+          <table class="table table-borderless">
+            <thead>
+            <th class="pb-5">
+              <h2>Spesifikasi Line Chart Daily</h2>
+            </th>
+            </thead>
+            <br>
+            <tbody>
+            <tr>
+              <td>
+                <h3>Bulan Tahun</h3>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <input class="form-control" type="month" th:field="*{bulanTahun}">
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h2>Daftar Dokter</h2>
+              </td>
+            </tr>
+            <tr th:each="dokter, iterationStatus : *{dokterModelList}">
+              <td>
+                <select th:field="*{dokterModelList[__${iterationStatus.index}__].username}"
+                        class="form-control">
+                  <div th:each="dokterEx, iterationStatus2 : ${listDokter}">
+                    <option th:value="${dokterEx.username}" th:text="${dokterEx.nama}"></option>
+                  </div>
+                </select>
+              </td>
+              <td>
+                <button th:value="${iterationStatus.index}" class="btn btn-danger" type="submit"
+                        name="deleteRowDokter">Hapus</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button class="btn btn-primary" type="submit" name="addRowDokter">+ Tambah Dokter</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="row">
+                  <div class="col">
+                    <button class="btn btn-primary" type="submit" name="save">Submit</button>
+                  </div>
+                  <div class="col">
+                    <a class="btn btn-primary" th:href="@{/chart}">Back</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+<footer th:replace="fragments/fragment :: footer"></footer>
+</html>

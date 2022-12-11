@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Rumah Sehat</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"></head>
+<object th:include="fragments/fragment :: css" th:remove="tag"/>
+<object th:include="fragments/fragment :: js" th:remove="tag"/>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+    *{
+        font-family: 'Poppins', sans-serif;
+    }
+</style>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2>Tambah Appointment</h2>
+                <br>
+                <form th:action="@{/appointment/add}" th:object="${appointment}" method="POST">
+                    Nama Dokter<br>
+                    <select name="dokter" th:field="*{dokter}" class="form-select" style="width: 500px;">
+                        <option value="" disabled selected hidden>Dokter</option>
+                        <div th:each="dokter : ${listDokter}">
+                            <option th:value="${dokter.uuid}" th:text="${dokter.nama} + ' - ' + {dokter.tarif}"></option>
+                        </div>
+                    </select>
+                    <br>
+
+                    Tanggal: <br>
+                    <input required class="form-control" type="date" placeholder="Tanggal Appointment" th:field="*{tanggal}" />
+                    <br><br>
+
+                    Waktu Mulai: <br>
+                    <input required class="form-control" type="time" placeholder="Waktu Mulai" th:field="*{waktuMulai}" />
+                    <br><br>
+
+                    <button class="btn btn-primary" type="submit" name="save">Simpan</button>
+                    <a class="btn btn-danger" href="/">Batal</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

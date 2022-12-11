@@ -35,8 +35,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                     .antMatchers("/css/**").permitAll()
                     .antMatchers("/js/**").permitAll()
                     .antMatchers("/login-sso", "/validate-ticket").permitAll()
+                    .antMatchers("/error").permitAll()
                     .antMatchers("/").hasAnyAuthority("Admin", "Apoteker", "Dokter")
                     .antMatchers("/user/**").hasAuthority("Admin")
+                    .antMatchers("/chart", "/chart/**").hasAuthority("Admin")
                     .anyRequest().authenticated()
                     .and()
                     .formLogin()
@@ -96,6 +98,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                     // dont authenticate this particular request
                     .authorizeRequests()
                     .antMatchers("/api/authenticate").permitAll()
+                    .antMatchers("/api/user/registration").permitAll()
                     .antMatchers("/api/**").hasAuthority("Pasien")
 
                     // all other requests need to be authenticated
