@@ -92,9 +92,9 @@
               <td th:text="${appointment.dokter.nama}"></td>
             </div>
             <td th:text="${appointment.pasien.nama}"></td>
-            <td th:text="${appointment.waktuAwal}"></td>
-            <td th:if="${appointment.isDone == false}" style="color: red;">BELUM SELESAI</td>
-            <td th:if="${appointment.isDone == true}" style="color: green;">SELESAI</td>
+            <td th:text="${#temporals.format(appointment.waktuAwal, 'dd MMMM yyyy HH:mm')}"></td>
+            <td th:if="${appointment.isDone == false}" style="color: red; font-weight: bold;">BELUM SELESAI</td>
+            <td th:if="${appointment.isDone == true}" style="color: green; font-weight: bold;">SELESAI</td>
             <td>
               <a class="btn btn-success" th:href="@{/appointment/view/} + ${appointment.kodeAppointment}">Detail</a>
             </td>

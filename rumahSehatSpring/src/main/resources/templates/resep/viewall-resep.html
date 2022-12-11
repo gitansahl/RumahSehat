@@ -94,16 +94,17 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="resep, iterationStatus : ${listResep}"
-                        th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+                        <tr th:each="resep, iterationStatus : ${listResep}">
                             <td th:text="${iterationStatus.count}"></td>
                             <td th:text="${resep.idResep}"></td>
                             <td class="col-md-3" th:text="${#temporals.format(resep.createdAt, 'dd MMMM yyyy HH:mm')}"></td>
                             <td th:if="${resep.isDone}"  id="done">SELESAI</td> 
                             <td th:unless="${resep.isDone}" id="nodone">BELUM SELESAI</td>  
-                            <td style="text-align:center">
-                                <a class="btn btn-success text-wrap" style="width: 7rem;" th:href="@{resep/} + ${resep.id}">Detail</a>
-                            </td>
+                            <div sec:authorize="hasAnyAuthority('Apoteker', 'apoteker', 'Admin', 'ADMIN')">
+                                <td style="text-align:center">
+                                    <a class="btn btn-success text-wrap" style="width: 7rem;" th:href="@{resep/} + ${resep.idResep}">Detail</a>
+                                </td>
+                            </div>
                         </tr>
                         </tbody>
                     </table>

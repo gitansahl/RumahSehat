@@ -24,17 +24,19 @@
                 <p th:text="'Nama Dokter: ' + ${appointment.dokter.nama}"></p>
                 <p th:text="'Nama Pasien: ' + ${appointment.pasien.nama}"></p>
                 <p th:text="'Waktu Awal: ' + ${appointment.waktuAwal}"></p>
-                <p th:if="${appointment.isDone == false}" style="color: red;">BELUM SELESAI</p>
-                <p th:if="${appointment.isDone == true}" style="color: green;">SELESAI</p>
+                <p th:if="${appointment.isDone == false}" style="color: red; font-weight: bold;">BELUM SELESAI</p>
+                <p th:if="${appointment.isDone == true}" style="color: green; font-weight: bold;">SELESAI</p>
                 <br>
-                <div sec:authorize="hasAuthority('Dokter')">
-                    <a th:if="${appointment.isDone == false}" class="btn btn-success" th:href="@{/resep/tambah/} + ${appointment.idAppointment}">Tambah Resep</a>
+                <div sec:authorize="hasAnyAuthority('Dokter', 'dokter')">
+                    <a th:if="${appointment.isDone == false}" class="btn btn-success" th:href="@{/resep/tambah/} + ${appointment.idAppointment}" style="margin-bottom: 10px;">Tambah Resep</a>
                 </div>
-                <a th:if="${appointment.resep != null}" class="btn btn-success" th:href="@{/resep/} + ${idResep}">Detail Resep</a>
+                <div sec:authorize="hasAnyAuthority('Dokter', 'dokter')">
+                    <a th:if="${appointment.resep != null}" class="btn btn-success" th:href="@{/resep/} + ${idResep}" style="margin-bottom: 10px;">Detail Resep</a>
+                </div>
                 <div sec:authorize="hasAuthority('Dokter')">
                     <form th:action="@{/appointment/view/} + ${appointment.kodeAppointment}" method="POST">
                         <a>
-                            <button th:if="${appointment.isDone == false}" class="btn btn-danger" type="submit" name="ubahStatus">Selesai</button>
+                            <button th:if="${appointment.isDone == false}" class="btn btn-danger" type="submit" name="ubahStatus" style="margin-bottom: 10px;">Selesai</button>
                         </a>
                     </form>
                 </div>

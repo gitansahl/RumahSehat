@@ -1,6 +1,8 @@
 package apap.ta.rumahSehat.appointment.service;
 
 import apap.ta.rumahSehat.appointment.model.AppointmentModel;
+import apap.ta.rumahSehat.user.model.DokterModel;
+import apap.ta.rumahSehat.user.model.PasienModel;
 
 import java.util.List;
 
@@ -13,7 +15,13 @@ public interface AppointmentService {
 
     List<AppointmentModel> getListAppointment();
 
+    // List<AppointmentModel> getListAppointmentByDokter(DokterModel dokter);
+
+    // List<AppointmentModel> getListAppointmentByPasien(PasienModel pasien);
+
     boolean isValid(AppointmentModel appointmentModel);
 
     List<AppointmentModel> getPasienListAppointment(String id);
+
+    void finishAppointment(AppointmentModel appointment);
 }
