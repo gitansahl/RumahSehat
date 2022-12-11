@@ -3,6 +3,7 @@ package apap.ta.rumahSehat.user.service;
 import apap.ta.rumahSehat.user.model.ApotekerModel;
 import apap.ta.rumahSehat.user.repository.ApotekerDb;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,5 +16,17 @@ public class ApotekerServiceImpl implements ApotekerService{
     @Override
     public List<ApotekerModel> findAll() {
         return apotekerDb.findAll();
+    }
+
+    @Override
+    public String encrypt(String password) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        return passwordEncoder.encode(password);
+    }
+
+    @Override
+    public ApotekerModel addApoteker(ApotekerModel apotekerModel) throws Exception{
+        apotekerModel.setPassword(encrypt(apotekerModel.getPassword()));
+        return apotekerDb.save(apotekerModel);
     }
 }
