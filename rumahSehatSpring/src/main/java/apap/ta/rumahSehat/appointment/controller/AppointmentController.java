@@ -94,7 +94,7 @@ public class AppointmentController {
         ResepModel resep = appointment.getResep();
         if (resep == null || resep.getIsDone()) {
             model.addAttribute("appointment", appointment);
-            
+
             TagihanModel tagihan = tagihanService.addTagihanByDokter(appointment);
             appointment.setTagihan(tagihan);
             appointmentService.finishAppointment(appointment);

@@ -1,10 +1,18 @@
 package apap.ta.rumahSehat.resep.service;
 
+<<<<<<< HEAD
+=======
 import java.util.ArrayList;
+>>>>>>> ff45b65d2ff514f9c44128c7e5aa0e5b8993df7b
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+<<<<<<< HEAD
+import apap.ta.rumahSehat.resep.model.ResepModel;
+import apap.ta.rumahSehat.resep.repository.ResepDb;
+import apap.ta.rumahSehat.appointment.repository.AppointmentDb;
+=======
 import apap.ta.rumahSehat.resep.model.JumlahDTO;
 import apap.ta.rumahSehat.resep.model.JumlahModel;
 import apap.ta.rumahSehat.resep.model.ResepDTO;
@@ -13,6 +21,7 @@ import apap.ta.rumahSehat.resep.repository.ResepDb;
 import apap.ta.rumahSehat.appointment.model.AppointmentModel;
 import apap.ta.rumahSehat.appointment.repository.AppointmentDb;
 import apap.ta.rumahSehat.appointment.service.AppointmentService;
+>>>>>>> ff45b65d2ff514f9c44128c7e5aa0e5b8993df7b
 import apap.ta.rumahSehat.obat.model.ObatModel;
 import apap.ta.rumahSehat.obat.repository.ObatDb;
 import org.springframework.stereotype.Service;
@@ -25,11 +34,29 @@ public class ResepServiceImpl implements ResepService{
   ResepDb resepDb;
 
   @Autowired
+<<<<<<< HEAD
+  AppointmentDb appointmentDb;
+
+  @Autowired
+  ObatDb obatDb;
+
+  @Override //, Long idAppointment
+  public void addResep(ResepModel resep) {  //nnt harus diganti, ambil parameter id appointment buat ngecek appointmentnya udah kelar apa belom, kalo belom isDone nya false
+    // Optional<AppointmentModel> appointment = appointmentDb.findByIdAppointment(idAppointment);
+
+    // if (appointment.getIsDone == true) {
+    //   return true;
+    // }
+    resepDb.save(resep);
+    
+    // return false;
+=======
   AppointmentService appointmentService;
 
   @Override
   public void addResep(ResepModel resep) {
     resepDb.save(resep);
+>>>>>>> ff45b65d2ff514f9c44128c7e5aa0e5b8993df7b
   }
 
   @Override
@@ -41,6 +68,8 @@ public class ResepServiceImpl implements ResepService{
   public ResepModel getResepByIdResep(Long idResep) {
     return resepDb.findByIdResep(idResep);
   }
+<<<<<<< HEAD
+=======
 
   @Override
   public ResepModel getResepByKodeAppointment(String kodeAppointment) {
@@ -77,4 +106,5 @@ public class ResepServiceImpl implements ResepService{
 
     return apiResep;
   }
+>>>>>>> ff45b65d2ff514f9c44128c7e5aa0e5b8993df7b
 }

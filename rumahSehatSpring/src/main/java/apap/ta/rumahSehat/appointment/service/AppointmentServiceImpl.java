@@ -42,7 +42,7 @@ public class AppointmentServiceImpl implements AppointmentService{
     public List<AppointmentModel> getListAppointment() {
         return appointmentDb.findAll();
     }
-    
+
     // @Override
     // public List<AppointmentModel> getListAppointmentByDokter(DokterModel dokter) {
     //     return appointmentDb.findAllByDokter(dokter.getId());

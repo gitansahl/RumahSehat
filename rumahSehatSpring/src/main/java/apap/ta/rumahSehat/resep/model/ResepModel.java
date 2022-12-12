@@ -28,7 +28,11 @@ import apap.ta.rumahSehat.user.model.ApotekerModel;
 @Table(name = "resep")
 public class ResepModel implements Serializable {
     @Id
+<<<<<<< HEAD
+    @Column(name = "id_resep")
+=======
     @Column(name = "id_resep", nullable = false)
+>>>>>>> ff45b65d2ff514f9c44128c7e5aa0e5b8993df7b
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long idResep;
 
@@ -49,7 +53,11 @@ public class ResepModel implements Serializable {
     @OneToMany(mappedBy = "resep", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<JumlahModel> listJumlah;
 
+<<<<<<< HEAD
+    @OneToOne(mappedBy = "resep", fetch = FetchType.LAZY)
+=======
     @OneToOne(cascade = CascadeType.ALL, optional = false)
+>>>>>>> ff45b65d2ff514f9c44128c7e5aa0e5b8993df7b
     private AppointmentModel appointment;
 
     // @OneToMany(mappedBy = "resep", fetch = FetchType.LAZY, cascade = CascadeType.ALL) //kayanya ini gaperlu dah

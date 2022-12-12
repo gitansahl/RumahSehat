@@ -22,7 +22,11 @@
 
   th {
       text-align: center;
+<<<<<<< HEAD
+      color: #36c4ef;
+=======
       color: #34ce57;
+>>>>>>> ff45b65d2ff514f9c44128c7e5aa0e5b8993df7b
   }
 
   td {
@@ -32,7 +36,11 @@
       width: 850px;
       display: flex;
       justify-content: center;
+<<<<<<< HEAD
+      padding-bottom: 80px;
+=======
       padding-bottom: 20px;
+>>>>>>> ff45b65d2ff514f9c44128c7e5aa0e5b8993df7b
   }
 
   .container-table {
@@ -41,7 +49,11 @@
       border-radius: 10px;
       border-style: solid;
       border-width: thick;
+<<<<<<< HEAD
+      border-color: #36c4ef;
+=======
       border-color: #34ce57;
+>>>>>>> ff45b65d2ff514f9c44128c7e5aa0e5b8993df7b
   }
 
   .header-container-table {
@@ -51,7 +63,11 @@
       justify-content: space-between;
       border-top-left-radius: 8px;
       border-top-right-radius: 8px;
+<<<<<<< HEAD
+      background-color: #36c4ef;
+=======
       background-color:#34ce57;
+>>>>>>> ff45b65d2ff514f9c44128c7e5aa0e5b8993df7b
       align-items: center;
   }
 
@@ -59,6 +75,8 @@
       display: flex;
       justify-content: center;
   }
+<<<<<<< HEAD
+=======
 
   #done {
     color: green;
@@ -69,6 +87,7 @@
     color: red;
     font-weight: bold;
   }
+>>>>>>> ff45b65d2ff514f9c44128c7e5aa0e5b8993df7b
 </style>
 <body>
 <nav th:replace="fragments/fragment :: navbar (${'/resep'})"></nav>
@@ -94,6 +113,18 @@
                         </tr>
                         </thead>
                         <tbody>
+<<<<<<< HEAD
+                        <tr th:each="resep, iterationStatus : ${listResep}"
+                        th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+                            <td th:text="${iterationStatus.count}"></td>
+                            <td th:text="${resep.idResep}"></td>
+                            <td class="col-md-3" th:text="${#temporals.format(resep.createdAt, 'dd MMMM yyyy HH:mm')}"></td>
+                            <td th:if="${resep.isDone}"  style="color: red;">BELUM SELESAI</td> 
+                            <td th:unless="${resep.isDone}" style="color: green;">SELESAI</td>  
+                            <td style="text-align:center">
+                                <a class="btn btn-success text-wrap" style="width: 7rem;" th:href="@{#}">Detail</a>
+                            </td>
+=======
                         <tr th:each="resep, iterationStatus : ${listResep}">
                             <td th:text="${iterationStatus.count}"></td>
                             <td th:text="${resep.idResep}"></td>
@@ -105,10 +136,18 @@
                                     <a class="btn btn-success text-wrap" style="width: 7rem;" th:href="@{resep/} + ${resep.idResep}">Detail</a>
                                 </td>
                             </div>
+>>>>>>> ff45b65d2ff514f9c44128c7e5aa0e5b8993df7b
                         </tr>
                         </tbody>
                     </table>
                 </div>
+<<<<<<< HEAD
+                <a class="btn btn-primary" style="width: 10rem;" th:href="@{/}">Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+=======
             </div>
             <!-- <div class="d-flex justify-content-center">
                 <a class="btn btn-primary" style="width: 10rem;" th:href="@{/}">Home</a>
@@ -120,5 +159,6 @@
 <div class="d-flex justify-content-center">
     <a class="btn btn-primary" style="width: 10rem; margin-bottom: 20px;" th:href="@{/}">Home</a>
 </div>
+>>>>>>> ff45b65d2ff514f9c44128c7e5aa0e5b8993df7b
 </body>
 </html>

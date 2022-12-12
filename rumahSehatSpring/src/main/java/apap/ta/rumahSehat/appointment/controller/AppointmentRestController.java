@@ -33,7 +33,7 @@ public class AppointmentRestController {
 
     @PostMapping(value = "/add")
     public ResponseEntity<?> addAppointment(@RequestBody AppointmentDTO appointmentDTO,
-                                          Authentication authentication) {
+                                            Authentication authentication) {
         var pasienModel = pasienService.findPasienByUsername(authentication.getName());
 
         var appointmentModel = new AppointmentModel();
@@ -50,10 +50,10 @@ public class AppointmentRestController {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body(Setting.response(
-                            HttpStatus.BAD_REQUEST.value(),
-                            "Schedule not available"
-                    )
-            );
+                                    HttpStatus.BAD_REQUEST.value(),
+                                    "Schedule not available"
+                            )
+                    );
         }
 
         appointmentService.addAppointment(appointmentModel);
