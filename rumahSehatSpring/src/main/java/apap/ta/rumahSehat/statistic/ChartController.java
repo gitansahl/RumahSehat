@@ -276,10 +276,12 @@ public class ChartController {
                                             Model model) {
 
         String[] listDokter = new String[dailyLineChartRequestDTO.getDokterModelList().size()];
+        List<DokterModel> listDokterDb = new ArrayList<>();
 
         for (int i=0; i<listDokter.length; i++) {
             DokterModel dokterModel = dokterService.findDokterByUsername(dailyLineChartRequestDTO.getDokterModelList().get(i).getUsername());
             listDokter[i] = dokterModel.getNama();
+            listDokterDb.add(dokterModel);
         }
 
         LocalDateTime awal = LocalDateTime.of(
@@ -297,7 +299,7 @@ public class ChartController {
         model.addAttribute("tahun", awal.getMonth().toString() + " " + awal.getYear());
         model.addAttribute("listDokter", listDokter);
         model.addAttribute("data", chartService.getDataLineChartDaily(
-                dailyLineChartRequestDTO.getDokterModelList(),
+                listDokterDb,
                 awal.getYear(),
                 awal.getMonthValue()
         ));

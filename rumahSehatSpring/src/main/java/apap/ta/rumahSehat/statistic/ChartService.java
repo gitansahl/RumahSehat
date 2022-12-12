@@ -66,7 +66,7 @@ public class ChartService {
         for (int i=0; i<dokterModelList.size(); i++) {
             int[] data = new int[akhir.getDayOfMonth()];
 
-            DokterModel dokterModel = dokterDb.findByUsername(dokterModelList.get(i).getUsername());
+            DokterModel dokterModel = dokterModelList.get(i);
 
             List<AppointmentModel> appointmentModelList = appointmentDb
                     .findAllByDokter_UsernameAndWaktuAwalBetween(
