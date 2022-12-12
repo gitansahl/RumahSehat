@@ -5,11 +5,8 @@
     <title>Add Dokter</title>
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
-<<<<<<< HEAD
-=======
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=neon|outline|emboss|shadow-multiple">
->>>>>>> ff45b65d2ff514f9c44128c7e5aa0e5b8993df7b
 </head>
 
 <body>
@@ -19,10 +16,6 @@
         <div class="card-body">
             <div class="justify-content">
                 <form th:action="@{/user/dokter/add}" th:object="${dokter}" method="POST">
-<<<<<<< HEAD
-                    <input type="hidden" th:field="*{role}">
-=======
->>>>>>> ff45b65d2ff514f9c44128c7e5aa0e5b8993df7b
                     <table class="table table-borderless">
                         <thead>
                         <th class="pb-5">
@@ -91,8 +84,5 @@
 </div>
 
 </body>
-<<<<<<< HEAD
-=======
 <footer th:replace="fragments/fragment :: footer"></footer>
->>>>>>> ff45b65d2ff514f9c44128c7e5aa0e5b8993df7b
 </html>

@@ -13,4 +13,5 @@ public interface PasienService {
     PasienModel findPasienByUsername(String username);
 
     String encrypt(String password);
+    PasienModel topUpSaldo(PasienModel pasien, Integer saldoTambahan);
 }

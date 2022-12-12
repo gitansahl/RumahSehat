@@ -55,4 +55,10 @@ public class PasienServiceImpl implements PasienService{
         var passwordEncoder = new BCryptPasswordEncoder();
         return passwordEncoder.encode(password);
     }
+
+    @Override
+    public PasienModel topUpSaldo(PasienModel pasien, Integer saldoTambahan) {
+        pasien.setSaldo(pasien.getSaldo() + saldoTambahan);
+        return pasienDb.save(pasien);
+    }
 }
