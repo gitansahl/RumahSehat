@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Setting {
-    public static final String CLIENT_BASE_URL = "http://localhost:8080";
+    public static final String CLIENT_BASE_URL = "https://apap-056.cs.ui.ac.id";
 
     public static final String CLIENT_LOGIN = CLIENT_BASE_URL + "/validate-ticket";
 
