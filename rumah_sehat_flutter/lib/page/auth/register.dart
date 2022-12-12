@@ -40,7 +40,7 @@ class RegisterPage extends StatelessWidget {
     };
 
     var respond = await http.post(
-        "$SERVER_IP/api/user/registration",
+        Uri.parse("$SERVER_IP/api/user/registration"),
         body: jsonEncode(requestBody),
         headers: {"Content-Type":"application/json"}
     );

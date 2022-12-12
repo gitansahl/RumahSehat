@@ -134,14 +134,6 @@ public class ResepController {
     model.addAttribute("resep", resep);
     return "resep/add-resep";
   }
-
-  @GetMapping("/resep/{idResep}")
-  public String viewDetailKaryawanPage(@PathVariable Long idResep, Model model) {
-    ResepModel resep = resepService.getResepByIdResep(idResep);
-    model.addAttribute("resep", resep);
-
-    return "resep/view-resep";
-  }
   
   @PostMapping(value = "/resep/tambah/", params = {"addRowObat"})
   private String addRowObatMultiple(

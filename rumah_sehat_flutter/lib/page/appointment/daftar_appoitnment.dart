@@ -17,7 +17,7 @@ class AppointmentPage extends StatelessWidget {
       "Authorization" : "Bearer $jwt"
     };
     var respond = await http.get(
-        "$SERVER_IP/api/appointment/get",
+        Uri.parse("$SERVER_IP/api/appointment/get"),
         headers: header
     );
     return jsonDecode(respond.body);

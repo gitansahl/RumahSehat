@@ -34,7 +34,7 @@ class _CreateAppointmentState extends State<CreateAppointment> {
         "Authorization" : "Bearer $jwt"
       };
       var respond = await http.get(
-          "$SERVER_IP/api/user/dokter/get",
+          Uri.parse("$SERVER_IP/api/user/dokter/get"),
           headers: header
       );
       return jsonDecode(respond.body);
@@ -154,7 +154,7 @@ class _CreateAppointmentState extends State<CreateAppointment> {
                         };
 
                         var respond = await http.post(
-                            "$SERVER_IP/api/appointment/add",
+                            Uri.parse("$SERVER_IP/api/appointment/add"),
                             headers: header,
                             body: jsonEncode(body));
 

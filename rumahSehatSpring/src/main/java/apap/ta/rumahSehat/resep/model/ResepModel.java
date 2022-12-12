@@ -51,8 +51,7 @@ public class ResepModel implements Serializable {
 
 
     @OneToOne(cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "id_appointment", referencedColumnName = "id_appointment")
     private AppointmentModel appointment;
 
-    // @OneToMany(mappedBy = "resep", fetch = FetchType.LAZY, cascade = CascadeType.ALL) //kayanya ini gaperlu dah
-    // private List<ObatModel> listObat;
 }

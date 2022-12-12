@@ -30,6 +30,7 @@ public class AppointmentModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonIgnore
+    @Column(name = "id_appointment")
     private Long idAppointment;
 
     @Column(name = "kode_appointment")
@@ -59,13 +60,12 @@ public class AppointmentModel {
     private PasienModel pasien;
 
     //Relation with TagihanModel
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "appointment", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private TagihanModel tagihan;
 
     //Relation with ResepModel
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_resep", referencedColumnName = "id_resep")
+    @OneToOne(mappedBy = "appointment", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnoreProperties(value = {"confirmer", "listJumlah", "appointment", "isDone", "createdAt"})
     private ResepModel resep;
 

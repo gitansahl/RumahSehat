@@ -9,14 +9,7 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -53,5 +46,6 @@ public class TagihanModel implements Serializable {
     private Long jumlahTagihan;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_appointment", referencedColumnName = "id_appointment")
     private AppointmentModel appointment;
 }

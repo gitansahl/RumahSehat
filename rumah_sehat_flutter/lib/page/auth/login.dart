@@ -27,7 +27,7 @@ class LoginPage extends StatelessWidget {
       "password": password
     };
     var respond = await http.post(
-        "$SERVER_IP/api/authenticate",
+        Uri.parse("$SERVER_IP/api/authenticate"),
         body: jsonEncode(requestBody),
         headers: {"Content-Type":"application/json"}
     );

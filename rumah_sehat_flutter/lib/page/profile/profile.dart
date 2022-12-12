@@ -14,9 +14,11 @@ class ProfilePage extends StatefulWidget {
 }
 
 Future<Profile> get request async {
-  final respond = await http.get("$SERVER_IP/api/profile", headers: {
-    "Content-Type": "application/json",
-    "Authorization": "Bearer $jwt"
+  final respond = await http.get(
+      Uri.parse("$SERVER_IP/api/profile"),
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $jwt"
   });
 
   if (respond.statusCode == 200) {
