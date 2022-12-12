@@ -24,7 +24,9 @@ public class ObatServiceImpl implements ObatService{
 
     @Override
     public ObatModel updateStok(ObatModel obatNew) {
-    return obatDb.save(obatNew);
+
+        obatDb.save(obatNew);
+        return obatNew;
   }
     @Autowired
     ObatDb obatDb;

@@ -9,4 +9,6 @@ public interface ObatService {
   ObatModel getObatByIdObat(String idObat);
 
   ObatModel updateStok(ObatModel obatNew);
+
+
 }

@@ -38,7 +38,7 @@
       <td class="text" th:text="${obat.stok}"></td>
       <td class="text" th:text="'Rp. ' + ${obat.harga}"></td>
       <td>
-        <a class="btn btn-primary" th:href="@{/obat}">Ubah stok</a>
+        <a class="btn btn-primary" th:href="@{/obat/update-stock/} + ${obat.idObat}">Ubah stok</a>
       </td>
 
     </tr>

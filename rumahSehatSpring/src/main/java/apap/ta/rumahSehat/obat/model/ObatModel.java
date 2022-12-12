@@ -9,6 +9,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import apap.ta.rumahSehat.resep.model.ResepModel;
 import apap.ta.rumahSehat.resep.model.JumlahModel;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -30,7 +31,7 @@ public class ObatModel {
     private String namaObat;
 
     @NotNull
-    @Column(name = "stok",columnDefinition = "integer default 100")
+    @Column(name = "stok", nullable = false, columnDefinition = "integer default 100")
     private int stok;
 
     @NotNull
