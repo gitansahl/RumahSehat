@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Bar Chart ' + ${tipe}"></title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=neon|outline|emboss|shadow-multiple">
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar(${'chart'})"></nav>
+<div class="container">
+    <div class="row text-center mt-3 py-5">
+        <div class="col mb-3">
+            <div class="alert alert-primary" role="alert" th:text="${success}" th:if="${success}"></div>
+            <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+            <!--        END OF FLASH MESSAGE-->
+        </div>
+    </div>
+</div>
+<br><br>
+<div class="container">
+    <h1 class="text-center" th:text="'Bar Chart ' + ${tipe}"></h1>
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <div class="chart-container" style="position: relative; height:500px; width:900px">
+                    <canvas id="myChart"></canvas>
+                </div>
+
+                <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script th:inline="javascript">
+                    const data = {
+                        labels: [[${label}]],
+                        datasets: [{
+                            label: [[${tipe}]] + ' Appointment Dokter',
+                            data: [[${data}]],
+                            borderWidth: 1,
+                        }]
+                    };
+
+                    const config = {
+                        type: 'bar',
+                        data: data,
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        },
+                    };
+
+                    const myChart = new Chart(
+                        document.getElementById('myChart'),
+                        config
+                    );
+
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container justify-content-center my-5">
+    <div class="row justify-content-center">
+        <div class="col">
+            <a class="mx-2 btn btn-block text-white" th:href="@{/chart}" style="background-color: #1c7430">Back</a>
+        </div>
+    </div>
+</div>
+</body>
+<footer th:replace="fragments/fragment :: footer"></footer>
+</html>

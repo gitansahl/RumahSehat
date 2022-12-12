@@ -3,22 +3,28 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 // import 'package:rumah_sehat_flutter/page/daftar_appointment.dart';
 import 'resepModel.dart';
+import 'package:rumah_sehat_flutter/main.dart';
 
 class DetailResep extends StatelessWidget {
   late ResepModel detailResep;
-  // ini di uncomment
-  // late final String idResep;
-  // DetailResep({required this.idResep});
+
+  DetailResep(this.kodeApt);
+
+  final String kodeApt;
 
   // Referensi: https://blog.logrocket.com/implementing-repository-pattern-flutter/
-  Future getDetailResep(String idResep) async {
+  Future getDetailResep() async {
     var response = await http.get(
-        Uri.parse('http://localhost:8080/api/v1/resep/3'), // harusnya $idResep, ini masih hardcode
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Method": "POST, GET, PUT, DELETE"
+        Uri.parse("$SERVER_IP/api/v1/resep/$kodeApt",), // harusnya $idResep, ini masih hardcode
+        // Uri.parse('http://localhost:8080/api/v1/resep/'+idResep), // harusnya $idResep, ini masih hardcode
+        headers: <String, String>{
+          'Content-Type' : 'application/json;charset=UTF-8',
+          'Authorization' : 'Bearer $jwt',
+          // "Access-Control-Allow-Origin": "*",
+          // "Access-Control-Allow-Method": "POST, GET, PUT, DELETE"
         });
     var jsonData = jsonDecode(response.body);
+    print(jsonData);
 
     if (response.statusCode == 200) {
       String idResep = jsonData["idResep"].toString();
@@ -26,9 +32,10 @@ class DetailResep extends StatelessWidget {
           idResep,
           jsonData["dokter"],
           jsonData["pasien"],
-          jsonData["apoteker"],
           jsonData["status"],
+          jsonData["apoteker"],
           jsonData["listObat"]);
+      print(detailResep);
       return detailResep;
     } else {
       return false;
@@ -39,13 +46,13 @@ class DetailResep extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Rumah Sehat'),
+          title: const Text('Detail Resep'),
           centerTitle: true,
         ),
         resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
           child: FutureBuilder(
-            future: getDetailResep("3"), //idresep masih hardcode
+            future: getDetailResep(),
             builder: (context, snapshot) {
               if (snapshot.data == false) {
                 return SafeArea(
@@ -207,7 +214,7 @@ class DetailResep extends StatelessWidget {
                                         rows: detailResep.listObat
                                             .map((listObat) => DataRow(cells: [
                                           DataCell(Text(
-                                              "${listObat['namaObat']}")),
+                                              "${listObat['obat']}")),
                                           DataCell(Text(
                                               "${listObat['kuantitas']}")),
                                         ]))

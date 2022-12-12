@@ -4,18 +4,17 @@
   <title>Confirm Resep</title>
   <object th:include="fragments/fragment :: css" th:remove="tag"></object>
   <object th:include="fragments/fragment :: js" th:remove="tag"></object>
-
 </head>
 <style>
-  #home {
-    background-color:#34ce57;
+  #detail {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #34ce57;
     border-color: #34ce57;
   }
 
-  #lihat {
-    margin-bottom: 10px;
-    margin-top: 10px;
-    background-color:#34ce57;
+  #home {
+    background-color: #34ce57;
     border-color: #34ce57;
   }
 </style>
@@ -28,7 +27,7 @@
         <h2 th:text="'
         Resep untuk appointment dengan kode ' + ${resep.appointment.kodeAppointment} + ' berhasil dikonfirmasi
         '"></h2>
-        <a id="lihat" class="btn btn-primary" th:href="@{/resep/} + ${resep.idResep}" style="margin-bottom: 20px;">Lihat Resep</a>
+        <a id="detail" class="btn btn-primary" th:href="@{/resep/} + ${resep.idResep}">Lihat Resep</a>
         <br>
         <a id="home" class="btn btn-primary" href="/">Home</a>
       </div>

@@ -5,6 +5,7 @@ import apap.ta.rumahSehat.authentication.model.JwtRequest;
 import apap.ta.rumahSehat.authentication.model.JwtResponse;
 import apap.ta.rumahSehat.authentication.service.JwtUserDetailsService;
 import apap.ta.rumahSehat.authentication.setting.Setting;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/api")
+@Slf4j
 public class JwtAuthController {
 
     @Autowired
@@ -34,6 +36,8 @@ public class JwtAuthController {
             final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
             authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
             final String token = jwtTokenUtil.generateToken(userDetails);
+
+            log.info(String.format("%s logged in with token %s.", authenticationRequest.getUsername(), token));
 
             return ResponseEntity
                     .status(HttpStatus.OK)

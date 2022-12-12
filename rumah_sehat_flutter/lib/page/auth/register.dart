@@ -51,105 +51,105 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Register"),),
+        appBar: AppBar(title: const Text("Register"),),
 
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: <Widget> [
-              TextField(
-                controller: _usernameController,
-                decoration: const InputDecoration(
-                    labelText: 'Username'
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: <Widget> [
+                TextField(
+                  controller: _usernameController,
+                  decoration: const InputDecoration(
+                      labelText: 'Username'
+                  ),
                 ),
-              ),
-              TextField(
-                controller: _namaController,
-                decoration: const InputDecoration(
-                    labelText: 'Nama'
+                TextField(
+                  controller: _namaController,
+                  decoration: const InputDecoration(
+                      labelText: 'Nama'
+                  ),
                 ),
-              ),
-              TextField(
-                controller: _emailController,
-                decoration: const InputDecoration(
-                    labelText: 'Email'
+                TextField(
+                  controller: _emailController,
+                  decoration: const InputDecoration(
+                      labelText: 'Email'
+                  ),
                 ),
-              ),
-              TextField(
-                controller: _umurController,
-                decoration: const InputDecoration(
-                    labelText: 'Umur'
+                TextField(
+                  controller: _umurController,
+                  decoration: const InputDecoration(
+                      labelText: 'Umur'
+                  ),
                 ),
-              ),
-              TextField(
-                controller: _passwordController,
-                obscureText: true,
-                decoration: const InputDecoration(
-                    labelText: 'Password'
+                TextField(
+                  controller: _passwordController,
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                      labelText: 'Password'
+                  ),
                 ),
-              ),
-              TextField(
-                controller: _passwordConfirmController,
-                obscureText: true,
-                decoration: const InputDecoration(
-                    labelText: 'Password Confirm'
+                TextField(
+                  controller: _passwordConfirmController,
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                      labelText: 'Password Confirm'
+                  ),
                 ),
-              ),
-              ElevatedButton(onPressed: () async {
-                try {
-                  int.parse(_umurController.text);
-                } catch (e) {
-                  displayDialog(context, "Error", "Umur harus berupa angka.");
-                }
-                int umur = int.parse(_umurController.text);
-                var username = _usernameController.text;
-                var password = _passwordController.text;
-                var nama = _namaController.text;
-                var email = _emailController.text;
-                var passwordConfirm = _passwordConfirmController.text;
-                if (password != passwordConfirm) {
-                  displayDialog(context, "Error", "Password Confirm tidak cocok dengan password.");
-                }
-                var res = await registerAttempt(username, email, nama, umur, password);
-                if (res['status'] == 200) {
-                  displayDialog(context, "Success", "Registration Success");
-                  Future.delayed(const Duration(seconds: 2));
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => LoginPage())
-                  );
-                } else {
-                  displayDialog(context, "Error", res['data']);
-                }
-              }, child: const Text("Register")
-              ),
-              RichText(
-                text: TextSpan(
-                    children: [
-                      const TextSpan(
-                          text: "Already have an account? ",
-                          style: TextStyle(
-                              color: Colors.black
-                          )
-                      ),
-                      TextSpan(
-                          text: "Login",
-                          style: const TextStyle(
-                              color: Colors.blue
-                          ),
-                          recognizer: TapGestureRecognizer()..onTap = () {
-                            Navigator.pushReplacement(context,
-                                MaterialPageRoute(builder: (context) => LoginPage())
-                            );
-                          }
-                      )
-                    ]
+                ElevatedButton(onPressed: () async {
+                  try {
+                    int.parse(_umurController.text);
+                  } catch (e) {
+                    displayDialog(context, "Error", "Umur harus berupa angka.");
+                  }
+                  int umur = int.parse(_umurController.text);
+                  var username = _usernameController.text;
+                  var password = _passwordController.text;
+                  var nama = _namaController.text;
+                  var email = _emailController.text;
+                  var passwordConfirm = _passwordConfirmController.text;
+                  if (password != passwordConfirm) {
+                    displayDialog(context, "Error", "Password Confirm tidak cocok dengan password.");
+                  }
+                  var res = await registerAttempt(username, email, nama, umur, password);
+                  if (res['status'] == 200) {
+                    displayDialog(context, "Success", "Registration Success");
+                    Future.delayed(const Duration(seconds: 2));
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => LoginPage())
+                    );
+                  } else {
+                    displayDialog(context, "Error", res['data']);
+                  }
+                }, child: const Text("Register")
                 ),
-              )
-            ],
+                RichText(
+                  text: TextSpan(
+                      children: [
+                        const TextSpan(
+                            text: "Already have an account? ",
+                            style: TextStyle(
+                                color: Colors.black
+                            )
+                        ),
+                        TextSpan(
+                            text: "Login",
+                            style: const TextStyle(
+                                color: Colors.blue
+                            ),
+                            recognizer: TapGestureRecognizer()..onTap = () {
+                              Navigator.pushReplacement(context,
+                                  MaterialPageRoute(builder: (context) => LoginPage())
+                              );
+                            }
+                        )
+                      ]
+                  ),
+                )
+              ],
+            ),
           ),
-        ),
-      )
+        )
     );
   }
 }

@@ -22,10 +22,9 @@ public interface AppointmentDb extends JpaRepository<AppointmentModel, Long> {
 
     List<AppointmentModel> findAllByPasien_Id(String idPasien);
 
-    // @Query("SELECT a FROM AppointmentModel a WHERE a.dokter.id = :id ORDER BY a.isDone")
-    // List<AppointmentModel> findAllByDokter(@Param("id") String id);
+    List<AppointmentModel> findAllByWaktuAwalBetween(LocalDateTime awal, LocalDateTime akhir);
 
-    // @Query("SELECT a FROM AppointmentModel a WHERE a.pasien.id = :id ORDER BY a.isDone")
-    // List<AppointmentModel> findAllByPasien(@Param("id") String id);
+    List<AppointmentModel> findAllByDokter_Username(String username);
 
+    List<AppointmentModel> findAllByDokter_UsernameAndWaktuAwalBetween(String username, LocalDateTime awal, LocalDateTime akhir);
 }

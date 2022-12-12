@@ -27,9 +27,9 @@ class LoginPage extends StatelessWidget {
       "password": password
     };
     var respond = await http.post(
-      "$SERVER_IP/api/authenticate",
-      body: jsonEncode(requestBody),
-      headers: {"Content-Type":"application/json"}
+        "$SERVER_IP/api/authenticate",
+        body: jsonEncode(requestBody),
+        headers: {"Content-Type":"application/json"}
     );
     return jsonDecode(respond.body);
   }
@@ -37,7 +37,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Log In"),),
+      appBar: AppBar(title: const Text("Log In"),),
 
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -45,15 +45,15 @@ class LoginPage extends StatelessWidget {
           children: <Widget> [
             TextField(
               controller: _usernameController,
-              decoration: InputDecoration(
-                labelText: 'Username'
+              decoration: const InputDecoration(
+                  labelText: 'Username'
               ),
             ),
             TextField(
               controller: _passwordController,
               obscureText: true,
-              decoration: InputDecoration(
-                labelText: 'Password'
+              decoration: const InputDecoration(
+                  labelText: 'Password'
               ),
             ),
             ElevatedButton(onPressed: () async {
@@ -68,29 +68,29 @@ class LoginPage extends StatelessWidget {
               } catch (e) {
                 displayDialog(context, "Error", res['data']);
               }
-            }, child: Text("Log In")
+            }, child: const Text("Log In")
             ),
             RichText(
               text: TextSpan(
-                children: [
-                  TextSpan(
-                    text: "Didn't have an account? ",
-                    style: TextStyle(
-                      color: Colors.black
+                  children: [
+                    const TextSpan(
+                        text: "Didn't have an account? ",
+                        style: TextStyle(
+                            color: Colors.black
+                        )
+                    ),
+                    TextSpan(
+                        text: "Register",
+                        style: const TextStyle(
+                            color: Colors.blue
+                        ),
+                        recognizer: TapGestureRecognizer()..onTap = () {
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (context) => RegisterPage())
+                          );
+                        }
                     )
-                  ),
-                  TextSpan(
-                    text: "Register",
-                      style: TextStyle(
-                          color: Colors.blue
-                      ),
-                      recognizer: TapGestureRecognizer()..onTap = () {
-                        Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (context) => RegisterPage())
-                        );
-                      }
-                  )
-                ]
+                  ]
               ),
             )
           ],

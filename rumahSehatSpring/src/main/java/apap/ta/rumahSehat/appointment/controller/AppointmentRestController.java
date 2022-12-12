@@ -8,6 +8,7 @@ import apap.ta.rumahSehat.user.model.PasienModel;
 import apap.ta.rumahSehat.user.repository.PasienDb;
 import apap.ta.rumahSehat.user.service.DokterService;
 import apap.ta.rumahSehat.user.service.PasienService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/api/appointment")
+@Slf4j
 public class AppointmentRestController {
     @Autowired
     PasienService pasienService;
@@ -37,15 +39,17 @@ public class AppointmentRestController {
                                           Authentication authentication) {
         PasienModel pasienModel = pasienService.findPasienByUsername(authentication.getName());
 
-
-
         AppointmentModel appointmentModel = new AppointmentModel();
         appointmentModel.setDokter(dokterService.findDokterByUsername(appointmentDTO.getUsernameDokter()));
         appointmentModel.setPasien(pasienModel);
         appointmentModel.setIsDone(false);
         appointmentModel.setWaktuAwal(appointmentDTO.getWaktuAwal());
 
+        log.info(String.format("%s request to add appointment", authentication.getName()));
+
         if (!appointmentService.isValid(appointmentModel)) {
+            log.info(String.format("%s requested schedule not available", authentication.getName()));
+
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body(Setting.response(
@@ -59,6 +63,8 @@ public class AppointmentRestController {
         appointmentModel.setKodeAppointment("APT-" + appointmentModel.getIdAppointment());
         appointmentService.addAppointment(appointmentModel);
 
+        log.info(String.format("%s requested appointment successfully added.", authentication.getName()));
+
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(Setting.response(
@@ -69,6 +75,8 @@ public class AppointmentRestController {
 
     @GetMapping("/get")
     private ResponseEntity getAppointment(Authentication authentication) {
+        log.info(String.format("%s request get list appointment.", authentication.getName()));
+
         PasienModel pasienModel = pasienService.findPasienByUsername(authentication.getName());
 
         return ResponseEntity

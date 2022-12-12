@@ -109,4 +109,9 @@ public class AppointmentServiceImpl implements AppointmentService{
         appointment.setIsDone(true);
         appointmentDb.save(appointment);
     }
+
+    @Override
+    public List<AppointmentModel> getAppointmentInRange(LocalDateTime awal, LocalDateTime akhir) {
+        return appointmentDb.findAllByWaktuAwalBetween(awal, akhir);
+    }
 }

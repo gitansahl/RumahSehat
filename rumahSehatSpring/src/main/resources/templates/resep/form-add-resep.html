@@ -105,13 +105,14 @@
                 <input type="hidden" th:field="*{appointment.idAppointment}">
               <table class="table table-borderless center">
                 <tbody>
-                  <!-- <tr> -->
+                  <tr>
                     <!-- <th>Daftar Obat</th> -->
                     <!-- DIGANTI -->
-                    <!-- <th colspan="2">
+                    <th></th>
+                    <th colspan="2">
                       <p style="color: red">Jangan melebihi stok!</p>
                     </th>
-                  </tr> -->
+                  </tr>
                   <tr th:each="obat, iterationStatus1 : *{listJumlah}">
                     <td>
                     <div class="mb-3">
