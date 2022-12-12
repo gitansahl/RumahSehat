@@ -44,7 +44,7 @@ public class AuthController {
     @GetMapping("/validate-ticket")
     public ModelAndView adminLoginSSO(@RequestParam(value = "ticket", required = false) String ticket,
                                       HttpServletRequest request
-    ) throws NullPointerException {
+    ){
         ServiceResponses serviceResponses = this.webClient.get().uri(
                 String.format(
                         Setting.SERVER_VALIDATE_TICKET,
@@ -53,12 +53,11 @@ public class AuthController {
                 )
         ).retrieve().bodyToMono(ServiceResponses.class).block();
 
-        Attributes attributes;
-        try {
-            attributes = serviceResponses.getAuthenticationSuccess().getAttributes();
-        } catch (NullPointerException e) {
+        if (serviceResponses ==  null) {
             throw new NullPointerException();
         }
+
+        Attributes attributes = serviceResponses.getAuthenticationSuccess().getAttributes();
 
         String username = serviceResponses.getAuthenticationSuccess().getUser();
 
