@@ -28,7 +28,7 @@ import apap.ta.rumahSehat.user.model.ApotekerModel;
 @Table(name = "resep")
 public class ResepModel implements Serializable {
     @Id
-    @Column(name = "id_resep")
+    @Column(name = "id_resep", nullable = false)
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long idResep;
 

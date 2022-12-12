@@ -6,6 +6,19 @@
   <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 
 </head>
+<style>
+  #home {
+    background-color:#34ce57;
+    border-color: #34ce57;
+  }
+
+  #lihat {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    background-color:#34ce57;
+    border-color: #34ce57;
+  }
+</style>
 <body>
 <nav th:replace="fragments/fragment :: navbar (${'/resep'})"></nav>
 <div class="container">
@@ -13,11 +26,11 @@
     <div class="card-body">
       <div class="justify-content-center">
         <h2 th:text="'
-        Resep untuk appointment dengan kode ' + ${resep.appointment.kode} + ' berhasil dikonfirmasi
+        Resep untuk appointment dengan kode ' + ${resep.appointment.kodeAppointment} + ' berhasil dikonfirmasi
         '"></h2>
-        <a class="btn btn-primary" th:href="@{/resep/detail/} + ${resep.idResep}">Lihat Resep</a>
+        <a id="lihat" class="btn btn-primary" th:href="@{/resep/} + ${resep.idResep}" style="margin-bottom: 20px;">Lihat Resep</a>
         <br>
-        <a class="btn btn-primary" href="/">Home</a>
+        <a id="home" class="btn btn-primary" href="/">Home</a>
       </div>
     </div>
   </div>

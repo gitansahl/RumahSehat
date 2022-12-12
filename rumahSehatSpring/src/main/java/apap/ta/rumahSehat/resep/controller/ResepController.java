@@ -295,9 +295,10 @@ public class ResepController {
       tagihanAsli.setKodeTagihan("BILL-" + String.valueOf(tagihanAsli.getId()));
       tagihanService.addTagihan(tagihanAsli);
       appointment.setTagihan(tagihanService.getTagihanById(tagihanAsli.getId()));
+      // resep.getAppointment().setTagihan(tagihanService.getTagihanById(tagihanAsli.getId()));
       appointmentService.addAppointment(appointment);
       
       model.addAttribute("resep", temp);
-      return "confirm-resep";
+      return "resep/confirm-resep";
   }
 }
