@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -28,10 +29,10 @@ public class ProfileRestController {
     PasienService pasienService;
 
     @RequestMapping(value = { "/profile" }, method = RequestMethod.GET)
-    public ResponseEntity getUserInfo(Principal principal){
+    public ResponseEntity getUserInfo(Authentication authentication){
         ObjectMapper objectMapper = new ObjectMapper();
-        String username = userDetailsService.loadUserByUsername(principal.getName()).getUsername();
-        PasienModel pasien = pasienService.findPasienByUsername(username);
+        PasienModel pasien = pasienService.findPasienByUsername(authentication.getName());
+
         Map<String, Object> userDetails = new HashMap<>();
         userDetails.put("username", pasien.getUsername());
         userDetails.put("nama", pasien.getNama());

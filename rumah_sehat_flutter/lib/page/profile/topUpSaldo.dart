@@ -15,19 +15,21 @@ class ToUpSaldoPage extends StatelessWidget {
 
   void displayDialog(context, title, text) => showDialog(
         context: context,
-        builder: (context) =>
-            AlertDialog(title: Text(title), content: Text(text),
-            actions: [
-                ElevatedButton(
-            onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const MyStatefulWidget()),
-                  );
-                },
-            child: const Text('Ok'),
-          ),
-              ],),
+        builder: (context) => AlertDialog(
+          title: Text(title),
+          content: Text(text),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MyStatefulWidget()),
+                );
+              },
+              child: const Text('Ok'),
+            ),
+          ],
+        ),
       );
 
   Future<Map<String, dynamic>> topUp(
@@ -35,7 +37,6 @@ class ToUpSaldoPage extends StatelessWidget {
   ) async {
     var requestBody = {
       "saldoTambahan": saldoTambahan,
-      // saldoTambahan
     };
 
     var respond = await http.post(Uri.parse("$SERVER_IP/api/topUp"),
@@ -47,8 +48,6 @@ class ToUpSaldoPage extends StatelessWidget {
 
     return jsonDecode(respond.body);
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -85,20 +84,24 @@ class ToUpSaldoPage extends StatelessWidget {
                     }
                     int saldoTambahan =
                         int.parse(_saldoTambahanController.text);
-                    
-                    if(saldoTambahan==null){
-                      displayDialog(context, "Error", "null ex");
-                    }else{
-                      var res = await topUp(saldoTambahan);
-                    if (res['status'] == 200) {
-                      displayDialog(context, "Success", "Top-Up sebesar " + saldoTambahan.toString() + " berhasil dilakukan" );
-                      Future.delayed(const Duration(seconds: 5));
-                    } else {
-                      displayDialog(context, "Error", res['status'].toString() + "\n" + res['error']);
-                    }
-                    }
 
-                    
+                    if (saldoTambahan == null) {
+                      displayDialog(context, "Error", "null ex");
+                    } else {
+                      var res = await topUp(saldoTambahan);
+                      if (res['status'] == 200) {
+                        displayDialog(
+                            context,
+                            "Success",
+                            "Top-Up sebesar " +
+                                saldoTambahan.toString() +
+                                " berhasil dilakukan");
+                        Future.delayed(const Duration(seconds: 5));
+                      } else {
+                        displayDialog(context, "Error",
+                            res['status'].toString() + "\n" + res['error']);
+                      }
+                    }
                   },
                   child: const Text("Confirm")),
             ),

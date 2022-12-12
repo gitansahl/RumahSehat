@@ -14,19 +14,17 @@ class ProfilePage extends StatefulWidget {
 }
 
 Future<Profile> get request async {
-    final respond = await http.get(Uri.parse("$SERVER_IP/api/profile"),
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer $jwt"
-        });
+  final respond = await http.get(Uri.parse("$SERVER_IP/api/profile"), headers: {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer $jwt"
+  });
 
-    if (respond.statusCode == 200) {
-      return Profile.fromJson(jsonDecode(respond.body));
-
-    } else {
-      throw Exception('Failed to load profile');
-    }
+  if (respond.statusCode == 200) {
+    return Profile.fromJson(jsonDecode(respond.body));
+  } else {
+    throw Exception('Failed to load profile');
   }
+}
 
 class Profile {
   final String username;
@@ -52,10 +50,7 @@ class Profile {
       umur: json['umur'] as int,
     );
   }
-
-
 }
-
 
 class _ProfilePageState extends State<ProfilePage> {
   @override
@@ -64,10 +59,9 @@ class _ProfilePageState extends State<ProfilePage> {
         future: request,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-
             Profile profile = snapshot.data as Profile;
-            String profileUsername = profile.username;
-            
+            // String profileUsername = profile.username;
+
             return Scaffold(
                 appBar: AppBar(
                   title: const Text('Profile'),
@@ -81,9 +75,8 @@ class _ProfilePageState extends State<ProfilePage> {
                             children: <Widget>[
                               ListTile(
                                 title: Text('Username'),
-                                subtitle: Text(profileUsername),
+                                subtitle: Text(profile.username),
                               ),
-                              // Text(profile.username),
                             ]),
                       ),
                     ),
@@ -96,7 +89,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                 title: Text('Nama'),
                                 subtitle: Text(profile.nama),
                               ),
-                              
                             ]),
                       ),
                     ),
@@ -109,7 +101,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                 title: Text('Umur'),
                                 subtitle: Text(profile.umur.toString()),
                               ),
-                              
                             ]),
                       ),
                     ),
@@ -122,7 +113,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                 title: Text('Email'),
                                 subtitle: Text(profile.email),
                               ),
-                              
                             ]),
                       ),
                     ),
@@ -135,7 +125,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                 title: Text('Saldo'),
                                 subtitle: Text(profile.saldo.toString()),
                               ),
-                              
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -175,7 +164,6 @@ class _ProfilePageState extends State<ProfilePage> {
           }
 
           return CircularProgressIndicator();
-
         });
   }
 }
