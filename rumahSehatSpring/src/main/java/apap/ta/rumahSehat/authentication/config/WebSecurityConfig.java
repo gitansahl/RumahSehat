@@ -36,6 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                     .antMatchers("/error").permitAll()
                     .antMatchers("/").hasAnyAuthority("Admin", "Apoteker", "Dokter")
                     .antMatchers("/chart", "/chart/**", "/user/**").hasAuthority("Admin")
+                    .antMatchers("/resep").hasAnyAuthority("Admin", "Apoteker")
                     .anyRequest().authenticated()
                     .and()
                     .formLogin()

@@ -18,5 +18,6 @@ public interface AppointmentService {
 
     List<AppointmentModel> getPasienListAppointment(String id);
 
+    void finishAppointment(AppointmentModel appointment);
     List<AppointmentModel> getAppointmentInRange(LocalDateTime awal, LocalDateTime akhir);
 }

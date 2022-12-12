@@ -10,15 +10,15 @@ import 'package:rumah_sehat_flutter/page/appointment/detail_appointment.dart';
 
 class AppointmentPage extends StatelessWidget {
   const AppointmentPage({Key? key}) : super(key: key);
-  
+
   Future<Map<String, dynamic>> getListAppointment() async {
     var header = {
       "Content-Type":"application/json",
       "Authorization" : "Bearer $jwt"
     };
     var respond = await http.get(
-      "$SERVER_IP/api/appointment/get",
-      headers: header
+        "$SERVER_IP/api/appointment/get",
+        headers: header
     );
     return jsonDecode(respond.body);
   }
@@ -81,28 +81,28 @@ class AppointmentPage extends StatelessWidget {
         builder: (context, snapshot) {
           if (!snapshot.hasData) return CircularProgressIndicator();
           return Scaffold(
-            appBar: AppBar(
-              title: const Text("Daftar Appointment"),
-            ),
-            body: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                    child: Column(
-                      children: <Widget>[
-                        ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) => CreateAppointment())
-                              );
-                            },
-                            child: const Text("Buat Appointment")),
-                        assembleListView(snapshot.data as Map<String, dynamic>),
-                      ],
-                    )
-                ),
+              appBar: AppBar(
+                title: const Text("Daftar Appointment"),
               ),
-            )
+              body: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(
+                      child: Column(
+                        children: <Widget>[
+                          ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) => CreateAppointment())
+                                );
+                              },
+                              child: const Text("Buat Appointment")),
+                          assembleListView(snapshot.data as Map<String, dynamic>),
+                        ],
+                      )
+                  ),
+                ),
+              )
 
           );
         });

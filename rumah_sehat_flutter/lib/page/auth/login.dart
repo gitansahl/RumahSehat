@@ -27,9 +27,9 @@ class LoginPage extends StatelessWidget {
       "password": password
     };
     var respond = await http.post(
-      "$SERVER_IP/api/authenticate",
-      body: jsonEncode(requestBody),
-      headers: {"Content-Type":"application/json"}
+        "$SERVER_IP/api/authenticate",
+        body: jsonEncode(requestBody),
+        headers: {"Content-Type":"application/json"}
     );
     return jsonDecode(respond.body);
   }
@@ -72,25 +72,25 @@ class LoginPage extends StatelessWidget {
             ),
             RichText(
               text: TextSpan(
-                children: [
-                  const TextSpan(
-                    text: "Didn't have an account? ",
-                    style: TextStyle(
-                      color: Colors.black
+                  children: [
+                    const TextSpan(
+                        text: "Didn't have an account? ",
+                        style: TextStyle(
+                            color: Colors.black
+                        )
+                    ),
+                    TextSpan(
+                        text: "Register",
+                        style: const TextStyle(
+                            color: Colors.blue
+                        ),
+                        recognizer: TapGestureRecognizer()..onTap = () {
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (context) => RegisterPage())
+                          );
+                        }
                     )
-                  ),
-                  TextSpan(
-                    text: "Register",
-                      style: const TextStyle(
-                          color: Colors.blue
-                      ),
-                      recognizer: TapGestureRecognizer()..onTap = () {
-                        Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (context) => RegisterPage())
-                        );
-                      }
-                  )
-                ]
+                  ]
               ),
             )
           ],

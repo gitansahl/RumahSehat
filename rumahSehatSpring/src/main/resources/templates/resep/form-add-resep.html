@@ -5,73 +5,162 @@
     <title>Tambah Resep</title>
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
 </head>
 <style>
   p {
     font-weight: bold;
+    margin-right: 10px;
   }
+
+  h2 {
+      margin-top: 50px;
+  }
+
   table {
     position: relative;
     text-align: center; 
     margin: 0 auto;
   }
+
+  th {
+      text-align: center;
+      color: #34ce57;
+  }
+
+  td {
+      text-align: center;
+  }
+
+  button {
+    margin-right: 20px;
+  }
+
+  .mb-3 {
+    margin-left: 20px;
+  }
+
+  .container-content {
+      width: 850px;
+      display: flex;
+      justify-content: center;
+      padding-bottom: 20px;
+  }
+
+  .container-table {
+      width: 700px;
+      height: auto;
+      border-radius: 10px;
+      border-style: solid;
+      border-width: thick;
+      border-color: #34ce57;
+  }
+
+  .header-container-table {
+      height: 60px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      background-color: #34ce57;
+      align-items: center;
+  }
+
+  .content-container-table {
+      display: flex;
+      justify-content: center;
+  }
+
+  #buttonTO {
+    margin-left: 20px;
+    background-color: #34ce57;
+    border-color: #34ce57;
+  }
+
+  #buttons {
+    margin-right: 10px;
+    margin-bottom: 20px;
+  }
 </style>
 <body>
 <nav th:replace="fragments/fragment :: navbar (${'/resep'})"></nav>
-<div class="d-flex justify-content-content">
-    <div class="container-content mt-5">
-        <div class="container-table">
-            <div class="content-container-table">
-                <form th:action="@{/resep/tambah/}" th:object="${resep}" method="POST">
-                    <input type="hidden" th:field="*{appointment.idAppointment}">
-
-                    <table class="table table-borderless center">
-                        <thead>
-                            <h1 style="font-weight: bold; font-size: xx-large"> Tambah Resep </h1>
-                        </thead>
-                    </table>
-
-                    <table class="table table-borderless center">
-                        <tbody>
-                          <tr>
-                            <th>Daftar Obat</th>
-                            <!-- DIGANTI -->
-                            <th>Kuantitas
-                              <p style="color: red">Jangan melebihi stok!</p>
-                            </th>
-                          </tr>
-                          <tr th:each="obat, iterationStatus1 : *{listJumlah}">
-                            <td>
-                              <select name="idObat" th:field="*{listJumlah[__${iterationStatus1.index}__].obat.idObat}" class="js-example-basic-single">
-                                <div th:each="obatEx, iterationStatus2 : ${listObatExisting}">
-                                  <option th:value="${obatEx.idObat}" th:text="'Obat: '+${obatEx.namaObat} + ', Stok Obat: '+ ${obatEx.stok}"></option>
-                                </div>
-                              </select>
-                            </td>
-                            <td>
-                              <input required class="form-control" type="number" th:field="*{listJumlah[__${iterationStatus1.index}__].kuantitas}"/>
-                            </td>
-                            <td>
-                            <button th:value="${iterationStatus1.index}" class="btn btn-danger" type="submit" name="deleteRowObat">Hapus Obat</button>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <button class="btn btn-success btn-block" type="submit" name="addRowObat">+ Tambah Obat</button>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      
-                <button class="btn btn-primary" type="submit" name="save">Simpan</button>
-                <a class="btn btn-primary" href="/resep">Batal</a>
-                </form>
+<!-- <div class="container">
+  <div class="card m-4 p-4">
+    <div class="card-body"> -->
+      <div class="d-flex justify-content-center">
+        <h2>Tambah Resep</h2>
+      </div>    
+      <div class="d-flex justify-content-center">
+        <div class="container-content mt-5">
+          <div class="container-table border">
+            <div class="header-container-table">
+              <h5 class="table-title text-white ml-4 mt-2">Data Obat</h5>
             </div>
+            <div class="content-container-table">
+              <form th:action="@{'/resep/tambah/'}" th:object="${resep}" method="POST">
+                <input type="hidden" th:field="*{appointment.idAppointment}">
+              <table class="table table-borderless center">
+                <tbody>
+                  <tr>
+                    <!-- <th>Daftar Obat</th> -->
+                    <!-- DIGANTI -->
+                    <th></th>
+                    <th colspan="2">
+                      <p style="color: red">Jangan melebihi stok!</p>
+                    </th>
+                  </tr>
+                  <tr th:each="obat, iterationStatus1 : *{listJumlah}">
+                    <td>
+                    <div class="mb-3">
+                      <label for="obatDropdown" class="form-label">Daftar Obat</label>
+                      <br>
+                      <!-- <select id="obatDropdownSearch" name="idObat" th:field="*{listJumlah[__${iterationStatus1.index}__].obat.idObat}" class="js-example-basic-single">
+                        <div th:each="obatEx, iterationStatus2 : ${listObatExisting}">
+                          <option th:value="${obatEx.idObat}" th:text="'Nama obat: ' + ${obatEx.namaObat} + '; Stok obat: ' + ${obatEx.stok}">
+                          </option>
+                        </div>
+                      </select> -->
+                      <select id="obatDropdownSearch" name="idObat" th:field="*{listJumlah[__${iterationStatus1.index}__].obat.idObat}" class="obatDropdown">
+                        <div th:each="obatEx, iterationStatus2 : ${listObatExisting}">
+                          <option th:value="${obatEx.idObat}" th:text="'Nama obat: ' + ${obatEx.namaObat} + '; Stok obat: ' + ${obatEx.stok}">
+                          </option>
+                        </div>
+                      </select>
+                    </div>  
+                    </td>
+                    <td>
+                      <label for="kuantitasObat">Kuantitas</label>
+                      <!-- <p style="color: red">Jangan melebihi stok!</p> -->
+                      <input required class="form-control" type="number" th:field="*{listJumlah[__${iterationStatus1.index}__].kuantitas}" id="kuantitasObat"/>
+                    </td>
+                    <td>
+                      <label></label>
+                      <button th:value="${iterationStatus1.index}" class="btn btn-danger" type="submit" name="deleteRowObat">Hapus Obat</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <button id="buttonTO" class="btn btn-success btn-block" type="submit" name="addRowObat">+ Tambah Obat</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div id="buttons" class="d-flex justify-content-center">
+                <!-- <button id="save" class="btn btn-primary" type="submit" name="save">Simpan</button> -->
+                <button style="margin-right: 10px;" class="btn btn-primary" type="submit" name="save">Simpan</button>
+                <a class="btn btn-danger" href="/resep">Batal</a>
+              </div>
+              </form>
+            </div>
+          </div>
         </div>
-    </div>
-</div>
-
-</body>
+      </div>
+    <script>
+      $(".obatDropdown").select2();
+    </script>
+  </body>
 </html>

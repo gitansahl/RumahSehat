@@ -22,7 +22,7 @@
 
   th {
       text-align: center;
-      color: #36c4ef;
+      color: #34ce57;
   }
 
   td {
@@ -32,7 +32,7 @@
       width: 850px;
       display: flex;
       justify-content: center;
-      padding-bottom: 80px;
+      padding-bottom: 20px;
   }
 
   .container-table {
@@ -41,7 +41,7 @@
       border-radius: 10px;
       border-style: solid;
       border-width: thick;
-      border-color: #36c4ef;
+      border-color: #34ce57;
   }
 
   .header-container-table {
@@ -51,13 +51,23 @@
       justify-content: space-between;
       border-top-left-radius: 8px;
       border-top-right-radius: 8px;
-      background-color: #36c4ef;
+      background-color:#34ce57;
       align-items: center;
   }
 
   .content-container-table {
       display: flex;
       justify-content: center;
+  }
+
+  #done {
+    color: green;
+    font-weight: bold;
+  }
+
+  #nodone {
+    color: red;
+    font-weight: bold;
   }
 </style>
 <body>
@@ -84,24 +94,31 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="resep, iterationStatus : ${listResep}"
-                        th:style="${iterationStatus.even} ? 'font-weight:bold;'">
+                        <tr th:each="resep, iterationStatus : ${listResep}">
                             <td th:text="${iterationStatus.count}"></td>
                             <td th:text="${resep.idResep}"></td>
                             <td class="col-md-3" th:text="${#temporals.format(resep.createdAt, 'dd MMMM yyyy HH:mm')}"></td>
-                            <td th:if="${resep.isDone}"  style="color: red;">BELUM SELESAI</td> 
-                            <td th:unless="${resep.isDone}" style="color: green;">SELESAI</td>  
-                            <td style="text-align:center">
-                                <a class="btn btn-success text-wrap" style="width: 7rem;" th:href="@{#}">Detail</a>
-                            </td>
+                            <td th:if="${resep.isDone}"  id="done">SELESAI</td> 
+                            <td th:unless="${resep.isDone}" id="nodone">BELUM SELESAI</td>  
+                            <div sec:authorize="hasAnyAuthority('Apoteker', 'apoteker', 'Admin', 'ADMIN')">
+                                <td style="text-align:center">
+                                    <a class="btn btn-success text-wrap" style="width: 7rem;" th:href="@{resep/} + ${resep.idResep}">Detail</a>
+                                </td>
+                            </div>
                         </tr>
                         </tbody>
                     </table>
                 </div>
+            </div>
+            <!-- <div class="d-flex justify-content-center">
                 <a class="btn btn-primary" style="width: 10rem;" th:href="@{/}">Home</a>
             </div>
+            <div></div> -->
         </div>
     </div>
+</div>
+<div class="d-flex justify-content-center">
+    <a class="btn btn-primary" style="width: 10rem; margin-bottom: 20px;" th:href="@{/}">Home</a>
 </div>
 </body>
 </html>
