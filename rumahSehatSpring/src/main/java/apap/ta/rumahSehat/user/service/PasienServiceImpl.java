@@ -2,12 +2,10 @@ package apap.ta.rumahSehat.user.service;
 
 import apap.ta.rumahSehat.user.model.PasienModel;
 import apap.ta.rumahSehat.user.repository.PasienDb;
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 @Service
@@ -37,7 +35,7 @@ public class PasienServiceImpl implements PasienService{
 
     @Override
     public String encrypt(String password) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        var passwordEncoder = new BCryptPasswordEncoder();
         return passwordEncoder.encode(password);
     }
 }

@@ -5,7 +5,6 @@ import apap.ta.rumahSehat.appointment.model.AppointmentModel;
 import apap.ta.rumahSehat.appointment.service.AppointmentService;
 import apap.ta.rumahSehat.authentication.setting.Setting;
 import apap.ta.rumahSehat.user.model.PasienModel;
-import apap.ta.rumahSehat.user.repository.PasienDb;
 import apap.ta.rumahSehat.user.service.DokterService;
 import apap.ta.rumahSehat.user.service.PasienService;
 import lombok.extern.slf4j.Slf4j;
@@ -18,8 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/api/appointment")
@@ -35,11 +32,11 @@ public class AppointmentRestController {
     AppointmentService appointmentService;
 
     @PostMapping(value = "/add")
-    private ResponseEntity addAppointment(@RequestBody AppointmentDTO appointmentDTO,
+    public ResponseEntity<?> addAppointment(@RequestBody AppointmentDTO appointmentDTO,
                                           Authentication authentication) {
-        PasienModel pasienModel = pasienService.findPasienByUsername(authentication.getName());
+        var pasienModel = pasienService.findPasienByUsername(authentication.getName());
 
-        AppointmentModel appointmentModel = new AppointmentModel();
+        var appointmentModel = new AppointmentModel();
         appointmentModel.setDokter(dokterService.findDokterByUsername(appointmentDTO.getUsernameDokter()));
         appointmentModel.setPasien(pasienModel);
         appointmentModel.setIsDone(false);
@@ -74,10 +71,10 @@ public class AppointmentRestController {
     }
 
     @GetMapping("/get")
-    private ResponseEntity getAppointment(Authentication authentication) {
+    public ResponseEntity<?> getAppointment(Authentication authentication) {
         log.info(String.format("%s request get list appointment.", authentication.getName()));
 
-        PasienModel pasienModel = pasienService.findPasienByUsername(authentication.getName());
+        var pasienModel = pasienService.findPasienByUsername(authentication.getName());
 
         return ResponseEntity
                 .status(HttpStatus.OK)

@@ -16,8 +16,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
-
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -33,27 +31,27 @@ public class UserController {
     @Autowired
     DokterService dokterService;
 
-    @RequestMapping(value = "/pasien", method = RequestMethod.GET)
-    private String manajemenPasien(Model model) {
+    @GetMapping(value = "/pasien")
+    public String manajemenPasien(Model model) {
         model.addAttribute("listPasien", pasienService.findAll());
 
         return "user/viewall-pasien";
     }
-    @RequestMapping(value = "/apoteker", method = RequestMethod.GET)
-    private String manajemenApoteker(Model model) {
+    @GetMapping(value = "/apoteker")
+    public String manajemenApoteker(Model model) {
         model.addAttribute("listApoteker", apotekerService.findAll());
 
         return "user/viewall-apoteker";
     }
-    @RequestMapping(value = "/dokter", method = RequestMethod.GET)
-    private String manajemenDokter(Model model) {
+    @GetMapping(value = "/dokter")
+    public String manajemenDokter(Model model) {
         model.addAttribute("listDokter", dokterService.findAll());
 
         return "user/viewall-dokter";
     }
 
     @GetMapping(value = "/apoteker/add")
-    private String formAddApoteker(Model model) {
+    public String formAddApoteker(Model model) {
 
         model.addAttribute("apoteker", new ApotekerDTO());
 
@@ -61,9 +59,9 @@ public class UserController {
     }
 
     @PostMapping(value = "/apoteker/add")
-    private String addApotekerSubmit(@ModelAttribute ApotekerDTO apotekerDTO,
+    public String addApotekerSubmit(@ModelAttribute ApotekerDTO apotekerDTO,
                                      RedirectAttributes redirectAttrs) {
-        ApotekerModel apotekerModel = new ApotekerModel();
+        var apotekerModel = new ApotekerModel();
         apotekerModel.setRole(RoleEnum.Apoteker);
         apotekerModel.setPassword(apotekerDTO.getPasssword());
         apotekerModel.setNama(apotekerDTO.getNama());
@@ -84,7 +82,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/dokter/add")
-    private String formAddDokter(Model model) {
+    public String formAddDokter(Model model) {
 
         model.addAttribute("dokter", new DokterDTO());
 
@@ -92,10 +90,10 @@ public class UserController {
     }
 
     @PostMapping(value = "/dokter/add")
-    private String addDokterSubmit(@ModelAttribute DokterDTO dokterDTO,
+    public String addDokterSubmit(@ModelAttribute DokterDTO dokterDTO,
                                    BindingResult result,
                                    RedirectAttributes redirectAttrs) {
-        DokterModel dokterModel = new DokterModel();
+        var dokterModel = new DokterModel();
         dokterModel.setRole(RoleEnum.Dokter);
         dokterModel.setUsername(dokterDTO.getUsername());
         dokterModel.setNama(dokterDTO.getNama());

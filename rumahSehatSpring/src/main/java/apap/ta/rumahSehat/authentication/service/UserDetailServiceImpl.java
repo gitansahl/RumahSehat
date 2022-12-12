@@ -32,7 +32,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException("Pasien hanya dapat mengakses melalui mobile");
         }
 
-        Set<GrantedAuthority> grantedAuthorities = new HashSet<GrantedAuthority>();
+        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().toString()));
         return new User(user.getUsername(), user.getPassword(), grantedAuthorities);
     }

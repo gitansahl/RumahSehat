@@ -29,6 +29,7 @@ import java.security.Principal;
 @Controller
 @Slf4j
 public class AuthController {
+    private static final String redirect = "redirect:";
     @Autowired
     ServerProperties serverProperties;
     private WebClient webClient = WebClient.builder().build();
@@ -45,7 +46,7 @@ public class AuthController {
     public ModelAndView adminLoginSSO(@RequestParam(value = "ticket", required = false) String ticket,
                                       HttpServletRequest request
     ){
-        ServiceResponses serviceResponses = this.webClient.get().uri(
+        var serviceResponses = this.webClient.get().uri(
                 String.format(
                         Setting.SERVER_VALIDATE_TICKET,
                         ticket,
@@ -57,14 +58,14 @@ public class AuthController {
             throw new NullPointerException();
         }
 
-        Attributes attributes = serviceResponses.getAuthenticationSuccess().getAttributes();
+        var attributes = serviceResponses.getAuthenticationSuccess().getAttributes();
 
         String username = serviceResponses.getAuthenticationSuccess().getUser();
 
         if (!userService.isWhitelist(username)) {
             log.info(String.format("%s non whitelist trying to log in.", username));
 
-            return new ModelAndView("redirect:" + Setting.SERVER_LOGOUT + Setting.CLIENT_LOGOUT);
+            return new ModelAndView(redirect + Setting.SERVER_LOGOUT + Setting.CLIENT_LOGOUT);
         }
 
         UserModel user = userService.getUserByUsername(username);
@@ -94,7 +95,7 @@ public class AuthController {
 
     @GetMapping("/login-sso")
     public ModelAndView loginSSO() {
-        return new ModelAndView("redirect:"+ Setting.SERVER_LOGIN + Setting.CLIENT_LOGIN);
+        return new ModelAndView(redirect+ Setting.SERVER_LOGIN + Setting.CLIENT_LOGIN);
     }
 
     @GetMapping("/logout-sso")
@@ -105,7 +106,7 @@ public class AuthController {
         if (!user.getRole().equals(RoleEnum.Admin)) {
             return new ModelAndView("redirect:/logout");
         }
-        return new ModelAndView("redirect:" + Setting.SERVER_LOGOUT + Setting.CLIENT_LOGOUT);
+        return new ModelAndView(redirect + Setting.SERVER_LOGOUT + Setting.CLIENT_LOGOUT);
     }
 
 

@@ -20,12 +20,12 @@ public class ApotekerServiceImpl implements ApotekerService{
 
     @Override
     public String encrypt(String password) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        var passwordEncoder = new BCryptPasswordEncoder();
         return passwordEncoder.encode(password);
     }
 
     @Override
-    public ApotekerModel addApoteker(ApotekerModel apotekerModel) throws Exception{
+    public ApotekerModel addApoteker(ApotekerModel apotekerModel){
         apotekerModel.setPassword(encrypt(apotekerModel.getPassword()));
         return apotekerDb.save(apotekerModel);
     }

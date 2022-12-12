@@ -20,12 +20,12 @@ public class DokterServiceImpl implements DokterService{
 
     @Override
     public String encrypt(String password) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        var passwordEncoder = new BCryptPasswordEncoder();
         return passwordEncoder.encode(password);
     }
 
     @Override
-    public DokterModel addDokter(DokterModel dokterModel) throws Exception {
+    public DokterModel addDokter(DokterModel dokterModel){
         dokterModel.setPassword(encrypt(dokterModel.getPassword()));
         return dokterDb.save(dokterModel);
     }

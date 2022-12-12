@@ -14,10 +14,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-
-import javax.validation.Valid;
-import java.sql.SQLIntegrityConstraintViolationException;
 
 @Controller
 @RequestMapping("/api/user")
@@ -31,9 +27,9 @@ public class UserRestController {
     DokterService dokterService;
 
     @PostMapping(value = "/registration")
-    private ResponseEntity registrasiPasien(@RequestBody PasienDTO pasienDTO,
+    public ResponseEntity<?> registrasiPasien(@RequestBody PasienDTO pasienDTO,
                                             BindingResult bindingResult) {
-        PasienModel pasienModel = new PasienModel();
+        var pasienModel = new PasienModel();
         pasienModel.setRole(RoleEnum.Pasien);
         pasienModel.setUsername(pasienDTO.getUsername());
         pasienModel.setNama(pasienModel.getNama());
@@ -61,7 +57,7 @@ public class UserRestController {
     }
 
     @GetMapping(value = "/dokter/get")
-    private ResponseEntity getListDokter(Authentication authentication) {
+    public ResponseEntity<?> getListDokter(Authentication authentication) {
 
         log.info(String.format("%s request list dokter", authentication.getName()));
 
