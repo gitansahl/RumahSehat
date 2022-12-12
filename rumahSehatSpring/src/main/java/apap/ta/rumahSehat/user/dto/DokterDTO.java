@@ -1,0 +1,18 @@
+package apap.ta.rumahSehat.user.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+public class DokterDTO {
+    private String nama;
+    private String username;
+    private String passsword;
+    private String email;
+    private Integer tarif;
+}

@@ -1,5 +1,7 @@
 package apap.ta.rumahSehat.user.controller;
 
+import apap.ta.rumahSehat.user.dto.ApotekerDTO;
+import apap.ta.rumahSehat.user.dto.DokterDTO;
 import apap.ta.rumahSehat.user.model.ApotekerModel;
 import apap.ta.rumahSehat.user.model.DokterModel;
 import apap.ta.rumahSehat.user.model.RoleEnum;
@@ -52,23 +54,22 @@ public class UserController {
 
     @GetMapping(value = "/apoteker/add")
     private String formAddApoteker(Model model) {
-        ApotekerModel apotekerModel = new ApotekerModel();
-        apotekerModel.setRole(RoleEnum.Apoteker);
 
-        model.addAttribute("apoteker", new ApotekerModel());
+        model.addAttribute("apoteker", new ApotekerDTO());
 
         return "user/form-add-apoteker";
     }
 
     @PostMapping(value = "/apoteker/add")
-    private String addApotekerSubmit(@ModelAttribute ApotekerModel apotekerModel,
-                                     BindingResult result,
+    private String addApotekerSubmit(@ModelAttribute ApotekerDTO apotekerDTO,
                                      RedirectAttributes redirectAttrs) {
+        ApotekerModel apotekerModel = new ApotekerModel();
         apotekerModel.setRole(RoleEnum.Apoteker);
-        if (result.hasErrors()) {
-            redirectAttrs.addFlashAttribute("error", "The error occurred.");
-            return "redirect:/user/apoteker/add";
-        }
+        apotekerModel.setPassword(apotekerDTO.getPasssword());
+        apotekerModel.setNama(apotekerDTO.getNama());
+        apotekerModel.setUsername(apotekerDTO.getUsername());
+        apotekerModel.setEmail(apotekerDTO.getEmail());
+
 
         try {
             apotekerService.addApoteker(apotekerModel);
@@ -84,23 +85,23 @@ public class UserController {
 
     @GetMapping(value = "/dokter/add")
     private String formAddDokter(Model model) {
-        DokterModel dokterModel = new DokterModel();
-        dokterModel.setRole(RoleEnum.Dokter);
 
-        model.addAttribute("dokter", new DokterModel());
+        model.addAttribute("dokter", new DokterDTO());
 
         return "user/form-add-dokter";
     }
 
     @PostMapping(value = "/dokter/add")
-    private String addDokterSubmit(@ModelAttribute DokterModel dokterModel,
+    private String addDokterSubmit(@ModelAttribute DokterDTO dokterDTO,
                                    BindingResult result,
                                    RedirectAttributes redirectAttrs) {
+        DokterModel dokterModel = new DokterModel();
         dokterModel.setRole(RoleEnum.Dokter);
-        if (result.hasErrors()) {
-            redirectAttrs.addFlashAttribute("error", "The error occurred.");
-            return "redirect:/user/dokter/add";
-        }
+        dokterModel.setUsername(dokterDTO.getUsername());
+        dokterModel.setNama(dokterDTO.getNama());
+        dokterModel.setEmail(dokterDTO.getEmail());
+        dokterModel.setPassword(dokterDTO.getPasssword());
+        dokterModel.setTarif(dokterDTO.getTarif());
 
         try {
             dokterService.addDokter(dokterModel);

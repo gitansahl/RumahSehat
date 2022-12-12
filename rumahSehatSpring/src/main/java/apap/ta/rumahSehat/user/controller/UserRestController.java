@@ -1,6 +1,7 @@
 package apap.ta.rumahSehat.user.controller;
 
 import apap.ta.rumahSehat.authentication.setting.Setting;
+import apap.ta.rumahSehat.user.dto.PasienDTO;
 import apap.ta.rumahSehat.user.model.PasienModel;
 import apap.ta.rumahSehat.user.model.RoleEnum;
 import apap.ta.rumahSehat.user.service.DokterService;
@@ -30,14 +31,16 @@ public class UserRestController {
     DokterService dokterService;
 
     @PostMapping(value = "/registration")
-    private ResponseEntity registrasiPasien(@Valid @RequestBody PasienModel pasienModel,
-                                         BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field."
-            );
-        }
+    private ResponseEntity registrasiPasien(@RequestBody PasienDTO pasienDTO,
+                                            BindingResult bindingResult) {
+        PasienModel pasienModel = new PasienModel();
         pasienModel.setRole(RoleEnum.Pasien);
+        pasienModel.setUsername(pasienDTO.getUsername());
+        pasienModel.setNama(pasienModel.getNama());
+        pasienModel.setEmail(pasienDTO.getEmail());
+        pasienModel.setPassword(pasienDTO.getPassword());
+        pasienModel.setUmur(pasienDTO.getUmur());
+
         try {
             pasienService.addPasien(pasienModel);
             log.info(String.format("%s registered.", pasienModel.getUsername()));
