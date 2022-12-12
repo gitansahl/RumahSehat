@@ -2,6 +2,9 @@ package apap.ta.rumahSehat.appointment.service;
 
 import apap.ta.rumahSehat.appointment.model.AppointmentModel;
 import apap.ta.rumahSehat.appointment.repository.AppointmentDb;
+import apap.ta.rumahSehat.user.model.DokterModel;
+import apap.ta.rumahSehat.user.model.PasienModel;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +42,17 @@ public class AppointmentServiceImpl implements AppointmentService{
     public List<AppointmentModel> getListAppointment() {
         return appointmentDb.findAll();
     }
+
+    // @Override
+    // public List<AppointmentModel> getListAppointmentByDokter(DokterModel dokter) {
+    //     return appointmentDb.findAllByDokter(dokter.getId());
+    // }
+
+    // @Override
+    // public List<AppointmentModel> getListAppointmentByPasien(PasienModel pasien) {
+    //     return appointmentDb.findAllByPasien(pasien.getId());
+    // }
+
 
     @Override
     public boolean isValid(AppointmentModel appointmentModel) {
@@ -82,11 +96,22 @@ public class AppointmentServiceImpl implements AppointmentService{
                         ).isPresent()
         ) return false;
 
-        return true;
+        else return true;
     }
 
     @Override
     public List<AppointmentModel> getPasienListAppointment(String id) {
         return appointmentDb.findAllByPasien_Id(id);
+    }
+
+    @Override
+    public void finishAppointment(AppointmentModel appointment) {
+        appointment.setIsDone(true);
+        appointmentDb.save(appointment);
+    }
+
+    @Override
+    public List<AppointmentModel> getAppointmentInRange(LocalDateTime awal, LocalDateTime akhir) {
+        return appointmentDb.findAllByWaktuAwalBetween(awal, akhir);
     }
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
   <head>
     <meta charset="UTF-8">
     <title>View Course</title>
@@ -44,7 +45,11 @@
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item" th:classappend="${page  == 'appointment'} ? active">
+<<<<<<< HEAD
             <a class="nav-link" th:href="@{/}">Appointment</a>
+=======
+            <a class="nav-link" th:href="@{/appointment}">Appointment</a>
+>>>>>>> ff45b65d2ff514f9c44128c7e5aa0e5b8993df7b
           </li>
           <li class="nav-item" th:classappend="${page  == 'obat'} ? active">
             <a class="nav-link" th:href="@{/obat}">Obat</a>
@@ -52,7 +57,14 @@
           <li class="nav-item" th:classappend="${page  == 'resep'} ? active">
             <a class="nav-link" th:href="@{/resep}">Resep</a>
           </li>
+<<<<<<< HEAD
           <li class="nav-item dropdown" th:classappend="${page  == 'user'} ? active">
+=======
+          <li class="nav-item" th:classappend="${page  == 'chart'} ? active" sec:authorize="hasAuthority('Admin')">
+            <a class="nav-link" th:href="@{/chart}">Chart</a>
+          </li>
+          <li class="nav-item dropdown" th:classappend="${page  == 'user'} ? active" sec:authorize="hasAuthority('Admin')">
+>>>>>>> ff45b65d2ff514f9c44128c7e5aa0e5b8993df7b
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false">
               Manajemen User
@@ -70,5 +82,39 @@
       </div>
     </nav>
   </body>
+<<<<<<< HEAD
 
+=======
+  <footer th:fragment="footer" class="site-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-6">
+          <h6>About</h6>
+          <p class="text-justify">
+            Website ini dikembangkan dengan tujuan untuk menyelesaikan tugas kelompok pada mata kuliah Arsitektur Pemrograman dan Aplikasi Perusahaan (APAP)
+          </p>
+        </div>
+
+        <div class="col-xs-6 col-md-3">
+          <h6>Teams</h6>
+          <ul class="footer-links">
+            <li><a>Kelompok 56</a></li>
+          </ul>
+        </div>
+
+        <div class="col-xs-6 col-md-3">
+          <h6>Members</h6>
+          <ul class="footer-links">
+            <li><a >Gitan Sahl Tazakha Wijaya</a></li>
+            <li><a >Muhammad Raihan Adliputra</a></li>
+            <li><a >Amelia Putri Fadillah</a></li>
+            <li><a >Josias Marchellino Pakpahan</a></li>
+            <li><a >Muhammad Ivan Radman</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr>
+    </div>
+  </footer>
+>>>>>>> ff45b65d2ff514f9c44128c7e5aa0e5b8993df7b
 </html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <title>Confirm Resep</title>
+  <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+  <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<style>
+  #detail {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #34ce57;
+    border-color: #34ce57;
+  }
+
+  #home {
+    background-color: #34ce57;
+    border-color: #34ce57;
+  }
+</style>
+<body>
+<nav th:replace="fragments/fragment :: navbar (${'/resep'})"></nav>
+<div class="container">
+  <div class="card m-4 p-4">
+    <div class="card-body">
+      <div class="justify-content-center">
+        <h2 th:text="'
+        Resep untuk appointment dengan kode ' + ${resep.appointment.kodeAppointment} + ' berhasil dikonfirmasi
+        '"></h2>
+        <a id="detail" class="btn btn-primary" th:href="@{/resep/} + ${resep.idResep}">Lihat Resep</a>
+        <br>
+        <a id="home" class="btn btn-primary" href="/">Home</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

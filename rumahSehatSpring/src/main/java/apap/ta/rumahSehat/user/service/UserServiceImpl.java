@@ -28,12 +28,12 @@ public class UserServiceImpl implements UserService{
         if(Setting.whitelist.contains(username)) {
             return true;
         }
-        return false;
+        else return false;
     }
 
     @Override
     public String encrypt(String password) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        var passwordEncoder = new BCryptPasswordEncoder();
         return passwordEncoder.encode(password);
     }
 }

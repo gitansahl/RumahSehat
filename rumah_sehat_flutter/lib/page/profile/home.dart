@@ -15,9 +15,7 @@ class _HomePageState extends State<HomePage> {
 
   Future<String> get request async {
     var respond = await http.get(
-        // "$SERVER_IP/api/hello" as Uri,
-        Uri.parse("$SERVER_IP/api/hello"),
-
+        "$SERVER_IP/api/hello",
         headers: {"Content-Type":"application/json",
           "Authorization" : "Bearer $jwt"}
     );

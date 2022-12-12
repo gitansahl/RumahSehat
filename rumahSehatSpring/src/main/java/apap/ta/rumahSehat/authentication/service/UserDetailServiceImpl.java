@@ -2,6 +2,7 @@ package apap.ta.rumahSehat.authentication.service;
 
 import apap.ta.rumahSehat.user.repository.UserDb;
 import apap.ta.rumahSehat.user.model.UserModel;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,6 +16,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
+@Slf4j
 public class UserDetailServiceImpl implements UserDetailsService {
 
     @Autowired
@@ -32,7 +34,8 @@ public class UserDetailServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException("Pasien hanya dapat mengakses melalui mobile");
         }
 
-        Set<GrantedAuthority> grantedAuthorities = new HashSet<GrantedAuthority>();
+        log.info(String.format("%s logged in", username));
+        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().toString()));
         return new User(user.getUsername(), user.getPassword(), grantedAuthorities);
     }

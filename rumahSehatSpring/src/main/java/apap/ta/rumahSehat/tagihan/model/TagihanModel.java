@@ -1,9 +1,5 @@
 package apap.ta.rumahSehat.tagihan.model;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -29,10 +25,6 @@ import apap.ta.rumahSehat.appointment.model.AppointmentModel;
 
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Setter
-@Getter
 @Data
 @Table(name = "tagihan")
 public class TagihanModel implements Serializable {
@@ -58,7 +50,7 @@ public class TagihanModel implements Serializable {
 
     @NotNull
     @Column(name = "jumlah_tagihan", nullable = false)
-    private Integer jumlahTagihan;
+    private Long jumlahTagihan;
 
     @OneToOne(cascade = CascadeType.ALL)
     private AppointmentModel appointment;
