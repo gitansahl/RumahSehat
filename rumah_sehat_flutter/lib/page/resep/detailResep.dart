@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 // import 'package:rumah_sehat_flutter/page/daftar_appointment.dart';
-import 'detailResepDTO.dart';
+import 'resepModel.dart';
 
 class DetailResep extends StatelessWidget {
-  late DetailResepDTO detailResep;
+  late ResepModel detailResep;
   // ini di uncomment
   // late final String idResep;
   // DetailResep({required this.idResep});
@@ -22,7 +22,7 @@ class DetailResep extends StatelessWidget {
 
     if (response.statusCode == 200) {
       String idResep = jsonData["idResep"].toString();
-      detailResep = DetailResepDTO(
+      detailResep = ResepModel(
           idResep,
           jsonData["dokter"],
           jsonData["pasien"],

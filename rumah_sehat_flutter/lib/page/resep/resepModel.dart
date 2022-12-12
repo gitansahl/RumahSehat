@@ -1,4 +1,4 @@
-class DetailResepDTO {
+class ResepModel {
   String idResep;
   String dokter;
   String pasien;
@@ -6,7 +6,7 @@ class DetailResepDTO {
   String status;
   List<dynamic> listObat;
 
-  DetailResepDTO(
+  ResepModel(
       this.idResep,
       this.dokter,
       this.pasien,
