@@ -15,6 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.ArrayList;
+
 @Controller
 @RequestMapping("/api/user")
 @CrossOrigin("*")
@@ -28,18 +31,19 @@ public class UserRestController {
 
     @PostMapping(value = "/registration")
     public ResponseEntity<?> registrasiPasien(@RequestBody PasienDTO pasienDTO,
-                                            BindingResult bindingResult) {
-        var pasienModel = new PasienModel();
-        pasienModel.setRole(RoleEnum.Pasien);
-        pasienModel.setUsername(pasienDTO.getUsername());
-        pasienModel.setNama(pasienModel.getNama());
-        pasienModel.setEmail(pasienDTO.getEmail());
-        pasienModel.setPassword(pasienDTO.getPassword());
-        pasienModel.setUmur(pasienDTO.getUmur());
+                                              BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(
+                            Setting.response(HttpStatus.BAD_REQUEST.value(), "Error occurred!")
+                    );
+        }
 
         try {
-            pasienService.addPasien(pasienModel);
-            log.info(String.format("%s registered.", pasienModel.getUsername()));
+            pasienService.addPasien(pasienDTO);
+            log.info(String.format("%s registered.", pasienDTO.getUsername()));
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body(
@@ -47,11 +51,11 @@ public class UserRestController {
                     );
 
         } catch (Exception e) {
-            log.info(String.format("%s %s", pasienModel.getUsername(), e.getMessage()));
+            log.info(String.format("%s %s", pasienDTO.getUsername(), e.getMessage()));
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body(
-                            Setting.response(HttpStatus.OK.value(), e.getMessage())
+                            Setting.response(HttpStatus.BAD_REQUEST.value(), e.getMessage())
                     );
         }
     }

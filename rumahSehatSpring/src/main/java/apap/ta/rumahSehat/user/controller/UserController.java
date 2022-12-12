@@ -63,7 +63,7 @@ public class UserController {
                                      RedirectAttributes redirectAttrs) {
         var apotekerModel = new ApotekerModel();
         apotekerModel.setRole(RoleEnum.Apoteker);
-        apotekerModel.setPassword(apotekerDTO.getPasssword());
+        apotekerModel.setPassword(apotekerDTO.getPassword());
         apotekerModel.setNama(apotekerDTO.getNama());
         apotekerModel.setUsername(apotekerDTO.getUsername());
         apotekerModel.setEmail(apotekerDTO.getEmail());
@@ -98,7 +98,7 @@ public class UserController {
         dokterModel.setUsername(dokterDTO.getUsername());
         dokterModel.setNama(dokterDTO.getNama());
         dokterModel.setEmail(dokterDTO.getEmail());
-        dokterModel.setPassword(dokterDTO.getPasssword());
+        dokterModel.setPassword(dokterDTO.getPassword());
         dokterModel.setTarif(dokterDTO.getTarif());
 
         try {

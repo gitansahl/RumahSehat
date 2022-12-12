@@ -12,7 +12,7 @@ import lombok.Setter;
 public class DokterDTO {
     private String nama;
     private String username;
-    private String passsword;
+    private String password;
     private String email;
     private Integer tarif;
 }

@@ -12,6 +12,6 @@ import lombok.Setter;
 public class ApotekerDTO {
     private String nama;
     private String username;
-    private String passsword;
+    private String password;
     private String email;
 }
