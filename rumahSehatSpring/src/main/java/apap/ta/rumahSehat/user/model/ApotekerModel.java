@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -16,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "apoteker")
-public class ApotekerModel extends UserModel {
+public class ApotekerModel extends UserModel implements Serializable {
 
     @OneToMany(mappedBy = "confirmer", fetch = FetchType.LAZY)
     @JsonIgnore

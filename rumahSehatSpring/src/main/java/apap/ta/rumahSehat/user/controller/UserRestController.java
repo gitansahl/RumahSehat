@@ -1,6 +1,7 @@
 package apap.ta.rumahSehat.user.controller;
 
 import apap.ta.rumahSehat.authentication.setting.Setting;
+import apap.ta.rumahSehat.user.dto.PasienDTO;
 import apap.ta.rumahSehat.user.model.PasienModel;
 import apap.ta.rumahSehat.user.model.RoleEnum;
 import apap.ta.rumahSehat.user.service.DokterService;
@@ -13,10 +14,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
-import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/api/user")
@@ -30,17 +30,20 @@ public class UserRestController {
     DokterService dokterService;
 
     @PostMapping(value = "/registration")
-    private ResponseEntity registrasiPasien(@Valid @RequestBody PasienModel pasienModel,
-                                         BindingResult bindingResult) {
+    public ResponseEntity<?> registrasiPasien(@RequestBody PasienDTO pasienDTO,
+                                              BindingResult bindingResult) {
+
         if (bindingResult.hasErrors()) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field."
-            );
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(
+                            Setting.response(HttpStatus.BAD_REQUEST.value(), "Error occurred!")
+                    );
         }
-        pasienModel.setRole(RoleEnum.Pasien);
+
         try {
-            pasienService.addPasien(pasienModel);
-            log.info(String.format("%s registered.", pasienModel.getUsername()));
+            pasienService.addPasien(pasienDTO);
+            log.info(String.format("%s registered.", pasienDTO.getUsername()));
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body(
@@ -48,17 +51,17 @@ public class UserRestController {
                     );
 
         } catch (Exception e) {
-            log.info(String.format("%s %s", pasienModel.getUsername(), e.getMessage()));
+            log.info(String.format("%s %s", pasienDTO.getUsername(), e.getMessage()));
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body(
-                            Setting.response(HttpStatus.OK.value(), e.getMessage())
+                            Setting.response(HttpStatus.BAD_REQUEST.value(), e.getMessage())
                     );
         }
     }
 
     @GetMapping(value = "/dokter/get")
-    private ResponseEntity getListDokter(Authentication authentication) {
+    public ResponseEntity<?> getListDokter(Authentication authentication) {
 
         log.info(String.format("%s request list dokter", authentication.getName()));
 

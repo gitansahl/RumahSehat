@@ -21,13 +21,13 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        PasienModel pasienModel = pasienDb.findByUsername(username);
+        var pasienModel = pasienDb.findByUsername(username);
 
         if (pasienModel == null) {
             throw new UsernameNotFoundException("Username not found.");
         }
 
-        Set<GrantedAuthority> grantedAuthorities = new HashSet<GrantedAuthority>();
+        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         grantedAuthorities.add(new SimpleGrantedAuthority(pasienModel.getRole().toString()));
         return new User(pasienModel.getUsername(), pasienModel.getPassword(), grantedAuthorities);
     }

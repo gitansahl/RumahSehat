@@ -2,13 +2,14 @@ package apap.ta.rumahSehat.user.model;
 
 import apap.ta.rumahSehat.appointment.model.AppointmentModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -17,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "dokter")
-public class DokterModel extends UserModel {
+public class DokterModel extends UserModel implements Serializable {
     @NotNull
     @Column(name = "tarif")
     private Integer tarif;

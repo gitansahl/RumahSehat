@@ -16,7 +16,6 @@
         <div class="card-body">
             <div class="justify-content">
                 <form th:action="@{/user/dokter/add}" th:object="${dokter}" method="POST">
-                    <input type="hidden" th:field="*{role}">
                     <table class="table table-borderless">
                         <thead>
                         <th class="pb-5">

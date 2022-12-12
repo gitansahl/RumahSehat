@@ -14,7 +14,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -30,10 +29,10 @@ public class JwtAuthController {
     @Autowired
     private JwtUserDetailsService userDetailsService;
 
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+    @PostMapping(value = "/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
         try {
-            final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+            final var userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
             authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
             final String token = jwtTokenUtil.generateToken(userDetails);
 
@@ -55,7 +54,7 @@ public class JwtAuthController {
 
         }
     }
-    private void authenticate(String username, String password) throws Exception {
+    private void authenticate(String username, String password) throws DisabledException, BadCredentialsException {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
 

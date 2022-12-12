@@ -82,7 +82,7 @@ public class AppointmentServiceImpl implements AppointmentService{
                         ).isPresent()
         ) return false;
 
-        return true;
+        else return true;
     }
 
     @Override

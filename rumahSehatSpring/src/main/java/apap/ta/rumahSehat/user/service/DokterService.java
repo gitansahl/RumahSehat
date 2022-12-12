@@ -7,6 +7,6 @@ import java.util.List;
 public interface DokterService {
     List<DokterModel> findAll();
     String encrypt(String password);
-    DokterModel addDokter(DokterModel dokterModel) throws Exception;
+    DokterModel addDokter(DokterModel dokterModel);
     DokterModel findDokterByUsername(String username);
 }
