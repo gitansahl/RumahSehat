@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ApotekerDb extends JpaRepository<ApotekerModel, String> {
+  ApotekerModel findByUsername(String username);
 }

@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:rumah_sehat_flutter/page/resep/detailResep.dart';
 
 class DetailAppointmentPage extends StatelessWidget {
   Map<String, dynamic> appointment;
@@ -27,12 +28,11 @@ class DetailAppointmentPage extends StatelessWidget {
     if (appointment['resep'] != null) {
       resep = ElevatedButton(
           onPressed: () {
-            // Tombol Detail Resep
-            // Navigator.push(context,
-            //     MaterialPageRoute(
-            //       builder: (context) => DetailAppointmentPage(data),
-            //     )
-            // );
+            Navigator.push(context,
+                MaterialPageRoute(
+                  builder: (context) => DetailResep(appointment['kodeAppointment']),
+                )
+            );
           },
           child: const Text("Detail Resep")
       );

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>View Resep</title>
+  <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+  <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<style>
+  .table {
+    margin-top: 20px;
+    width: 650px;
+    height: auto;
+  }
+
+  h2 {
+    margin: 50px;
+  }
+
+  th {
+    text-align: center;
+    color: #34ce57;
+  }
+
+  td {
+    text-align: center;
+  }
+
+  .container-content {
+    width: 850px;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 80px;
+  }
+
+  .container-table {
+    width: 700px;
+    height: auto;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: thick;
+    border-color: #34ce57;
+  }
+
+  .header-container-table {
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    background-color: #34ce57;
+    align-items: center;
+  }
+
+  .content-container-table {
+    display: flex;
+    justify-content: center;
+  }
+
+  #detail-text {
+    color: #34ce57;
+    font-weight: bold;
+  }
+
+  p {
+    text-align: left;
+  }
+
+  #done {
+    color: green;
+    font-weight: bold;
+  }
+
+  #nodone {
+    color: red;
+    font-weight: bold;
+  }
+
+  #confirm {
+    margin-top: 20px;
+    background-color: #34ce57;
+    border-color: #34ce57;
+  }
+
+  #back {
+    margin-top: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+  }
+
+  #home {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  #div-confirm{
+    margin-top: 10px;
+    float: right;
+  }
+</style>
+<body>
+<nav th:replace="fragments/fragment :: navbar (${'/resep'})"></nav>
+<div class="d-flex justify-content-center">
+  <div class="text-center">
+    <div class="container">
+      <h2>Detail Resep</h2>
+      <div class="row">
+      </div>
+    </div>
+    <div class="card align-content-center">
+      <div class="container-content mt-0 pb-0">
+        <table class="table table-borderless">
+          <tr>
+            <td style="width: 250px; position: sticky; right: 0px">
+              <p id="detail-text">ID Resep</p>
+              <p th:text="${resep.idResep}"></p>
+              <p id="detail-text">Tanggal, Waktu</p>
+              <p th:text="${#temporals.format(resep.createdAt, 'dd MMMM yyyy HH:mm')}"></p>
+              <p id="detail-text">Nama Dokter</p>
+              <p th:text="${dokter}"></p>
+              <p id="detail-text">Nama Pasien</p>
+              <p th:text="${pasien}"></p>
+              <p id="detail-text">Status</p>
+              <p th:text="${status}"></p>
+              <p id="detail-text">Nama Apoteker</p>
+              <p th:text="${apoteker}"></p>
+              <p id="detail-text">Daftar Obat</p>
+              <div th:if="*{listJumlah.size() != 0}">
+                <table class="table">
+                    <thead>
+                      <tr class="border-bottom">
+                          <th>No</th>
+                          <th>Nama Obat</th>
+                          <th>Kuantitas</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr th:each="jumlah, iterationStatus1 : ${listJumlah}">
+                          <td th:text="${iterationStatus1.count}"></td>
+                          <td th:text="${jumlah.obat.namaObat}"></td>
+                          <td th:text="${jumlah.kuantitas}"></td>
+                      </tr>
+                    </tbody>
+                </table>
+              </div>
+            </td>
+          </tr>
+        </table>
+        <div id="div-confirm" sec:authorize="hasAnyAuthority('Apoteker', 'apoteker')">
+          <div th:if="${#strings.equals(status, 'BELUM SELESAI')}">
+              <form th:action="@{/resep/konfirmasi}" th:object="${resep}" method="POST">
+                  <input type="hidden" th:field="*{idResep}">
+                  <input type="submit" value="Konfirmasi Resep" class="btn btn-primary" id="confirm">
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <a id="confirm" class="btn btn-secondary" th:href="@{/resep/konfirmasi}">Konfirmasi Resep</a> -->
+    <a id="back" class="btn btn-danger" style="width: 10rem;" th:href="@{/resep}">Kembali</a>
+    <a id="home" class="btn btn-primary" style="width: 10rem;" th:href="@{/}">Home</a>
+  </div>
+</div>
+</body>
+</html>

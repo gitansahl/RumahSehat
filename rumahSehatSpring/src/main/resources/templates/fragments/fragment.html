@@ -45,7 +45,7 @@
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item" th:classappend="${page  == 'appointment'} ? active">
-            <a class="nav-link" th:href="@{/}">Appointment</a>
+            <a class="nav-link" th:href="@{/appointment}">Appointment</a>
           </li>
           <li class="nav-item" th:classappend="${page  == 'obat'} ? active">
             <a class="nav-link" th:href="@{/obat}">Obat</a>
@@ -74,7 +74,6 @@
       </div>
     </nav>
   </body>
-
   <footer th:fragment="footer" class="site-footer">
     <div class="container">
       <div class="row">
