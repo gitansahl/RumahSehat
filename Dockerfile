@@ -1,5 +1,5 @@
 FROM openjdk:17-alpine
-ARG JAR_FILE=rumahSehatSpring/build/libs/rumahSehat-0.0.1-SNAPSHOT.jar
+ARG JAR_FILE=rumahSehatSpring/build/libs/ta_a_stu_56-0.0.1-SNAPSHOT.jar
 COPY ${JAR_FILE} app.jar
 EXPOSE 9099
 ENTRYPOINT ["java","-jar","/app.jar"]
