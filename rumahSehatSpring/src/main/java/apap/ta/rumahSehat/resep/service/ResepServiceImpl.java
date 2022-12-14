@@ -32,6 +32,8 @@ public class ResepServiceImpl implements ResepService{
 
   @Autowired
   ObatDb obatDb;
+
+  @Autowired
   AppointmentService appointmentService;
 
   @Override

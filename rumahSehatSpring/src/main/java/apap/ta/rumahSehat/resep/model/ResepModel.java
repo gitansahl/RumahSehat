@@ -41,7 +41,7 @@ public class ResepModel implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime createdAt;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional =  false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = true)
     @JoinColumn(name = "confirmer_uuid", referencedColumnName = "id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private ApotekerModel confirmer;
