@@ -20,15 +20,6 @@ public class ResepDTO {
       this.pasien = pasien;
       this.listObat = listObat;
   }
-  
-  // public void setDokter (String namaDokter){
-  //     this.dokter = namaDokter;
-  // }
-
-  
-  // public void setPasien (String namaPasien){
-  //   this.pasien = namaPasien;
-  // }
 
   public void setStatus (String status){
       this.status = status;

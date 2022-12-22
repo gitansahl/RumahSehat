@@ -24,9 +24,8 @@ public class AdminServiceImpl implements AdminService{
   }
 
   public String encrypt(String password) {
-      BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-      String hashedPassword = passwordEncoder.encode(password);
-      return hashedPassword;
+      var passwordEncoder = new BCryptPasswordEncoder();
+      return passwordEncoder.encode(password);
   }
 
   @Override

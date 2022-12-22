@@ -25,10 +25,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public boolean isWhitelist(String username) {
-        if(Setting.whitelist.contains(username)) {
-            return true;
-        }
-        else return false;
+        return Setting.whitelist.contains(username);
     }
 
     @Override

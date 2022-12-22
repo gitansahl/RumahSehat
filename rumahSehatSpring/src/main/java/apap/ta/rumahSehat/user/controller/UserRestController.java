@@ -2,8 +2,6 @@ package apap.ta.rumahSehat.user.controller;
 
 import apap.ta.rumahSehat.authentication.setting.Setting;
 import apap.ta.rumahSehat.user.dto.PasienDTO;
-import apap.ta.rumahSehat.user.model.PasienModel;
-import apap.ta.rumahSehat.user.model.RoleEnum;
 import apap.ta.rumahSehat.user.service.DokterService;
 import apap.ta.rumahSehat.user.service.PasienService;
 import lombok.extern.slf4j.Slf4j;
@@ -14,13 +12,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-
-import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/api/user")
-@CrossOrigin("*")
 @Slf4j
 public class UserRestController {
     @Autowired

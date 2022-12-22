@@ -27,7 +27,7 @@ public class PasienServiceImpl implements PasienService{
 
     @Override
     public PasienModel addPasien(PasienDTO pasienDTO){
-        PasienModel pasienModel = new PasienModel();
+        var pasienModel = new PasienModel();
         pasienModel.setRole(RoleEnum.Pasien);
         pasienModel.setUsername(pasienDTO.getUsername());
         pasienModel.setNama(pasienDTO.getNama());

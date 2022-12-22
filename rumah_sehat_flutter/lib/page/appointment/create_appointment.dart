@@ -163,7 +163,9 @@ class _CreateAppointmentState extends State<CreateAppointment> {
                         if (data['status']!=200) {
                           displayDialog(context, "Error", data['data']);
                         }
-                        displayDialog(context, "Success", data['data']);
+                        else {
+                          displayDialog(context, "Success", data['data']);
+                        }
                       },
                       child: const Text("Simpan"))
                 ],

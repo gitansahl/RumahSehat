@@ -1,6 +1,5 @@
 package apap.ta.rumahSehat.authentication.service;
 
-import apap.ta.rumahSehat.user.model.PasienModel;
 import apap.ta.rumahSehat.user.repository.PasienDb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;

@@ -4,7 +4,6 @@ import apap.ta.rumahSehat.appointment.model.AppointmentDTO;
 import apap.ta.rumahSehat.appointment.model.AppointmentModel;
 import apap.ta.rumahSehat.appointment.service.AppointmentService;
 import apap.ta.rumahSehat.authentication.setting.Setting;
-import apap.ta.rumahSehat.user.model.PasienModel;
 import apap.ta.rumahSehat.user.service.DokterService;
 import apap.ta.rumahSehat.user.service.PasienService;
 import lombok.extern.slf4j.Slf4j;

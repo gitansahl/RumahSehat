@@ -37,8 +37,8 @@ public class TagihanServiceImpl implements TagihanService {
     @Override
     public TagihanModel addTagihanByDokter(AppointmentModel appointment) {
         DokterModel dokter = appointment.getDokter();
-        Long tarif = Long.valueOf(dokter.getTarif());
-        TagihanModel tagihan = new TagihanModel();
+        var tarif = Long.valueOf(dokter.getTarif());
+        var tagihan = new TagihanModel();
         tagihan.setJumlahTagihan(tarif);
         tagihan.setAppointment(appointment);
         tagihan.setTanggalDibuat(LocalDateTime.now());
@@ -62,8 +62,8 @@ public class TagihanServiceImpl implements TagihanService {
     @Override
     public boolean bayarTagihan(PasienModel pasien, TagihanModel tagihan) {
         Integer saldoPasien = pasien.getSaldo();
-        Long jumlahTagihanLong = tagihan.getJumlahTagihan();
-        Integer jumlahTagihan = Integer.valueOf(jumlahTagihanLong.intValue());
+        var jumlahTagihanLong = tagihan.getJumlahTagihan();
+        var jumlahTagihan = Integer.valueOf(jumlahTagihanLong.intValue());
 
         if (jumlahTagihan > saldoPasien) {
             return false;

@@ -28,7 +28,7 @@ public class ChartController {
     @Autowired
     DokterService dokterService;
 
-    @RequestMapping(value = "")
+    @GetMapping(value = "")
     public String defaultPage(Model model) {
         var date = LocalDateTime.now();
         var awal = LocalDateTime.of(date.getYear(), 1, 1, 0, 0);
@@ -46,7 +46,7 @@ public class ChartController {
         return"statistic/default";
     }
 
-    @RequestMapping(value = "/bar")
+    @GetMapping(value = "/bar")
     public String formBarChart(Model model) {
         var barChartRequestDTO = new BarChartRequestDTO();
 
@@ -214,7 +214,7 @@ public class ChartController {
 
     @GetMapping(value = "/line-daily")
     public String formLineChartDaily(Model model) {
-        DailyLineChartRequestDTO dailyLineChartRequestDTO = new DailyLineChartRequestDTO();
+        var dailyLineChartRequestDTO = new DailyLineChartRequestDTO();
         dailyLineChartRequestDTO.setDokterModelList(new ArrayList<>());
         dailyLineChartRequestDTO.getDokterModelList().add(new DokterModel());
 

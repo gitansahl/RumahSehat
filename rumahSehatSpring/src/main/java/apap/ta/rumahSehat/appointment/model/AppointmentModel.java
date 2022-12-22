@@ -4,7 +4,6 @@ import apap.ta.rumahSehat.resep.model.ResepModel;
 import apap.ta.rumahSehat.tagihan.model.TagihanModel;
 import apap.ta.rumahSehat.user.model.DokterModel;
 import apap.ta.rumahSehat.user.model.PasienModel;
-import apap.ta.rumahSehat.tagihan.model.TagihanModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;

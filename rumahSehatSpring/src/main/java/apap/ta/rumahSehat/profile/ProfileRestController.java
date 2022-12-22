@@ -4,7 +4,6 @@ import apap.ta.rumahSehat.authentication.setting.Setting;
 import apap.ta.rumahSehat.user.model.PasienModel;
 import apap.ta.rumahSehat.user.service.PasienService;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +19,6 @@ import apap.ta.rumahSehat.authentication.service.JwtUserDetailsService;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin("*")
 public class ProfileRestController {
     @Autowired
     private JwtUserDetailsService userDetailsService;
@@ -28,10 +26,10 @@ public class ProfileRestController {
     @Autowired
     PasienService pasienService;
 
-    @RequestMapping(value = { "/profile" }, method = RequestMethod.GET)
+    @GetMapping(value = { "/profile" })
     public ResponseEntity getUserInfo(Authentication authentication){
-        ObjectMapper objectMapper = new ObjectMapper();
-        PasienModel pasien = pasienService.findPasienByUsername(authentication.getName());
+        var objectMapper = new ObjectMapper();
+        var pasien = pasienService.findPasienByUsername(authentication.getName());
 
         Map<String, Object> userDetails = new HashMap<>();
         userDetails.put("username", pasien.getUsername());
@@ -41,22 +39,21 @@ public class ProfileRestController {
         userDetails.put("umur", pasien.getUmur());
 
         try {
-            String userDetailsResponse = objectMapper.writeValueAsString(userDetails);
+            var userDetailsResponse = objectMapper.writeValueAsString(userDetails);
             return ResponseEntity.ok(userDetailsResponse);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
             return null;
         }
 
     }
 
-    @RequestMapping(value = "/topUp", method = RequestMethod.POST)
+    @PostMapping(value = "/topUp")
     public ResponseEntity<?> topUpSaldo(Principal principal, @RequestBody String saldoTambahanJson){
 
-        ObjectMapper objectMapper = new ObjectMapper();
+        var objectMapper = new ObjectMapper();
         try {
-            JsonNode jsonNodeRoot = objectMapper.readTree(saldoTambahanJson);
-            JsonNode jsonSaldoTambahan = jsonNodeRoot.get("saldoTambahan");
+            var jsonNodeRoot = objectMapper.readTree(saldoTambahanJson);
+            var jsonSaldoTambahan = jsonNodeRoot.get("saldoTambahan");
             Integer saldoTambahan = jsonSaldoTambahan.asInt();
 
             String username = userDetailsService.loadUserByUsername(principal.getName()).getUsername();

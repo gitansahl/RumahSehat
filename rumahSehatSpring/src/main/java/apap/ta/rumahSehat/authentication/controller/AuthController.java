@@ -1,7 +1,6 @@
 package apap.ta.rumahSehat.authentication.controller;
 
 import apap.ta.rumahSehat.authentication.setting.Setting;
-import apap.ta.rumahSehat.authentication.xml.Attributes;
 import apap.ta.rumahSehat.authentication.xml.ServiceResponses;
 import apap.ta.rumahSehat.user.model.AdminModel;
 import apap.ta.rumahSehat.user.model.RoleEnum;
@@ -12,18 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.security.Principal;
 
 @Controller
@@ -37,7 +33,7 @@ public class AuthController {
     @Autowired
     UserService userService;
 
-    @RequestMapping("/login")
+    @GetMapping("/login")
     public String login() {
         return "authentication/login";
     }
@@ -82,10 +78,10 @@ public class AuthController {
 
         Authentication authentication = new UsernamePasswordAuthenticationToken(username, "rumahsehat");
 
-        SecurityContext securityContext = SecurityContextHolder.getContext();
+        var securityContext = SecurityContextHolder.getContext();
         securityContext.setAuthentication(authentication);
 
-        HttpSession httpSession = request.getSession(true);
+        var httpSession = request.getSession(true);
         httpSession.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, securityContext);
 
         log.info(String.format("%s logged in with SSO.", authentication.getName()));

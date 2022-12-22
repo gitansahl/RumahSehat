@@ -17,7 +17,6 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import apap.ta.rumahSehat.appointment.model.AppointmentModel;
-import apap.ta.rumahSehat.obat.model.ObatModel;
 import apap.ta.rumahSehat.user.model.ApotekerModel;
 
 @Entity

@@ -11,12 +11,8 @@ import apap.ta.rumahSehat.appointment.repository.AppointmentDb;
 import apap.ta.rumahSehat.resep.model.JumlahDTO;
 import apap.ta.rumahSehat.resep.model.JumlahModel;
 import apap.ta.rumahSehat.resep.model.ResepDTO;
-import apap.ta.rumahSehat.resep.model.ResepModel;
-import apap.ta.rumahSehat.resep.repository.ResepDb;
 import apap.ta.rumahSehat.appointment.model.AppointmentModel;
-import apap.ta.rumahSehat.appointment.repository.AppointmentDb;
 import apap.ta.rumahSehat.appointment.service.AppointmentService;
-import apap.ta.rumahSehat.obat.model.ObatModel;
 import apap.ta.rumahSehat.obat.repository.ObatDb;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,15 +56,15 @@ public class ResepServiceImpl implements ResepService{
   
   @Override
   public ResepDTO getResepApi (ResepModel resep){
-    List<JumlahDTO> listObat = new ArrayList<JumlahDTO>();
+    List<JumlahDTO> listObat = new ArrayList<>();
 
     for (JumlahModel obat : resep.getListJumlah()) {
-        JumlahDTO jumlahDTO = new JumlahDTO(obat.getObat().getNamaObat(), obat.getKuantitas());
+        var jumlahDTO = new JumlahDTO(obat.getObat().getNamaObat(), obat.getKuantitas());
         listObat.add(jumlahDTO);
     }
 
     //Membuat model DTO baru
-    ResepDTO apiResep = new ResepDTO(resep.getIdResep(), resep.getAppointment().getDokter().getNama(), resep.getAppointment().getPasien().getNama(), listObat);
+    var apiResep = new ResepDTO(resep.getIdResep(), resep.getAppointment().getDokter().getNama(), resep.getAppointment().getPasien().getNama(), listObat);
     
     //Cek apoteker yang akan mengkonfirmasi
     if (resep.getConfirmer() == null) {
@@ -78,7 +74,7 @@ public class ResepServiceImpl implements ResepService{
     }
 
     //Cek status resep
-    if (resep.getIsDone() != true){
+    if (!resep.getIsDone()){
       apiResep.setStatus("BELUM SELESAI");
     } else {
       apiResep.setStatus("SELESAI");

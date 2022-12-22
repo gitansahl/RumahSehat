@@ -21,5 +21,5 @@ public class ApotekerModel extends UserModel implements Serializable {
 
     @OneToMany(mappedBy = "confirmer", fetch = FetchType.LAZY)
     @JsonIgnore
-    List<ResepModel> listResep;
+    private List<ResepModel> listResep;
 }

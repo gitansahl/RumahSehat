@@ -2,13 +2,8 @@ package apap.ta.rumahSehat.tagihan.controller;
 
 import apap.ta.rumahSehat.authentication.service.JwtUserDetailsService;
 import apap.ta.rumahSehat.authentication.setting.Setting;
-import apap.ta.rumahSehat.tagihan.model.TagihanModel;
 import apap.ta.rumahSehat.tagihan.service.TagihanService;
-import apap.ta.rumahSehat.user.model.PasienModel;
 import apap.ta.rumahSehat.user.service.PasienService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,14 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 @RestController
 @RequestMapping("/api/tagihan")
-@CrossOrigin("*")
 public class TagihanRestController {
 
     @Autowired
@@ -36,8 +25,8 @@ public class TagihanRestController {
     PasienService pasienService;
 
     @GetMapping("/get")
-    private ResponseEntity getTagihan(Authentication authentication) {
-        PasienModel pasienModel = pasienService.findPasienByUsername(authentication.getName());
+    public ResponseEntity getTagihan(Authentication authentication) {
+        var pasienModel = pasienService.findPasienByUsername(authentication.getName());
 
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -48,7 +37,7 @@ public class TagihanRestController {
     }
 
     @GetMapping("/{kodeTagihan}")
-    private ResponseEntity getDetailTagihan(@PathVariable String kodeTagihan) {
+    public ResponseEntity getDetailTagihan(@PathVariable String kodeTagihan) {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(Setting.response(
@@ -57,11 +46,11 @@ public class TagihanRestController {
                 );
     }
 
-    @RequestMapping(value = "/bayar/{kodeTagihan}", method = RequestMethod.POST)
+    @PostMapping(value = "/bayar/{kodeTagihan}")
     public ResponseEntity<?> topUpSaldo(Authentication authentication, @PathVariable String kodeTagihan){
 
-        PasienModel pasienModel = pasienService.findPasienByUsername(authentication.getName());
-        TagihanModel tagihanModel= tagihanService.getTagihanByKodeTagihan(kodeTagihan);
+        var pasienModel = pasienService.findPasienByUsername(authentication.getName());
+        var tagihanModel= tagihanService.getTagihanByKodeTagihan(kodeTagihan);
 
         if (!tagihanService.bayarTagihan(pasienModel, tagihanModel)) {
             return ResponseEntity.status(HttpStatus.OK).body(Setting.response(HttpStatus.OK.value(), "Saldo tidak cukup"));
