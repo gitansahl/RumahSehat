@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="UTF-8">
   <title>View Resep</title>
@@ -148,10 +149,9 @@
             </td>
           </tr>
         </table>
-        <div id="div-confirm" sec:authorize="hasAnyAuthority('Apoteker', 'apoteker')">
+        <div id="div-confirm" sec:authorize="hasAnyAuthority('Apoteker')">
           <div th:if="${#strings.equals(status, 'BELUM SELESAI')}">
-              <form th:action="@{/resep/konfirmasi}" th:object="${resep}" method="POST">
-                  <input type="hidden" th:field="*{idResep}">
+              <form th:action="@{/resep/konfirmasi/} + ${resep.idResep}" method="POST">
                   <input type="submit" value="Konfirmasi Resep" class="btn btn-primary" id="confirm">
               </form>
           </div>

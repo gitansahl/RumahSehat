@@ -1,4 +1,4 @@
-package apap.ta.rumahSehat.resep.model;
+package apap.ta.rumahSehat.resep.dto;
 
 import lombok.Getter;
 import lombok.Setter;

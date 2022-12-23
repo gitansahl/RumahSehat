@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import apap.ta.rumahSehat.resep.model.ResepDTO;
+import apap.ta.rumahSehat.resep.dto.ResepDTO;
 import apap.ta.rumahSehat.resep.model.ResepModel;
 import apap.ta.rumahSehat.resep.service.ResepService;
 import lombok.extern.slf4j.Slf4j;

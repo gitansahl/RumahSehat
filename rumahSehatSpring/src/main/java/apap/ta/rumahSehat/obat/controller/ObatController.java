@@ -1,5 +1,6 @@
 package apap.ta.rumahSehat.obat.controller;
 
+import apap.ta.rumahSehat.obat.dto.ObatDTO;
 import apap.ta.rumahSehat.obat.model.ObatModel;
 import apap.ta.rumahSehat.obat.service.ObatService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,13 +36,27 @@ public class ObatController {
 
     @GetMapping("/obat/update-stock/{idObat}")
     public String updateStockFormPage(@PathVariable String idObat, Model model){
-        ObatModel obat = obatService.getObatByIdObat(idObat);
+        ObatModel obatDb = obatService.getObatByIdObat(idObat);
+
+        var obat = new ObatDTO();
+        obat.setIdObat(obatDb.getIdObat());
+        obat.setNamaObat(obatDb.getNamaObat());
+        obat.setStok(obatDb.getStok());
+        obat.setHarga(obatDb.getHarga());
+
         model.addAttribute("obat", obat);
         return "obat/form-update-stock-obat";
     }
 
     @PostMapping("/obat/update-stock")
-    public String updateStockSubmitPage(@ModelAttribute ObatModel obat, Model model, Authentication authentication){
+    public String updateStockSubmitPage(@ModelAttribute ObatDTO obatDTO, Model model, Authentication authentication){
+
+        var obat = new ObatModel();
+        obat.setIdObat(obatDTO.getIdObat());
+        obat.setNamaObat(obatDTO.getNamaObat());
+        obat.setHarga(obatDTO.getHarga());
+        obat.setStok(obatDTO.getStok());
+
         if(authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("Apoteker"))){
             ObatModel updateStock = obatService.updateStok(obat);
             model.addAttribute("namaObat", updateStock.getNamaObat());

@@ -4,6 +4,8 @@ import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import apap.ta.rumahSehat.resep.dto.ResepDTOWeb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -76,13 +78,10 @@ public class ResepController {
   public String addResepFormPage(
     Model model, 
     @PathVariable Long idAppointment) {
-    var resep = new ResepModel();
+    var resep = new ResepDTOWeb();
     resep.setAppointment(appointmentService.getAppointmentByIdAppointment(idAppointment));
-    resep.setIsDone(false);
-    model.addAttribute("resep", resep);
     
     List<ObatModel> listObat = obatService.getListObat();
-    model.addAttribute("listObatExisting", listObat);
 
     var jumlah = new JumlahModel();
     var obat = new ObatModel();
@@ -99,45 +98,14 @@ public class ResepController {
     
     return "resep/form-add-resep";
   }
-
-  @PostMapping("/resep/tambah")
-  public String addResepSubmitPage(@ModelAttribute ResepModel resep, Model model) {
-    for (JumlahModel jumlah : resep.getListJumlah()) {
-      jumlah.setResep(resep);
-
-      ObatModel obat = jumlah.getObat();
-      ObatModel obatDb = obatService.getObatByIdObat(obat.getIdObat());
-      if (obatDb.getStok() < jumlah.getKuantitas()) {
-          model.addAttribute("resep", resep);
-          return "resep/cant-add-resep";
-      } else {
-          obatDb.setStok(obatDb.getStok() - jumlah.getKuantitas());
-          jumlah.setObat(obatDb);
-      }
-    }
-
-    var now = LocalDateTime.now();
-    resep.setIsDone(false);
-    resep.setCreatedAt(now);
-    resep.setAppointment(appointmentService.getAppointmentByIdAppointment(resep.getAppointment().getIdAppointment()));
-
-    resepService.addResep(resep);
-    for (JumlahModel jumlahjumlah : resep.getListJumlah()) {
-      ObatModel obat = jumlahjumlah.getObat();
-      jumlahService.addJumlah(jumlahjumlah);
-      obatService.updateStok(obat);
-    }
-
-    model.addAttribute("resep", resep);
-    return "resep/add-resep";
-  }
   
   @PostMapping(value = "/resep/tambah/", params = {"addRowObat"})
   public String addRowObatMultiple(
-    @ModelAttribute ResepModel resep, 
-    Model model) {
-    if (resep.getListJumlah() == null || resep.getListJumlah().isEmpty()) {
-      resep.setListJumlah(new ArrayList<>());
+          @ModelAttribute ResepDTOWeb resep,
+          Model model) {
+
+      if (resep.getListJumlah() == null || resep.getListJumlah().isEmpty()) {
+          resep.setListJumlah(new ArrayList<>());
       }
       model.addAttribute("resep", resep);
 
@@ -155,9 +123,10 @@ public class ResepController {
 
   @PostMapping(value = "/resep/tambah/", params = {"deleteRowObat"})
   public String deleteRowResepMultiple(
-    @ModelAttribute ResepModel resep, 
-    @RequestParam("deleteRowObat") Integer row, 
-    Model model) {
+          @ModelAttribute ResepDTOWeb resep,
+          @RequestParam("deleteRowObat") Integer row,
+          Model model) {
+
       resep.getListJumlah().remove(row.intValue());
       model.addAttribute("resep", resep);
 
@@ -169,28 +138,31 @@ public class ResepController {
     
   @PostMapping(value = "/resep/tambah", params="save")
   public String addResepSubmitPage(
-    @ModelAttribute ResepModel resep, 
-    Model model,  
-    Principal principal) {
-    
-    for (JumlahModel jumlah : resep.getListJumlah()) {
-      jumlah.setResep(resep);
-    }
+          @ModelAttribute ResepDTOWeb resepDTOWeb,
+          Model model) {
+
+      var resep = new ResepModel();
+      resep.setAppointment(resepDTOWeb.getAppointment());
+      resep.setListJumlah(resepDTOWeb.getListJumlah());
+
+      for (JumlahModel jumlah : resep.getListJumlah()) {
+          jumlah.setResep(resep);
+      }
 
     // Default value for isDone
-    resep.setIsDone(false);
-    var now = LocalDateTime.now();
-    resep.setCreatedAt(now);
-    resep.setAppointment(appointmentService.getAppointmentByIdAppointment(resep.getAppointment().getIdAppointment()));
+      resep.setIsDone(false);
+      var now = LocalDateTime.now();
+      resep.setCreatedAt(now);
+      resep.setAppointment(appointmentService.getAppointmentByIdAppointment(resep.getAppointment().getIdAppointment()));
 
-    resepService.addResep(resep);
-    model.addAttribute("resep", resep);
+      resepService.addResep(resep);
+      model.addAttribute("resep", resep);
 
-    for (JumlahModel jumlahjumlah : resep.getListJumlah()) {
-      jumlahService.addJumlah(jumlahjumlah);
-    }
+      for (JumlahModel jumlahjumlah : resep.getListJumlah()) {
+          jumlahService.addJumlah(jumlahjumlah);
+      }
 
-    return "resep/add-resep";
+      return "resep/add-resep";
   }
 
   @GetMapping("/resep/{idResep}")
@@ -228,32 +200,32 @@ public class ResepController {
     return "resep/view-resep";
   }
 
-  @PostMapping("/resep/konfirmasi")
+  @PostMapping("/resep/konfirmasi/{idResep}")
   public String konfirmasiResep(
-    @ModelAttribute ResepModel resep, 
-    Model model) {
-      ResepModel temp = resepService.getResepByIdResep(resep.getIdResep());
+          @PathVariable("idResep") Long idResep,
+          Model model) {
+
+      var temp = resepService.getResepByIdResep(idResep);
       List<JumlahModel> listJumlah = temp.getListJumlah();
       Integer tagihan = 0;
 
       for (JumlahModel jumlah : listJumlah) {
-        jumlah.setResep(temp);
-        int jumlahObat = jumlah.getKuantitas();
-        ObatModel obat = jumlah.getObat();
-        Integer harga = obat.getHarga() * jumlahObat;
+          jumlah.setResep(temp);
+          int jumlahObat = jumlah.getKuantitas();
+          ObatModel obat = jumlah.getObat();
+          Integer harga = obat.getHarga() * jumlahObat;
 
-        if (jumlah.getKuantitas() <= obat.getStok()) {
-          resep.setIsDone(true);
-          int stok = obat.getStok();
+          if (jumlah.getKuantitas() <= obat.getStok()) {
+              int stok = obat.getStok();
 
-          jumlah.setObat(obat);
-          obat.setStok(stok - jumlahObat);
-          tagihan += harga;
-        }
-        else {
-          model.addAttribute("resep", temp);
-          return "resep/cant-confirm-resep";
-        }
+              jumlah.setObat(obat);
+              obat.setStok(stok - jumlahObat);
+              tagihan += harga;
+
+          } else {
+              model.addAttribute("resep", temp);
+              return "resep/cant-confirm-resep";
+          }
       }
 
       //Mengambil model apoteker yang sedang login
